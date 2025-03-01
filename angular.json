@@ -26,6 +26,7 @@
             ],
             "styles": [
               "@angular/material/prebuilt-themes/indigo-pink.css",
+              "node_modules/ltf-design-system/src/lib/styles/ltf-styles.css",
               "src/styles.css"
             ],
             "scripts": []
