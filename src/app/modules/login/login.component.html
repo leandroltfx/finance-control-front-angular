@@ -1,0 +1,46 @@
+<div class="ltf-w-30 ltf-center ltf-ptop-3">
+    <mat-card>
+        <mat-card-header>
+            <mat-card-title>
+                <div class="ltf-w-100 ltf-txt-center">
+                    <h1>{{ 'APP_NAME' | translate }}</h1>
+                </div>
+            </mat-card-title>
+        </mat-card-header>
+        <hr class="ltf-w-95">
+        <mat-card-content>
+            <form [formGroup]="loginForm" (submit)="login()">
+                <mat-form-field class="ltf-w-100 ltf-mtop-1">
+                    <mat-label>{{ 'LOGIN.EMAIL' | translate }}</mat-label>
+                    <input matInput formControlName="email" required>
+                    <mat-error *ngIf="loginForm.controls['email'].invalid">
+                        {{ 'LOGIN.ERROR_EMAIL' | translate }}
+                    </mat-error>
+                </mat-form-field>
+                <mat-form-field class="ltf-w-100 ltf-mtop-1">
+                    <mat-label>{{ 'LOGIN.PASSWORD' | translate }}</mat-label>
+                    <input matInput formControlName="password" required>
+                    <mat-error *ngIf="loginForm.controls['password'].invalid">
+                        {{ 'LOGIN.ERROR_PASSWORD' | translate }}
+                    </mat-error>
+                </mat-form-field>
+                <div class="ltf-txt-right">
+                    <button mat-button type="button">
+                        {{ 'LOGIN.FORGOT_PASSWORD' | translate }}
+                    </button>
+                </div>
+                <div class="ltf-mtop-1">
+                    <button mat-raised-button color="primary" class="ltf-w-100" type="submit">
+                        {{ 'LOGIN.LOGIN' | translate }}
+                    </button>
+                </div>
+                <div class="ltf-mtop-1 ltf-flex ltf-align-items-center">
+                    {{ 'LOGIN.NO_HAVE_ACCOUNT' | translate }}
+                    <button mat-button type="button">
+                        {{ 'LOGIN.REGISTER' | translate }}
+                    </button>
+                </div>
+            </form>
+        </mat-card-content>
+    </mat-card>
+</div>
