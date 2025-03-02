@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { HttpErrorResponse } from '@angular/common/http';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+
+import { LoginDto } from './models/dto/login-dto';
+import { LoginService } from './acl/service/login.service';
 
 @Component({
   selector: 'fc-login',
@@ -12,6 +16,7 @@ export class LoginComponent implements OnInit {
 
   constructor(
     private readonly _formBuilder: FormBuilder,
+    private readonly _loginService: LoginService,
   ) { }
 
   public ngOnInit(): void {
@@ -20,9 +25,15 @@ export class LoginComponent implements OnInit {
 
   public login(): void {
     if (this.loginForm.valid) {
-      console.log('Login Form is valid!');
-    } else {
-      console.error('Login Form is invalid!');
+      this._loginService.login(
+        this.loginForm.controls['email'].value,
+        this.loginForm.controls['password'].value,
+      ).subscribe(
+        {
+          next: ((loginDto: LoginDto) => console.log(loginDto)),
+          error: ((httpResponseError: HttpErrorResponse) => console.log(httpResponseError)),
+        }
+      );
     }
   }
 
