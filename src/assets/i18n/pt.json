@@ -1,0 +1,11 @@
+{
+    "APP_NAME": "Finance Control",
+    "LOGIN": {
+        "EMAIL": "Email",
+        "PASSWORD": "Senha",
+        "FORGOT_PASSWORD": "Esqueceu a senha?",
+        "LOGIN": "Login",
+        "NO_HAVE_ACCOUNT": "Não tem uma conta?",
+        "REGISTER": "Cadastre-se"
+    }
+}
