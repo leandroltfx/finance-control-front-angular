@@ -13,10 +13,16 @@
                 <mat-form-field class="ltf-w-100 ltf-mtop-1">
                     <mat-label>{{ 'LOGIN.EMAIL' | translate }}</mat-label>
                     <input matInput formControlName="email" required>
+                    <mat-error *ngIf="loginForm.controls['email'].invalid">
+                        {{ 'LOGIN.ERROR_EMAIL' | translate }}
+                    </mat-error>
                 </mat-form-field>
                 <mat-form-field class="ltf-w-100 ltf-mtop-1">
                     <mat-label>{{ 'LOGIN.PASSWORD' | translate }}</mat-label>
                     <input matInput formControlName="password" required>
+                    <mat-error *ngIf="loginForm.controls['password'].invalid">
+                        {{ 'LOGIN.ERROR_PASSWORD' | translate }}
+                    </mat-error>
                 </mat-form-field>
                 <div class="ltf-txt-right">
                     <button mat-button type="button">

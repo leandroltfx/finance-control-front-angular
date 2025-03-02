@@ -2,7 +2,9 @@
     "APP_NAME": "Finance Control",
     "LOGIN": {
         "EMAIL": "Email",
+        "ERROR_EMAIL": "Informe o email",
         "PASSWORD": "Senha",
+        "ERROR_PASSWORD": "Informe a senha",
         "FORGOT_PASSWORD": "Esqueceu a senha?",
         "LOGIN": "Login",
         "NO_HAVE_ACCOUNT": "Não tem uma conta?",
