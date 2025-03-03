@@ -1,4 +1,7 @@
+import { Router } from '@angular/router';
 import { ReactiveFormsModule } from '@angular/forms';
+import { HttpErrorResponse } from '@angular/common/http';
+import { RouterTestingModule } from '@angular/router/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
@@ -9,17 +12,17 @@ import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 
+import { of, throwError } from 'rxjs';
+
+import { LoginDto } from './models/dto/login-dto';
 import { LoginComponent } from './login.component';
 import { LoginService } from './acl/service/login.service';
-import { of, throwError } from 'rxjs';
-import { LoginResponseContract } from './models/contracts/response/login-response-contract';
-import { LoginDto } from './models/dto/login-dto';
 import { LoggedUserDto } from './models/logged-user/logged-user-dto';
-import { HttpErrorResponse } from '@angular/common/http';
 
 describe('LoginComponent', () => {
   let component: LoginComponent;
   let fixture: ComponentFixture<LoginComponent>;
+  let router: Router;
   let loginServiceSpy: jasmine.SpyObj<LoginService>;
 
   beforeEach(() => {
@@ -30,6 +33,7 @@ describe('LoginComponent', () => {
       declarations: [LoginComponent],
       imports: [
         ReactiveFormsModule,
+        RouterTestingModule,
         BrowserAnimationsModule,
 
         TranslateModule.forRoot(),
@@ -44,6 +48,7 @@ describe('LoginComponent', () => {
       ]
     });
     fixture = TestBed.createComponent(LoginComponent);
+    router = TestBed.inject(Router);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
@@ -112,6 +117,18 @@ describe('LoginComponent', () => {
       component.login();
 
       expect(loginServiceSpy.login).not.toHaveBeenCalled();
+    });
+  });
+
+  describe('goToUserRegistration', () => {
+
+    it('deve rotear para o módulo de cadastro de usuário', () => {
+
+      const navigateSpy = spyOn(router, 'navigate');
+
+      component.goToUserRegistration();
+
+      expect(navigateSpy).toHaveBeenCalled();
     });
   });
 });
