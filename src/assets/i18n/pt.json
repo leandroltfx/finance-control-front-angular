@@ -9,5 +9,14 @@
         "LOGIN": "Login",
         "NO_HAVE_ACCOUNT": "Não tem uma conta?",
         "REGISTER": "Cadastre-se"
+    },
+    "USER_REGISTRATION": {
+        "TITLE": "Cadastro de Usuário",
+        "USERNAME": "Nome de usuário",
+        "EMAIL": "Email",
+        "PASSWORD": "Senha",
+        "CONFIRM_PASSWORD": "Confirme sua senha",
+        "CANCEL": "Cancelar",
+        "REGISTER": "Cadastrar"
     }
 }
