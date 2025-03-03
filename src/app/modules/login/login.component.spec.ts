@@ -10,12 +10,22 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 
 import { LoginComponent } from './login.component';
+import { LoginService } from './acl/service/login.service';
+import { of, throwError } from 'rxjs';
+import { LoginResponseContract } from './models/contracts/response/login-response-contract';
+import { LoginDto } from './models/dto/login-dto';
+import { LoggedUserDto } from './models/logged-user/logged-user-dto';
+import { HttpErrorResponse } from '@angular/common/http';
 
 describe('LoginComponent', () => {
   let component: LoginComponent;
   let fixture: ComponentFixture<LoginComponent>;
+  let loginServiceSpy: jasmine.SpyObj<LoginService>;
 
   beforeEach(() => {
+
+    loginServiceSpy = jasmine.createSpyObj<LoginService>('LoginService', ['login']);
+
     TestBed.configureTestingModule({
       declarations: [LoginComponent],
       imports: [
@@ -28,6 +38,9 @@ describe('LoginComponent', () => {
         MatInputModule,
         MatButtonModule,
         MatFormFieldModule,
+      ],
+      providers: [
+        { provide: LoginService, useValue: loginServiceSpy },
       ]
     });
     fixture = TestBed.createComponent(LoginComponent);
@@ -40,9 +53,10 @@ describe('LoginComponent', () => {
   });
 
   describe('login', () => {
-    it('deve logar mensagem de sucesso caso email e senha tenham sido preenchidos', () => {
+    it('deve realizar o login caso email e senha tenham sido preenchidos', () => {
 
-      const logSpy = spyOn(console, 'log');
+      const loginDto: LoginDto = new LoginDto('Login efetuado com sucesso!', new LoggedUserDto('username', 'email'));
+      loginServiceSpy.login.and.returnValue(of(loginDto));
 
       component.loginForm = component['_buildLoginForm']();
 
@@ -51,12 +65,25 @@ describe('LoginComponent', () => {
 
       component.login();
 
-      expect(logSpy).toHaveBeenCalledWith('Login Form is valid!');
+      expect(loginServiceSpy.login).toHaveBeenCalledWith('email@email.com', 'asd123');
     });
 
-    it('deve logar mensagem de erro caso o email não tenha sido preenchido', () => {
+    it('deve receber o erro HTTP em caso de falha no login', () => {
 
-      const errorSpy = spyOn(console, 'error');
+      const httpErrorResponse: HttpErrorResponse = new HttpErrorResponse({});
+      loginServiceSpy.login.and.returnValue(throwError(() => httpErrorResponse));
+
+      component.loginForm = component['_buildLoginForm']();
+
+      component.loginForm.controls['email'].setValue('email@email.com');
+      component.loginForm.controls['password'].setValue('asd123');
+
+      component.login();
+
+      expect(loginServiceSpy.login).toHaveBeenCalledWith('email@email.com', 'asd123');
+    });
+
+    it('não deve realizar o login caso o email não tenha sido preenchido', () => {
 
       component.loginForm = component['_buildLoginForm']();
 
@@ -64,12 +91,10 @@ describe('LoginComponent', () => {
 
       component.login();
 
-      expect(errorSpy).toHaveBeenCalledWith('Login Form is invalid!');
+      expect(loginServiceSpy.login).not.toHaveBeenCalled();
     });
 
-    it('deve logar mensagem de erro caso a senha não tenha sido preenchida', () => {
-
-      const errorSpy = spyOn(console, 'error');
+    it('não deve realizar o login caso a senha não tenha sido preenchida', () => {
 
       component.loginForm = component['_buildLoginForm']();
 
@@ -77,18 +102,16 @@ describe('LoginComponent', () => {
 
       component.login();
 
-      expect(errorSpy).toHaveBeenCalledWith('Login Form is invalid!');
+      expect(loginServiceSpy.login).not.toHaveBeenCalled();
     });
 
-    it('deve logar mensagem de erro caso email e senha não tenham sido preenchidos', () => {
-
-      const errorSpy = spyOn(console, 'error');
+    it('não deve realizar o login caso email e senha não tenham sido preenchidos', () => {
 
       component.loginForm = component['_buildLoginForm']();
 
       component.login();
 
-      expect(errorSpy).toHaveBeenCalledWith('Login Form is invalid!');
+      expect(loginServiceSpy.login).not.toHaveBeenCalled();
     });
   });
 });
