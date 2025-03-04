@@ -13,20 +13,20 @@
                 <mat-form-field class="ltf-w-100 ltf-mtop-1">
                     <mat-label>{{ 'USER_REGISTRATION.USERNAME' | translate }}</mat-label>
                     <input matInput formControlName="username" required>
-                    <mat-error *ngIf="userRegistrationForm.controls['username'].dirty && userRegistrationForm.controls['username'].hasError('required')">
+                    <mat-error *ngIf="userRegistrationForm.controls['username'].hasError('required')">
                         {{ 'USER_REGISTRATION.ERROR_REQUIRED_USERNAME' | translate }}
                     </mat-error>
-                    <mat-error *ngIf="userRegistrationForm.controls['username'].dirty && userRegistrationForm.controls['username'].hasError('pattern')">
+                    <mat-error *ngIf="userRegistrationForm.controls['username'].hasError('pattern')">
                         {{ 'USER_REGISTRATION.ERROR_PATTERN_USERNAME' | translate }}
                     </mat-error>
                 </mat-form-field>
                 <mat-form-field class="ltf-w-100 ltf-mtop-1">
                     <mat-label>{{ 'USER_REGISTRATION.EMAIL' | translate }}</mat-label>
                     <input matInput formControlName="email" required>
-                    <mat-error *ngIf="userRegistrationForm.controls['email'].dirty && userRegistrationForm.controls['email'].hasError('required')">
+                    <mat-error *ngIf="userRegistrationForm.controls['email'].hasError('required')">
                         {{ 'USER_REGISTRATION.ERROR_REQUIRED_EMAIL' | translate }}
                     </mat-error>
-                    <mat-error *ngIf="userRegistrationForm.controls['email'].dirty && userRegistrationForm.controls['email'].hasError('pattern')">
+                    <mat-error *ngIf="userRegistrationForm.controls['email'].hasError('pattern')">
                         {{ 'USER_REGISTRATION.ERROR_PATTERN_EMAIL' | translate }}
                     </mat-error>
                 </mat-form-field>
@@ -37,10 +37,10 @@
                     <button mat-icon-button matSuffix (click)="hidePassword = !hidePassword">
                         <mat-icon>{{ hidePassword ? 'visibility' : 'visibility_off' }}</mat-icon>
                     </button>
-                    <mat-error *ngIf="userRegistrationForm.controls['password'].dirty && userRegistrationForm.controls['password'].hasError('required')">
+                    <mat-error *ngIf="userRegistrationForm.controls['password'].hasError('required')">
                         {{ 'USER_REGISTRATION.ERROR_REQUIRED_PASSWORD' | translate }}
                     </mat-error>
-                    <mat-error *ngIf="userRegistrationForm.controls['password'].dirty && userRegistrationForm.controls['password'].hasError('minlength')">
+                    <mat-error *ngIf="userRegistrationForm.controls['password'].hasError('minlength')">
                         {{ 'USER_REGISTRATION.ERROR_MINLENGTH_PASSWORD' | translate }}
                     </mat-error>
                 </mat-form-field>
@@ -51,10 +51,10 @@
                     <button mat-icon-button matSuffix (click)="hideConfirmPassword = !hideConfirmPassword">
                         <mat-icon>{{ hideConfirmPassword ? 'visibility' : 'visibility_off' }}</mat-icon>
                     </button>
-                    <mat-error *ngIf="userRegistrationForm.controls['confirmPassword'].dirty && userRegistrationForm.controls['confirmPassword'].hasError('required')">
+                    <mat-error *ngIf="userRegistrationForm.controls['confirmPassword'].hasError('required')">
                         {{ 'USER_REGISTRATION.ERROR_REQUIRED_CONFIRM_PASSWORD' | translate }}
                     </mat-error>
-                    <mat-error *ngIf="userRegistrationForm.controls['confirmPassword'].dirty && userRegistrationForm.controls['confirmPassword'].hasError('confirm')">
+                    <mat-error *ngIf="userRegistrationForm.controls['confirmPassword'].hasError('confirm')">
                         {{ 'USER_REGISTRATION.ERROR_CONFIRM_PASSWORD' | translate }}
                     </mat-error>
                 </mat-form-field>
