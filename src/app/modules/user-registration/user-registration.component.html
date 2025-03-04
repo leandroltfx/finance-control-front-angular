@@ -34,7 +34,7 @@
                     <mat-label>{{ 'USER_REGISTRATION.PASSWORD' | translate }}</mat-label>
                     <input matInput formControlName="password" required [type]="hidePassword ? 'password' : 'text'"
                         (ngModelChange)="updateConfirmValidator()">
-                    <button mat-icon-button matSuffix (click)="hidePassword = !hidePassword">
+                    <button mat-icon-button matSuffix type="button" (click)="hidePassword = !hidePassword">
                         <mat-icon>{{ hidePassword ? 'visibility' : 'visibility_off' }}</mat-icon>
                     </button>
                     <mat-error *ngIf="userRegistrationForm.controls['password'].hasError('required')">
@@ -48,7 +48,7 @@
                     <mat-label>{{ 'USER_REGISTRATION.CONFIRM_PASSWORD' | translate }}</mat-label>
                     <input matInput formControlName="confirmPassword" required
                         [type]="hideConfirmPassword ? 'password' : 'text'">
-                    <button mat-icon-button matSuffix (click)="hideConfirmPassword = !hideConfirmPassword">
+                    <button mat-icon-button matSuffix type="button" (click)="hideConfirmPassword = !hideConfirmPassword">
                         <mat-icon>{{ hideConfirmPassword ? 'visibility' : 'visibility_off' }}</mat-icon>
                     </button>
                     <mat-error *ngIf="userRegistrationForm.controls['confirmPassword'].hasError('required')">
