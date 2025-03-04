@@ -1,0 +1,31 @@
+import { Injectable } from '@angular/core';
+import { HttpErrorResponse } from '@angular/common/http';
+
+import { catchError, map, Observable, throwError } from 'rxjs';
+
+import { LoginDto } from '../../../../modules/login/models/dto/login-dto';
+import { UserRegistrationProxyService } from '../proxy/user-registration-proxy.service';
+import { UserRegistrationAdapterService } from '../adapter/user-registration-adapter.service';
+import { LoginResponseContract } from '../../../../modules/login/models/contracts/response/login-response-contract';
+
+@Injectable()
+export class UserRegistrationService {
+
+  constructor(
+    private readonly _userRegistrationProxyService: UserRegistrationProxyService,
+    private readonly _userRegistrationAdapterService: UserRegistrationAdapterService,
+  ) { }
+
+  public registerUser(
+    username: string,
+    email: string,
+    password: string,
+  ): Observable<LoginDto> {
+    return this._userRegistrationProxyService.registerUser(
+      this._userRegistrationAdapterService.toRequestContract(username, email, password)
+    ).pipe(
+      map((loginResponseContract: LoginResponseContract) => this._userRegistrationAdapterService.toDto(loginResponseContract)),
+      catchError((httpErroResponse: HttpErrorResponse) => throwError(() => httpErroResponse)),
+    );
+  }
+}

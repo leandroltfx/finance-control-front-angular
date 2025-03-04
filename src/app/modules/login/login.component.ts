@@ -1,8 +1,10 @@
+import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { HttpErrorResponse } from '@angular/common/http';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import { LoginDto } from './models/dto/login-dto';
+import { RoutesEnum } from '../../shared/enum/routes.enum';
 import { LoginService } from './acl/service/login.service';
 
 @Component({
@@ -15,6 +17,7 @@ export class LoginComponent implements OnInit {
   public loginForm!: FormGroup;
 
   constructor(
+    private readonly _router: Router,
     private readonly _formBuilder: FormBuilder,
     private readonly _loginService: LoginService,
   ) { }
@@ -35,6 +38,10 @@ export class LoginComponent implements OnInit {
         }
       );
     }
+  }
+
+  public goToUserRegistration(): void {
+    this._router.navigate([RoutesEnum.USER_REGISTRATION]);
   }
 
   private _buildLoginForm(): FormGroup {

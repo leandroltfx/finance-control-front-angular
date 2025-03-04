@@ -9,5 +9,22 @@
         "LOGIN": "Login",
         "NO_HAVE_ACCOUNT": "Não tem uma conta?",
         "REGISTER": "Cadastre-se"
+    },
+    "USER_REGISTRATION": {
+        "TITLE": "Cadastro de Usuário",
+        "USERNAME": "Nome de usuário",
+        "ERROR_REQUIRED_USERNAME": "Informe o nome de usuário",
+        "ERROR_PATTERN_USERNAME": "O nome de usuário não pode conter caracteres especiais ou espaços",
+        "EMAIL": "Email",
+        "ERROR_REQUIRED_EMAIL": "Informe o email",
+        "ERROR_PATTERN_EMAIL": "Email inválido",
+        "PASSWORD": "Senha",
+        "ERROR_REQUIRED_PASSWORD": "Informe a senha",
+        "ERROR_MINLENGTH_PASSWORD": "A senha deve conter no mínimo 8 caracteres",
+        "CONFIRM_PASSWORD": "Confirme sua senha",
+        "ERROR_REQUIRED_CONFIRM_PASSWORD": "Confirme a senha",
+        "ERROR_CONFIRM_PASSWORD": "Senhas inconsistentes",
+        "CANCEL": "Cancelar",
+        "REGISTER": "Cadastrar"
     }
 }
