@@ -1,4 +1,15 @@
+import { ReactiveFormsModule } from '@angular/forms';
+import { RouterTestingModule } from '@angular/router/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
+import { TranslateModule } from '@ngx-translate/core';
+
+import { MatCardModule } from '@angular/material/card';
+import { MatIconModule } from '@angular/material/icon';
+import { MatInputModule } from '@angular/material/input';
+import { MatButtonModule } from '@angular/material/button';
+import { MatFormFieldModule } from '@angular/material/form-field';
 
 import { UserRegistrationComponent } from './user-registration.component';
 
@@ -8,7 +19,20 @@ describe('UserRegistrationComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [UserRegistrationComponent]
+      declarations: [UserRegistrationComponent],
+      imports: [
+        ReactiveFormsModule,
+        RouterTestingModule,
+        BrowserAnimationsModule,
+
+        TranslateModule.forRoot(),
+
+        MatCardModule,
+        MatIconModule,
+        MatInputModule,
+        MatButtonModule,
+        MatFormFieldModule,
+      ]
     });
     fixture = TestBed.createComponent(UserRegistrationComponent);
     component = fixture.componentInstance;
