@@ -17,6 +17,7 @@ export class UserRegistrationComponent implements OnInit {
   public userRegistrationForm!: FormGroup;
   public hidePassword: boolean = true;
   public hideConfirmPassword: boolean = true;
+  public passwordMinLength: number = 8;
 
   private _patternEmail: RegExp = /^[a-z0-9.]+@[a-z0-9]+\.[a-z]+(\.[a-z]+)?$/i;
   private _patternUsername: RegExp = /^[A-Za-z0-9_]+$/;
@@ -58,7 +59,7 @@ export class UserRegistrationComponent implements OnInit {
     return this._formBuilder.group({
       username: [null, [Validators.required, Validators.pattern(this._patternUsername)]],
       email: [null, [Validators.required, Validators.pattern(this._patternEmail)]],
-      password: [null, [Validators.required, Validators.minLength(8)]],
+      password: [null, [Validators.required, Validators.minLength(this.passwordMinLength)]],
       confirmPassword: [null, [Validators.required, this._confirmationValidator]],
     });
   }
