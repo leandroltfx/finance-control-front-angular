@@ -20,7 +20,7 @@
         "ERROR_PATTERN_EMAIL": "Email inválido",
         "PASSWORD": "Senha",
         "ERROR_REQUIRED_PASSWORD": "Informe a senha",
-        "ERROR_MINLENGTH_PASSWORD": "A senha deve conter no mínimo 8 caracteres",
+        "ERROR_MINLENGTH_PASSWORD": "A senha deve conter no mínimo {{ passwordMinLength }} caracteres",
         "CONFIRM_PASSWORD": "Confirme sua senha",
         "ERROR_REQUIRED_CONFIRM_PASSWORD": "Confirme a senha",
         "ERROR_CONFIRM_PASSWORD": "Senhas inconsistentes",

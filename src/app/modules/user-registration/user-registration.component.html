@@ -40,15 +40,16 @@
                     <mat-error *ngIf="userRegistrationForm.controls['password'].hasError('required')">
                         {{ 'USER_REGISTRATION.ERROR_REQUIRED_PASSWORD' | translate }}
                     </mat-error>
-                    <mat-error *ngIf="userRegistrationForm.controls['password'].hasError('minlength')">
-                        {{ 'USER_REGISTRATION.ERROR_MINLENGTH_PASSWORD' | translate }}
-                    </mat-error>
+                    <mat-error *ngIf="userRegistrationForm.controls['password'].hasError('minlength')"
+                        [translate]="'USER_REGISTRATION.ERROR_MINLENGTH_PASSWORD'"
+                        [translateParams]="{ passwordMinLength: passwordMinLength }"></mat-error>
                 </mat-form-field>
                 <mat-form-field class="ltf-w-100 ltf-mtop-1">
                     <mat-label>{{ 'USER_REGISTRATION.CONFIRM_PASSWORD' | translate }}</mat-label>
                     <input matInput formControlName="confirmPassword" required
                         [type]="hideConfirmPassword ? 'password' : 'text'">
-                    <button mat-icon-button matSuffix type="button" (click)="hideConfirmPassword = !hideConfirmPassword">
+                    <button mat-icon-button matSuffix type="button"
+                        (click)="hideConfirmPassword = !hideConfirmPassword">
                         <mat-icon>{{ hideConfirmPassword ? 'visibility' : 'visibility_off' }}</mat-icon>
                     </button>
                     <mat-error *ngIf="userRegistrationForm.controls['confirmPassword'].hasError('required')">
