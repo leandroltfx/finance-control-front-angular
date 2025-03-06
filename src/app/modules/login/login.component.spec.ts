@@ -141,7 +141,7 @@ describe('LoginComponent', () => {
 
       component.goToRecoverPassword();
 
-      expect(navigateSpy).toHaveBeenCalledWith([RoutesEnum.RECOVER_PASSWORD]);
+      expect(navigateSpy).toHaveBeenCalledWith([RoutesEnum.RESET_PASSWORD]);
     });
   });
 });
