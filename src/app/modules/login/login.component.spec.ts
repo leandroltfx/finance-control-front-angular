@@ -16,6 +16,7 @@ import { of, throwError } from 'rxjs';
 
 import { LoginDto } from './models/dto/login-dto';
 import { LoginComponent } from './login.component';
+import { RoutesEnum } from '../../shared/enum/routes.enum';
 import { LoginService } from './acl/service/login.service';
 import { LoggedUserDto } from './models/logged-user/logged-user-dto';
 
@@ -128,7 +129,19 @@ describe('LoginComponent', () => {
 
       component.goToUserRegistration();
 
-      expect(navigateSpy).toHaveBeenCalled();
+      expect(navigateSpy).toHaveBeenCalledWith([RoutesEnum.USER_REGISTRATION]);
+    });
+  });
+
+  describe('goToRecoverPassword', () => {
+
+    it('deve rotear para o módulo de recuperação de senha', () => {
+
+      const navigateSpy = spyOn(router, 'navigate');
+
+      component.goToRecoverPassword();
+
+      expect(navigateSpy).toHaveBeenCalledWith([RoutesEnum.RECOVER_PASSWORD]);
     });
   });
 });

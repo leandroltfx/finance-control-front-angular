@@ -44,6 +44,10 @@ export class LoginComponent implements OnInit {
     this._router.navigate([RoutesEnum.USER_REGISTRATION]);
   }
 
+  public goToRecoverPassword(): void {
+    this._router.navigate([RoutesEnum.RECOVER_PASSWORD]);
+  }
+
   private _buildLoginForm(): FormGroup {
     return this._formBuilder.group({
       email: [null, [Validators.required]],
