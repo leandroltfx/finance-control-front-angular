@@ -26,5 +26,14 @@
         "ERROR_CONFIRM_PASSWORD": "Senhas inconsistentes",
         "CANCEL": "Cancelar",
         "REGISTER": "Cadastrar"
+    },
+    "RESET_PASSWORD": {
+        "TITLE": "Redefinir senha",
+        "SUBTITLE": "Digite o endereço de e-mail e lhe enviaremos um link de redefinição de senha.",
+        "EMAIL": "Email",
+        "ERROR_REQUIRED_EMAIL": "Informe o email",
+        "ERROR_PATTERN_EMAIL": "Email inválido",
+        "SEND_EMAIL_TO_RESET_PASSWORD": "Enviar e-mail para redefinir senha",
+        "CANCEL": "Cancelar"
     }
 }
