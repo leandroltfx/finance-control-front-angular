@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 
 import { MatSnackBarModule } from '@angular/material/snack-bar'
 
+import { AuthService } from './services/auth/auth.service';
 import { MessageService } from './services/message/message.service';
 
 @NgModule({
@@ -13,6 +14,7 @@ import { MessageService } from './services/message/message.service';
     MatSnackBarModule,
   ],
   providers: [
+    AuthService,
     MessageService,
   ]
 })
