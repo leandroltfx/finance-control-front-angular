@@ -3,9 +3,11 @@ import { Component, OnInit } from '@angular/core';
 import { HttpErrorResponse } from '@angular/common/http';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
+import { Message } from '../../shared/enum/message.enum';
 import { RoutesEnum } from '../../shared/enum/routes.enum';
 import { ResetPasswordDto } from './models/dto/reset-password-dto';
 import { ResetPasswordService } from './acl/service/reset-password.service';
+import { MessageService } from '../../core/services/message/message.service';
 
 @Component({
   selector: 'fc-reset-password',
@@ -21,6 +23,7 @@ export class ResetPasswordComponent implements OnInit {
   constructor(
     private readonly _router: Router,
     private readonly _formBuilder: FormBuilder,
+    private readonly _messageService: MessageService,
     private readonly _resetPasswordService: ResetPasswordService,
   ) { }
 
@@ -34,8 +37,12 @@ export class ResetPasswordComponent implements OnInit {
         this.recoverPasswordForm.controls['email'].value
       ).subscribe(
         {
-          next: ((resetPasswordDto: ResetPasswordDto) => console.log(resetPasswordDto)),
-          error: ((httpResponseError: HttpErrorResponse) => console.log(httpResponseError)),
+          next: ((resetPasswordDto: ResetPasswordDto) => {
+            this._messageService.showMessage(resetPasswordDto.message, 'success');
+          }),
+          error: ((httpResponseError: HttpErrorResponse) => {
+            this._messageService.showMessage(httpResponseError.error['message'] ?? Message.DEFAULT_HTTP_ERROR_MESSAGE, 'error');
+          }),
         }
       );
     }
