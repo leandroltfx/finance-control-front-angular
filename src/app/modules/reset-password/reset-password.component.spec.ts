@@ -14,20 +14,24 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 
 import { of, throwError } from 'rxjs';
 
+import { Message } from '../../shared/enum/message.enum';
 import { RoutesEnum } from '../../shared/enum/routes.enum';
 import { ResetPasswordDto } from './models/dto/reset-password-dto';
 import { ResetPasswordComponent } from './reset-password.component';
 import { ResetPasswordService } from './acl/service/reset-password.service';
+import { MessageService } from '../../core/services/message/message.service';
 
 describe('ResetPasswordComponent', () => {
   let component: ResetPasswordComponent;
   let fixture: ComponentFixture<ResetPasswordComponent>;
   let router: Router;
   let resetPasswordServiceSpy: jasmine.SpyObj<ResetPasswordService>;
+  let messageServiceSpy: jasmine.SpyObj<MessageService>;
 
   beforeEach(() => {
 
     resetPasswordServiceSpy = jasmine.createSpyObj<ResetPasswordService>('ResetPasswordService', ['resetPassword']);
+    messageServiceSpy = jasmine.createSpyObj<MessageService>('MessageService', ['showMessage']);
 
     TestBed.configureTestingModule({
       declarations: [ResetPasswordComponent],
@@ -44,7 +48,8 @@ describe('ResetPasswordComponent', () => {
         MatFormFieldModule,
       ],
       providers: [
-        { provide: ResetPasswordService, useValue: resetPasswordServiceSpy }
+        { provide: ResetPasswordService, useValue: resetPasswordServiceSpy },
+        { provide: MessageService, useValue: messageServiceSpy },
       ]
     });
     fixture = TestBed.createComponent(ResetPasswordComponent);
@@ -71,11 +76,12 @@ describe('ResetPasswordComponent', () => {
       component.recoverPassword();
 
       expect(resetPasswordServiceSpy.resetPassword).toHaveBeenCalledWith('email@email.com');
+      expect(messageServiceSpy.showMessage).toHaveBeenCalledWith('Um link de redefinição de senha foi enviado para o email informado', 'success');
     });
 
     it('deve receber o erro HTTP em caso de falha na redefinição de senha', () => {
 
-      const httpErrorResponse: HttpErrorResponse = new HttpErrorResponse({});
+      const httpErrorResponse: HttpErrorResponse = new HttpErrorResponse({ error: { message: 'Ocorreu um erro na redefinição de senha.' } });
       resetPasswordServiceSpy.resetPassword.and.returnValue(throwError(() => httpErrorResponse));
 
       component.recoverPasswordForm = component['_buildRecoverPasswordForm']();
@@ -85,6 +91,22 @@ describe('ResetPasswordComponent', () => {
       component.recoverPassword();
 
       expect(resetPasswordServiceSpy.resetPassword).toHaveBeenCalledWith('email@email.com');
+      expect(messageServiceSpy.showMessage).toHaveBeenCalledWith('Ocorreu um erro na redefinição de senha.', 'error');
+    });
+
+    it('deve receber o erro HTTP em caso de falha na redefinição de senha e emitir a mensagem padrão caso o servidor esteja offline', () => {
+
+      const httpErrorResponse: HttpErrorResponse = new HttpErrorResponse({ error: {} });
+      resetPasswordServiceSpy.resetPassword.and.returnValue(throwError(() => httpErrorResponse));
+
+      component.recoverPasswordForm = component['_buildRecoverPasswordForm']();
+
+      component.recoverPasswordForm.controls['email'].setValue('email@email.com');
+
+      component.recoverPassword();
+
+      expect(resetPasswordServiceSpy.resetPassword).toHaveBeenCalledWith('email@email.com');
+      expect(messageServiceSpy.showMessage).toHaveBeenCalledWith(Message.DEFAULT_HTTP_ERROR_MESSAGE, 'error');
     });
   });
 
