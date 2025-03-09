@@ -4,6 +4,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { catchError, map, Observable, throwError } from 'rxjs';
 
 import { LoginDto } from '../../../../modules/login/models/dto/login-dto';
+import { AuthService } from '../../../../core/services/auth/auth.service';
 import { UserRegistrationProxyService } from '../proxy/user-registration-proxy.service';
 import { UserRegistrationAdapterService } from '../adapter/user-registration-adapter.service';
 import { LoginResponseContract } from '../../../../modules/login/models/contracts/response/login-response-contract';
@@ -12,6 +13,7 @@ import { LoginResponseContract } from '../../../../modules/login/models/contract
 export class UserRegistrationService {
 
   constructor(
+    private readonly _authService: AuthService,
     private readonly _userRegistrationProxyService: UserRegistrationProxyService,
     private readonly _userRegistrationAdapterService: UserRegistrationAdapterService,
   ) { }
@@ -24,7 +26,11 @@ export class UserRegistrationService {
     return this._userRegistrationProxyService.registerUser(
       this._userRegistrationAdapterService.toRequestContract(username, email, password)
     ).pipe(
-      map((loginResponseContract: LoginResponseContract) => this._userRegistrationAdapterService.toDto(loginResponseContract)),
+      map((loginResponseContract: LoginResponseContract) => {
+        const loginDto: LoginDto = this._userRegistrationAdapterService.toDto(loginResponseContract);
+        this._authService.loggedUser = loginDto.loggedUser;
+        return loginDto;
+      }),
       catchError((httpErroResponse: HttpErrorResponse) => throwError(() => httpErroResponse)),
     );
   }
