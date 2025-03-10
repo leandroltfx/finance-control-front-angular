@@ -66,6 +66,8 @@ describe('LoginComponent', () => {
   describe('login', () => {
     it('deve realizar o login caso email e senha tenham sido preenchidos', () => {
 
+      const navigateSpy = spyOn(router, 'navigate');
+
       const loginDto: LoginDto = new LoginDto('Login efetuado com sucesso!', new LoggedUserDto('username', 'email'));
       loginServiceSpy.login.and.returnValue(of(loginDto));
 
@@ -78,6 +80,7 @@ describe('LoginComponent', () => {
 
       expect(loginServiceSpy.login).toHaveBeenCalledWith('email@email.com', 'asd123');
       expect(messageServiceSpy.showMessage).toHaveBeenCalledWith('Login efetuado com sucesso!', 'success');
+      expect(navigateSpy).toHaveBeenCalledWith([RoutesEnum.HOME]);
     });
 
     it('deve receber o erro HTTP em caso de falha no login', () => {
