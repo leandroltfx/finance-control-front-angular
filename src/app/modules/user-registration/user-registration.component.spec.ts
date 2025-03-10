@@ -67,8 +67,11 @@ describe('UserRegistrationComponent', () => {
   describe('registerUser', () => {
     it('deve realizar o cadastro de usuário se todos os campos forem preenchidos', () => {
 
+      const navigateSpy = spyOn(router, 'navigate');
+
       const loginResponseContract: LoginResponseContract = new LoginResponseContract('Cadastro realizado com sucesso!', new LoggedUserResponseContract('username', 'email@email.com'));
       userRegistrationServiceSpy.registerUser.and.returnValue(of(loginResponseContract));
+
       component.userRegistrationForm = component['_buildUserRegistrationForm']();
 
       component.userRegistrationForm.controls['username'].setValue('username');
@@ -80,6 +83,7 @@ describe('UserRegistrationComponent', () => {
 
       expect(userRegistrationServiceSpy.registerUser).toHaveBeenCalledWith('username', 'email@email.com', 'asdasdasd');
       expect(messageServiceSpy.showMessage).toHaveBeenCalledWith('Cadastro realizado com sucesso!', 'success');
+      expect(navigateSpy).toHaveBeenCalledWith([RoutesEnum.HOME]);
     });
 
     it('deve receber o erro HTTP em caso de falha no login', () => {
