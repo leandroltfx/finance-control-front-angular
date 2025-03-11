@@ -15,11 +15,11 @@ export class HomeComponent {
   ) { }
 
   public goToBankAccounts(): void {
-    this._router.navigate([RoutesEnum.BANK_ACCOUNTS]);
+    this._router.navigate([`${RoutesEnum.HOME}/${RoutesEnum.BANK_ACCOUNTS}`]);
   }
 
   public goToMovements(): void {
-    this._router.navigate([RoutesEnum.MOVEMENTS]);
+    this._router.navigate([`${RoutesEnum.HOME}/${RoutesEnum.MOVEMENTS}`]);
   }
 
 }

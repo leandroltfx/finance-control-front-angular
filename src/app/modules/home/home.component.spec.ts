@@ -48,22 +48,22 @@ describe('HomeComponent', () => {
   });
 
   describe('goToBankAccounts', () => {
-    it('deve rotear para o módulo de contas bancárias', () => {
+    it('deve rotear para o módulo de contas bancárias dentro da rota ativa da home', () => {
       const navigateSpy = spyOn(router, 'navigate');
 
       component.goToBankAccounts();
 
-      expect(navigateSpy).toHaveBeenCalledWith([RoutesEnum.BANK_ACCOUNTS]);
+      expect(navigateSpy).toHaveBeenCalledWith([`${RoutesEnum.HOME}/${RoutesEnum.BANK_ACCOUNTS}`]);
     });
   });
 
   describe('goToMovements', () => {
-    it('deve rotear para o módulo de movimentações', () => {
+    it('deve rotear para o módulo de movimentações dentro da rota ativa da home', () => {
       const navigateSpy = spyOn(router, 'navigate');
 
       component.goToMovements();
 
-      expect(navigateSpy).toHaveBeenCalledWith([RoutesEnum.MOVEMENTS]);
+      expect(navigateSpy).toHaveBeenCalledWith([`${RoutesEnum.HOME}/${RoutesEnum.MOVEMENTS}`]);
     });
   });
 });
