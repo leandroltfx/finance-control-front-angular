@@ -52,6 +52,7 @@ describe('BankAccountsComponent', () => {
       component['_getBankAccounts']();
 
       expect(bankAccountsServiceSpy.getBankAccounts).toHaveBeenCalledWith('userId');
+      expect(component.bankAccountsDto.length).toBe(0);
     });
 
     it('deve receber o erro HTTP em caso de falha na listagem de contas bancárias', () => {

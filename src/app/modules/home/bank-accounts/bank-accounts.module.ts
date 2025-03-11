@@ -1,6 +1,8 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
+import { MatCardModule } from '@angular/material/card';
+
 import { BankAccountsComponent } from './bank-accounts.component';
 import { BankAccountsRoutingModule } from './bank-accounts-routing.module';
 import { BankAccountsService } from './acl/service/bank-accounts.service';
@@ -13,6 +15,8 @@ import { BankAccountsAdapterService } from './acl/adapter/bank-accounts-adapter.
   ],
   imports: [
     CommonModule,
+
+    MatCardModule,
 
     BankAccountsRoutingModule,
   ],
