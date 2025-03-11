@@ -23,7 +23,7 @@ export class BankAccountsComponent {
 
   private _getBankAccounts(): void {
     this._bankAccountsService.getBankAccounts(
-      String(this._authService.loggedUser?.id)
+      this._authService.loggedUser?.id
     ).subscribe(
       {
         next: (bankAccountsDto: BankAccountsDto) => console.log(bankAccountsDto),

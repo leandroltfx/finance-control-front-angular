@@ -17,7 +17,7 @@ export class BankAccountsService {
   ) { }
 
   public getBankAccounts(
-    userId: string
+    userId: string | undefined
   ): Observable<BankAccountsDto> {
 
     if (!userId) {
