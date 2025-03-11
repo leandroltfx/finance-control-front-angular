@@ -1,9 +1,9 @@
 import { inject } from '@angular/core';
 import { CanActivateFn, Router } from '@angular/router';
 
+import { RoutesEnum } from '../../../shared/enum/routes.enum';
 import { AuthService } from '../../services/auth/auth.service';
 import { LoggedUserDto } from '../../../modules/login/models/logged-user/logged-user-dto';
-import { RoutesEnum } from 'src/app/shared/enum/routes.enum';
 
 // Functional Guards
 export const homeGuard: CanActivateFn = () => {

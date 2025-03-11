@@ -1,10 +1,10 @@
 import { TestBed } from '@angular/core/testing';
-import { ActivatedRouteSnapshot, CanActivateFn, Router, RouterStateSnapshot, UrlTree } from '@angular/router';
+import { ActivatedRouteSnapshot, CanActivateFn, Router, RouterStateSnapshot } from '@angular/router';
 
 import { homeGuard } from './home.guard';
+import { RoutesEnum } from '../../../shared/enum/routes.enum';
 import { AuthService } from '../../services/auth/auth.service';
-import { LoggedUserDto } from 'src/app/modules/login/models/logged-user/logged-user-dto';
-import { RoutesEnum } from 'src/app/shared/enum/routes.enum';
+import { LoggedUserDto } from '../../../modules/login/models/logged-user/logged-user-dto';
 
 describe('homeGuard', () => {
 
