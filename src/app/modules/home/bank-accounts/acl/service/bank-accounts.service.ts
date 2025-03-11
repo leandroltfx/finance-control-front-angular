@@ -3,7 +3,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 
 import { catchError, map, Observable, throwError } from 'rxjs';
 
-import { BankAccountsDto } from '../../models/dto/bank-accounts-dto';
+import { BankAccountDto } from '../../models/dto/bank-accounts-dto';
 import { BankAccountsProxyService } from '../proxy/bank-accounts-proxy.service';
 import { BankAccountsAdapterService } from '../adapter/bank-accounts-adapter.service';
 import { BankAccountsResponseContract } from '../../models/contracts/response/bank-accounts-response-contract';
@@ -18,7 +18,7 @@ export class BankAccountsService {
 
   public getBankAccounts(
     userId: string | undefined
-  ): Observable<BankAccountsDto> {
+  ): Observable<BankAccountDto[]> {
 
     if (!userId) {
       return throwError(() => new Error('userId não informado.'));

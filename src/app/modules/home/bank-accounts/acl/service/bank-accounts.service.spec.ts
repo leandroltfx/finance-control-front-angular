@@ -1,11 +1,12 @@
 import { TestBed } from '@angular/core/testing';
+import { HttpErrorResponse } from '@angular/common/http';
+
+import { of, throwError } from 'rxjs';
 
 import { BankAccountsService } from './bank-accounts.service';
 import { BankAccountsProxyService } from '../proxy/bank-accounts-proxy.service';
 import { BankAccountsAdapterService } from '../adapter/bank-accounts-adapter.service';
 import { BankAccountsResponseContract } from '../../models/contracts/response/bank-accounts-response-contract';
-import { of, throwError } from 'rxjs';
-import { HttpErrorResponse } from '@angular/common/http';
 
 describe('BankAccountsService', () => {
   let service: BankAccountsService;

@@ -1,8 +1,7 @@
-import { BankAccountDto, BankAccountsDto } from './bank-accounts-dto';
+import { BankAccountDto } from './bank-accounts-dto';
 
-describe('BankAccountsDto', () => {
+describe('BankAccountDto', () => {
   it('should create an instance', () => {
-    const bankAccountDto: BankAccountDto = new BankAccountDto('id', 'institution', 'nickname', 0);
-    expect(new BankAccountsDto([bankAccountDto])).toBeTruthy();
+    expect(new BankAccountDto('id', 'institution', 'nickname', 0)).toBeTruthy();
   });
 });

@@ -1,12 +1,12 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+
+import { of, throwError } from 'rxjs';
 
 import { BankAccountsComponent } from './bank-accounts.component';
 import { AuthService } from '../../../core/services/auth/auth.service';
 import { BankAccountsService } from './acl/service/bank-accounts.service';
 import { LoggedUserDto } from '../../login/models/logged-user/logged-user-dto';
-import { of, throwError } from 'rxjs';
-import { BankAccountsDto } from './models/dto/bank-accounts-dto';
-import { HttpErrorResponse } from '@angular/common/http';
 
 describe('BankAccountsComponent', () => {
   let component: BankAccountsComponent;
@@ -37,7 +37,7 @@ describe('BankAccountsComponent', () => {
     });
     fixture = TestBed.createComponent(BankAccountsComponent);
     component = fixture.componentInstance;
-    bankAccountsServiceSpy.getBankAccounts.and.returnValue(of(new BankAccountsDto([])));
+    bankAccountsServiceSpy.getBankAccounts.and.returnValue(of([]));
     fixture.detectChanges();
   });
 

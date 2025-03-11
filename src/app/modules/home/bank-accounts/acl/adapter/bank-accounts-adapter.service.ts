@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 
-import { BankAccountsDto } from '../../models/dto/bank-accounts-dto';
+import { BankAccountDto } from '../../models/dto/bank-accounts-dto';
 import { BankAccountsRequestContract } from '../../models/contracts/request/bank-accounts-request-contract';
 import { BankAccountsResponseContract } from '../../models/contracts/response/bank-accounts-response-contract';
 
@@ -11,8 +11,15 @@ export class BankAccountsAdapterService {
 
   public toDto(
     bankAccountsResponseContract: BankAccountsResponseContract
-  ): BankAccountsDto {
-    return new BankAccountsDto(bankAccountsResponseContract.bankAccounts);
+  ): BankAccountDto[] {
+
+    const bankAccountsDto: BankAccountDto[] = [];
+
+    for (const bankAccount of bankAccountsResponseContract.bankAccounts) {
+      bankAccountsDto.push(bankAccount);
+    }
+
+    return bankAccountsDto;
   }
 
   public toRequestContract(

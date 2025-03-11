@@ -18,15 +18,3 @@ export class BankAccountDto {
     }
 
 }
-
-export class BankAccountsDto {
-
-    bankAccounts: BankAccountDto[] = [];
-
-    constructor(
-        bankAccounts: BankAccountDto[]
-    ) {
-        this.bankAccounts = bankAccounts;
-    }
-
-}

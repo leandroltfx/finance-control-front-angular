@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
 import { HttpErrorResponse } from '@angular/common/http';
 
-import { BankAccountsDto } from './models/dto/bank-accounts-dto';
 import { AuthService } from '../../../core/services/auth/auth.service';
 import { BankAccountsService } from './acl/service/bank-accounts.service';
+import { BankAccountDto } from './models/dto/bank-accounts-dto';
 
 @Component({
   selector: 'fc-bank-accounts',
@@ -11,6 +11,8 @@ import { BankAccountsService } from './acl/service/bank-accounts.service';
   styleUrls: ['./bank-accounts.component.css']
 })
 export class BankAccountsComponent {
+
+  public bankAccountDto: BankAccountDto[] = []
 
   constructor(
     private readonly _authService: AuthService,
@@ -26,7 +28,7 @@ export class BankAccountsComponent {
       this._authService.loggedUser?.id
     ).subscribe(
       {
-        next: (bankAccountsDto: BankAccountsDto) => console.log(bankAccountsDto),
+        next: (bankAccountsDto: BankAccountDto[]) =>this.bankAccountDto = bankAccountsDto,
         error: (httpErrorResponse: HttpErrorResponse) => console.log(httpErrorResponse),
       }
     )

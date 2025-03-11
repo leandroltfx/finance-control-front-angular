@@ -1,11 +1,11 @@
 import { TestBed } from '@angular/core/testing';
+import { HttpErrorResponse } from '@angular/common/http';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 
 import { environment } from '../../../../../../environments/environment';
 import { BankAccountsProxyService } from './bank-accounts-proxy.service';
 import { BankAccountsRequestContract } from '../../models/contracts/request/bank-accounts-request-contract';
 import { BankAccountsResponseContract } from '../../models/contracts/response/bank-accounts-response-contract';
-import { HttpErrorResponse } from '@angular/common/http';
 
 describe('BankAccountsProxyService', () => {
   let service: BankAccountsProxyService;
