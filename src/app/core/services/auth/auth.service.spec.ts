@@ -26,8 +26,8 @@ describe('AuthService', () => {
   describe('loggedUser', () => {
     it('deve receber e alterar o valor de loggedUser', () => {
 
-      const user1 = new LoggedUserDto('admin', 'admin@email.com');
-      const user2 = new LoggedUserDto('user', 'user@email.com');
+      const user1 = new LoggedUserDto('1b9d6bcd-bbfd-4b2d-9b5d-ab8dfbbd4bed', 'admin', 'admin@email.com');
+      const user2 = new LoggedUserDto('1b9d6bcd-bbfd-4b2d-9b5d-ab8dfbbd4bed', 'user', 'user@email.com');
 
       service.loggedUser = user1;
 

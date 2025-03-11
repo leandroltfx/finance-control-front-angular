@@ -48,7 +48,7 @@ describe('homeGuard', () => {
 
   it('deve permitir acesso a home se o usuário estiver autenticado', () => {
 
-    authServiceSpy.loggedUser = new LoggedUserDto('userName', 'email@email.com');
+    authServiceSpy.loggedUser = new LoggedUserDto('1b9d6bcd-bbfd-4b2d-9b5d-ab8dfbbd4bed', 'userName', 'email@email.com');
 
     const result = executeGuard(route, state);
     expect(result).toBeTrue();
