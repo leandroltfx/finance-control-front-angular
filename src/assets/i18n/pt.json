@@ -35,5 +35,9 @@
         "ERROR_PATTERN_EMAIL": "Email inválido",
         "SEND_EMAIL_TO_RESET_PASSWORD": "Enviar e-mail para redefinir senha",
         "CANCEL": "Cancelar"
+    },
+    "HOME": {
+        "ITEM_MENU_1": "Contas bancárias",
+        "ITEM_MENU_2": "Movimentações"
     }
 }

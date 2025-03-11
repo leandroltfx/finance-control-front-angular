@@ -4,5 +4,7 @@ export enum RoutesEnum {
     USER_REGISTRATION = 'user-registration',
     RESET_PASSWORD = 'reset-password',
     HOME = 'home',
+    BANK_ACCOUNTS = 'bank-accounts',
+    MOVEMENTS = 'movements',
 
 };

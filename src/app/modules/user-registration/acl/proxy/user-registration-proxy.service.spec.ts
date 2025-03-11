@@ -37,7 +37,7 @@ describe('UserRegistrationProxyService', () => {
     it('deve realizar uma chamada HTTP POST para o cadastro de usuário', () => {
 
       const userRegistrationRequestContract: UserRegistrationRequestContract = new UserRegistrationRequestContract('username', 'email', 'password');
-      const loginResponseContract: LoginResponseContract = new LoginResponseContract('Cadastro realizado com sucesso!', new LoggedUserResponseContract('userName', 'email'));
+      const loginResponseContract: LoginResponseContract = new LoginResponseContract('Cadastro realizado com sucesso!', new LoggedUserResponseContract('1b9d6bcd-bbfd-4b2d-9b5d-ab8dfbbd4bed', 'userName', 'email'));
 
       service.registerUser(userRegistrationRequestContract).subscribe(
         {

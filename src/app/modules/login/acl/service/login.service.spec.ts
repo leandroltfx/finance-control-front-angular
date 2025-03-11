@@ -54,13 +54,14 @@ describe('LoginService', () => {
       const loginResponseContract: LoginResponseContract = new LoginResponseContract(
         'message',
         new LoggedUserResponseContract(
+          '1b9d6bcd-bbfd-4b2d-9b5d-ab8dfbbd4bed',
           'userName',
           'email',
         )
       );
       loginProxyServiceSpy.login.and.returnValue(of(loginResponseContract));
 
-      const loginDto: LoginDto = new LoginDto('message', new LoggedUserDto('userName', 'email'));
+      const loginDto: LoginDto = new LoginDto('message', new LoggedUserDto('1b9d6bcd-bbfd-4b2d-9b5d-ab8dfbbd4bed', 'userName', 'email'));
       loginAdapterServiceSpy.toDto.and.returnValue(loginDto);
 
       service.login('email', 'password').subscribe(

@@ -69,7 +69,7 @@ describe('UserRegistrationComponent', () => {
 
       const navigateSpy = spyOn(router, 'navigate');
 
-      const loginResponseContract: LoginResponseContract = new LoginResponseContract('Cadastro realizado com sucesso!', new LoggedUserResponseContract('username', 'email@email.com'));
+      const loginResponseContract: LoginResponseContract = new LoginResponseContract('Cadastro realizado com sucesso!', new LoggedUserResponseContract('1b9d6bcd-bbfd-4b2d-9b5d-ab8dfbbd4bed', 'username', 'email@email.com'));
       userRegistrationServiceSpy.registerUser.and.returnValue(of(loginResponseContract));
 
       component.userRegistrationForm = component['_buildUserRegistrationForm']();
@@ -124,7 +124,7 @@ describe('UserRegistrationComponent', () => {
 
     it('não deve realizar o cadastro de usuário se o nome de usuário estiver com caracter especial', () => {
 
-      const loginResponseContract: LoginResponseContract = new LoginResponseContract('Cadastro realizado com sucesso!', new LoggedUserResponseContract('username', 'email@email.com'));
+      const loginResponseContract: LoginResponseContract = new LoginResponseContract('Cadastro realizado com sucesso!', new LoggedUserResponseContract('1b9d6bcd-bbfd-4b2d-9b5d-ab8dfbbd4bed', 'username', 'email@email.com'));
       userRegistrationServiceSpy.registerUser.and.returnValue(of(loginResponseContract));
       component.userRegistrationForm = component['_buildUserRegistrationForm']();
 
@@ -140,7 +140,7 @@ describe('UserRegistrationComponent', () => {
 
     it('não deve realizar o cadastro de usuário se o nome de usuário estiver com espaços em branco no início', () => {
 
-      const loginResponseContract: LoginResponseContract = new LoginResponseContract('Cadastro realizado com sucesso!', new LoggedUserResponseContract('username', 'email@email.com'));
+      const loginResponseContract: LoginResponseContract = new LoginResponseContract('Cadastro realizado com sucesso!', new LoggedUserResponseContract('1b9d6bcd-bbfd-4b2d-9b5d-ab8dfbbd4bed', 'username', 'email@email.com'));
       userRegistrationServiceSpy.registerUser.and.returnValue(of(loginResponseContract));
       component.userRegistrationForm = component['_buildUserRegistrationForm']();
 
@@ -156,7 +156,7 @@ describe('UserRegistrationComponent', () => {
 
     it('não deve realizar o cadastro de usuário se o nome de usuário estiver com espaços em branco no final', () => {
 
-      const loginResponseContract: LoginResponseContract = new LoginResponseContract('Cadastro realizado com sucesso!', new LoggedUserResponseContract('username', 'email@email.com'));
+      const loginResponseContract: LoginResponseContract = new LoginResponseContract('Cadastro realizado com sucesso!', new LoggedUserResponseContract('1b9d6bcd-bbfd-4b2d-9b5d-ab8dfbbd4bed', 'username', 'email@email.com'));
       userRegistrationServiceSpy.registerUser.and.returnValue(of(loginResponseContract));
       component.userRegistrationForm = component['_buildUserRegistrationForm']();
 
@@ -172,7 +172,7 @@ describe('UserRegistrationComponent', () => {
 
     it('não deve realizar o cadastro de usuário se o nome de usuário estiver com espaços em branco no meio', () => {
 
-      const loginResponseContract: LoginResponseContract = new LoginResponseContract('Cadastro realizado com sucesso!', new LoggedUserResponseContract('username', 'email@email.com'));
+      const loginResponseContract: LoginResponseContract = new LoginResponseContract('Cadastro realizado com sucesso!', new LoggedUserResponseContract('1b9d6bcd-bbfd-4b2d-9b5d-ab8dfbbd4bed', 'username', 'email@email.com'));
       userRegistrationServiceSpy.registerUser.and.returnValue(of(loginResponseContract));
       component.userRegistrationForm = component['_buildUserRegistrationForm']();
 
@@ -188,7 +188,7 @@ describe('UserRegistrationComponent', () => {
 
     it('não deve realizar o cadastro de usuário se o email estiver fora do formato padrão', () => {
 
-      const loginResponseContract: LoginResponseContract = new LoginResponseContract('Cadastro realizado com sucesso!', new LoggedUserResponseContract('username', 'email@email.com'));
+      const loginResponseContract: LoginResponseContract = new LoginResponseContract('Cadastro realizado com sucesso!', new LoggedUserResponseContract('1b9d6bcd-bbfd-4b2d-9b5d-ab8dfbbd4bed', 'username', 'email@email.com'));
       userRegistrationServiceSpy.registerUser.and.returnValue(of(loginResponseContract));
       component.userRegistrationForm = component['_buildUserRegistrationForm']();
 
@@ -204,7 +204,7 @@ describe('UserRegistrationComponent', () => {
 
     it('não deve realizar o cadastro de usuário se a senha estiver com menos de 8 caracteres', () => {
 
-      const loginResponseContract: LoginResponseContract = new LoginResponseContract('Cadastro realizado com sucesso!', new LoggedUserResponseContract('username', 'email@email.com'));
+      const loginResponseContract: LoginResponseContract = new LoginResponseContract('Cadastro realizado com sucesso!', new LoggedUserResponseContract('1b9d6bcd-bbfd-4b2d-9b5d-ab8dfbbd4bed', 'username', 'email@email.com'));
       userRegistrationServiceSpy.registerUser.and.returnValue(of(loginResponseContract));
       component.userRegistrationForm = component['_buildUserRegistrationForm']();
 
@@ -220,7 +220,7 @@ describe('UserRegistrationComponent', () => {
 
     it('não deve realizar o cadastro de usuário se a confirmação da senha estiver diferente da senha', () => {
 
-      const loginResponseContract: LoginResponseContract = new LoginResponseContract('Cadastro realizado com sucesso!', new LoggedUserResponseContract('username', 'email@email.com'));
+      const loginResponseContract: LoginResponseContract = new LoginResponseContract('Cadastro realizado com sucesso!', new LoggedUserResponseContract('1b9d6bcd-bbfd-4b2d-9b5d-ab8dfbbd4bed', 'username', 'email@email.com'));
       userRegistrationServiceSpy.registerUser.and.returnValue(of(loginResponseContract));
       component.userRegistrationForm = component['_buildUserRegistrationForm']();
 

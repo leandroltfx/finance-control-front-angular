@@ -37,7 +37,7 @@ describe('LoginProxyService', () => {
     it('deve realizar uma chamada HTTP POST para o login', () => {
 
       const loginRequestContract: LoginRequestContract = new LoginRequestContract('email', 'password');
-      const loginResponseContract: LoginResponseContract = new LoginResponseContract('Login efetuado com sucesso!', new LoggedUserResponseContract('userName', 'email'));
+      const loginResponseContract: LoginResponseContract = new LoginResponseContract('Login efetuado com sucesso!', new LoggedUserResponseContract('1b9d6bcd-bbfd-4b2d-9b5d-ab8dfbbd4bed', 'userName', 'email'));
 
       service.login(loginRequestContract).subscribe(
         {
