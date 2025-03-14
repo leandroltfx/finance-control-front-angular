@@ -12,7 +12,7 @@ import { BankAccountsService } from './acl/service/bank-accounts.service';
 })
 export class BankAccountsComponent {
 
-  public bankAccountsDto: BankAccountDto[] = []
+  public bankAccountsDto: BankAccountDto[] = [];
 
   constructor(
     private readonly _authService: AuthService,
@@ -28,7 +28,7 @@ export class BankAccountsComponent {
       this._authService.loggedUser?.id
     ).subscribe(
       {
-        next: (bankAccountsDto: BankAccountDto[]) =>this.bankAccountsDto = bankAccountsDto,
+        next: (bankAccountsDto: BankAccountDto[]) => this.bankAccountsDto = bankAccountsDto,
         error: (httpErrorResponse: HttpErrorResponse) => console.log(httpErrorResponse),
       }
     )
