@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { HttpErrorResponse } from '@angular/common/http';
 
-import { BankAccountDto } from './models/dto/bank-accounts-dto';
+import { BankAccountDto } from './models/dto/bank-account-dto';
 import { AuthService } from '../../../core/services/auth/auth.service';
 import { BankAccountsService } from './acl/service/bank-accounts.service';
 

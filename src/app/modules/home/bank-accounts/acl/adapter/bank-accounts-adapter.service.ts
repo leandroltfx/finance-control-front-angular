@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 
 import { LtfUtilsService } from 'ltf-utils';
 
-import { BankAccountDto } from '../../models/dto/bank-accounts-dto';
+import { BankAccountDto } from '../../models/dto/bank-account-dto';
 import { BankAccountsRequestContract } from '../../models/contracts/request/bank-accounts-request-contract';
 import { BankAccountsResponseContract } from '../../models/contracts/response/bank-accounts-response-contract';
 

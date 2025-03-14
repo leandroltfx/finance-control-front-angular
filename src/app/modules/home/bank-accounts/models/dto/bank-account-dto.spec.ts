@@ -1,4 +1,4 @@
-import { BankAccountDto } from './bank-accounts-dto';
+import { BankAccountDto } from './bank-account-dto';
 
 describe('BankAccountDto', () => {
   it('should create an instance', () => {
