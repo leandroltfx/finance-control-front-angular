@@ -1,4 +1,4 @@
-export class MovementsDto {
+export class MovementDto {
 
     id!: string;
     bankAccount!: string;
