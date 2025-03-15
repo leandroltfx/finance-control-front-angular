@@ -28,6 +28,7 @@ describe('MovementsAdapterService', () => {
         [
           {
             id: 'id',
+            registerDate: '01.01.2025',
             bankAccount: 'bank',
             category: 'category',
             description: 'description',

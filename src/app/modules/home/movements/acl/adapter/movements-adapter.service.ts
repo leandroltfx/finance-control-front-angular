@@ -22,6 +22,7 @@ export class MovementsAdapterService {
     for (const movementResponse of movementsResponseContract.movements) {
       const movementDto: MovementDto = new MovementDto(
         movementResponse.id,
+        movementResponse.registerDate,
         movementResponse.bankAccount,
         movementResponse.value,
         movementResponse.description,
