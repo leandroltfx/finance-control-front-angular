@@ -1,5 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
+import { TranslateModule } from '@ngx-translate/core';
+
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 
@@ -13,6 +15,8 @@ describe('ErrorComponent', () => {
     TestBed.configureTestingModule({
       declarations: [ErrorComponent],
       imports: [
+        TranslateModule.forRoot(),
+
         MatIconModule,
         MatButtonModule,
       ]
