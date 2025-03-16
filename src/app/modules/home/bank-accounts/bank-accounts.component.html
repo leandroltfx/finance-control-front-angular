@@ -1,4 +1,4 @@
-<main class="ltf-flex ltf-align-items-center ltf-flex-wrap">
+<main class="ltf-flex ltf-align-items-center ltf-flex-wrap" *ngIf="bankAccountsDto.length && !errorMessage">
     <mat-card class="ltf-w-30 ltf-mbottom-1 ltf-mright-1" *ngFor="let bankAccount of bankAccountsDto">
         <mat-card-header>
             <mat-card-title-group>
@@ -16,3 +16,4 @@
         </mat-card-content>
     </mat-card>
 </main>
+<fc-error *ngIf="!bankAccountsDto.length && errorMessage" [message]="errorMessage" (emitEventRetry)="getBankAccounts()"></fc-error>

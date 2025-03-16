@@ -1,4 +1,4 @@
-<table mat-table *ngIf="movementsDto.length" [dataSource]="movementsDto" class="mat-elevation-z8">
+<table mat-table *ngIf="movementsDto.length && !errorMessage" [dataSource]="movementsDto" class="mat-elevation-z8">
     <ng-container matColumnDef="registerDate">
         <th mat-header-cell *matHeaderCellDef>Data</th>
         <td mat-cell *matCellDef="let movement">{{ movement.registerDate }}</td>
@@ -22,3 +22,4 @@
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 </table>
+<fc-error *ngIf="!movementsDto.length && errorMessage" [message]="errorMessage" (emitEventRetry)="getMovements()"></fc-error>

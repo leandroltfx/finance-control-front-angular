@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
+import { HttpErrorResponse } from '@angular/common/http';
 
 import { MovementDto } from './models/dto/movement-dto';
+import { Message } from '../../../shared/enum/message.enum';
 import { MovementsService } from './acl/service/movements.service';
 import { AuthService } from '../../../core/services/auth/auth.service';
-import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'fc-movements',
@@ -14,6 +15,7 @@ export class MovementsComponent {
 
   public movementsDto: MovementDto[] = [];
   public displayedColumns: string[] = ['registerDate', 'bankAccount', 'category', 'description', 'formattedBalance'];
+  public errorMessage!: string;
 
   constructor(
     private readonly _authService: AuthService,
@@ -21,16 +23,19 @@ export class MovementsComponent {
   ) { }
 
   public ngOnInit(): void {
-    this._getMovements();
+    this.getMovements();
   }
 
-  private _getMovements(): void {
+  public getMovements(): void {
     this._movementsService.getMovements(
       this._authService.loggedUser?.id
     ).subscribe(
       {
-        next: (movementsDto: MovementDto[]) => this.movementsDto = movementsDto,
-        error: (httpErrorResponse: HttpErrorResponse) => console.log(httpErrorResponse),
+        next: (movementsDto: MovementDto[]) => {
+          this.movementsDto = movementsDto;
+          this.errorMessage = '';
+        },
+        error: (httpErrorResponse: HttpErrorResponse) => this.errorMessage = httpErrorResponse.error['message'] ?? Message.DEFAULT_HTTP_ERROR_MESSAGE,
       }
     );
   }

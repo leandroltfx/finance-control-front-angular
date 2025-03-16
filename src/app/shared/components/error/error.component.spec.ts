@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { MatIconModule } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
 
 import { ErrorComponent } from './error.component';
 
@@ -12,7 +13,8 @@ describe('ErrorComponent', () => {
     TestBed.configureTestingModule({
       declarations: [ErrorComponent],
       imports: [
-        MatIconModule
+        MatIconModule,
+        MatButtonModule,
       ]
     });
     fixture = TestBed.createComponent(ErrorComponent);
@@ -22,5 +24,16 @@ describe('ErrorComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  describe('retry', () => {
+    it('deve emitir evento para retentativa', () => {
+
+      const emitSpy = spyOn(component.emitEventRetry, 'emit');
+
+      component.retry();
+
+      expect(emitSpy).toHaveBeenCalled();
+    });
   });
 });

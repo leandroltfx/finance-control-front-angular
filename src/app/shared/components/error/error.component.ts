@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 @Component({
   selector: 'fc-error',
@@ -8,5 +8,10 @@ import { Component, Input } from '@angular/core';
 export class ErrorComponent {
 
   @Input() message!: string;
+  @Output() emitEventRetry = new EventEmitter();
+
+  public retry(): void {
+    this.emitEventRetry.emit();
+  }
 
 }
