@@ -49,20 +49,32 @@ describe('BankAccountsComponent', () => {
 
     it('deve retornar a lista de contas bancárias', () => {
 
-      component['_getBankAccounts']();
+      component.getBankAccounts();
 
       expect(bankAccountsServiceSpy.getBankAccounts).toHaveBeenCalledWith('userId');
       expect(component.bankAccountsDto.length).toBe(0);
     });
 
-    it('deve receber o erro HTTP em caso de falha na listagem de contas bancárias', () => {
+    it('deve receber o erro HTTP em caso de falha na listagem de contas bancárias e apresentar mensagem vinda do back', () => {
 
       const httpErrorResponse: HttpErrorResponse = new HttpErrorResponse({ error: { message: 'Ocorreu um erro listagem de contas bancárias.' } });
       bankAccountsServiceSpy.getBankAccounts.and.returnValue(throwError(() => httpErrorResponse));
 
-      component['_getBankAccounts']();
+      component.getBankAccounts();
 
       expect(bankAccountsServiceSpy.getBankAccounts).toHaveBeenCalledWith('userId');
+      expect(component.errorMessage).toBe('Ocorreu um erro listagem de contas bancárias.');
+    });
+
+    it('deve receber o erro HTTP em caso de falha na listagem de contas bancárias e apresentar mensagem padrão caso o back esteja indisponível', () => {
+
+      const httpErrorResponse: HttpErrorResponse = new HttpErrorResponse({ error: {} });
+      bankAccountsServiceSpy.getBankAccounts.and.returnValue(throwError(() => httpErrorResponse));
+
+      component.getBankAccounts();
+
+      expect(bankAccountsServiceSpy.getBankAccounts).toHaveBeenCalledWith('userId');
+      expect(component.errorMessage).toBe('Servidor indisponível. Tente novamente mais tarde.');
     });
   });
 });

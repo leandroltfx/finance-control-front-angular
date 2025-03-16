@@ -1,6 +1,8 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
+import { MatTableModule } from '@angular/material/table';
+
 import { of, throwError } from 'rxjs';
 
 import { MovementsComponent } from './movements.component';
@@ -30,6 +32,9 @@ describe('MovementsComponent', () => {
 
     TestBed.configureTestingModule({
       declarations: [MovementsComponent],
+      imports: [
+        MatTableModule
+      ],
       providers: [
         { provide: AuthService, useValue: authServiceSpy },
         { provide: MovementsService, useValue: movementsServiceSpy },
@@ -49,20 +54,32 @@ describe('MovementsComponent', () => {
 
     it('deve retornar a lista de movimentações', () => {
 
-      component['_getMovements']();
+      component.getMovements();
 
       expect(movementsServiceSpy.getMovements).toHaveBeenCalledWith('userId');
       expect(component.movementsDto.length).toBe(0);
     });
 
-    it('deve receber o erro HTTP em caso de falha na listagem de movimentações', () => {
+    it('deve receber o erro HTTP em caso de falha na listagem de movimentações e apresentar mensagem vinda do back', () => {
 
       const httpErrorResponse: HttpErrorResponse = new HttpErrorResponse({ error: { message: 'Ocorreu um erro listagem de movimentações.' } });
       movementsServiceSpy.getMovements.and.returnValue(throwError(() => httpErrorResponse));
 
-      component['_getMovements']();
+      component.getMovements();
 
       expect(movementsServiceSpy.getMovements).toHaveBeenCalledWith('userId');
+      expect(component.errorMessage).toBe('Ocorreu um erro listagem de movimentações.');
+    });
+
+    it('deve receber o erro HTTP em caso de falha na listagem de movimentações e apresentar mensagem padrão caso o back esteja indisponível', () => {
+
+      const httpErrorResponse: HttpErrorResponse = new HttpErrorResponse({ error: {} });
+      movementsServiceSpy.getMovements.and.returnValue(throwError(() => httpErrorResponse));
+
+      component.getMovements();
+
+      expect(movementsServiceSpy.getMovements).toHaveBeenCalledWith('userId');
+      expect(component.errorMessage).toBe('Servidor indisponível. Tente novamente mais tarde.');
     });
   });
 });

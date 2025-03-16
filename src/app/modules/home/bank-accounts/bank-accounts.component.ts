@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { HttpErrorResponse } from '@angular/common/http';
 
+import { Message } from '../../../shared/enum/message.enum';
 import { BankAccountDto } from './models/dto/bank-account-dto';
 import { AuthService } from '../../../core/services/auth/auth.service';
 import { BankAccountsService } from './acl/service/bank-accounts.service';
@@ -13,6 +14,7 @@ import { BankAccountsService } from './acl/service/bank-accounts.service';
 export class BankAccountsComponent {
 
   public bankAccountsDto: BankAccountDto[] = [];
+  public errorMessage!: string;
 
   constructor(
     private readonly _authService: AuthService,
@@ -20,16 +22,19 @@ export class BankAccountsComponent {
   ) { }
 
   public ngOnInit(): void {
-    this._getBankAccounts();
+    this.getBankAccounts();
   }
 
-  private _getBankAccounts(): void {
+  public getBankAccounts(): void {
     this._bankAccountsService.getBankAccounts(
       this._authService.loggedUser?.id
     ).subscribe(
       {
-        next: (bankAccountsDto: BankAccountDto[]) => this.bankAccountsDto = bankAccountsDto,
-        error: (httpErrorResponse: HttpErrorResponse) => console.log(httpErrorResponse),
+        next: (bankAccountsDto: BankAccountDto[]) => {
+          this.bankAccountsDto = bankAccountsDto;
+          this.errorMessage = '';
+        },
+        error: (httpErrorResponse: HttpErrorResponse) => this.errorMessage = httpErrorResponse.error['message'] ?? Message.DEFAULT_HTTP_ERROR_MESSAGE,
       }
     )
   }
