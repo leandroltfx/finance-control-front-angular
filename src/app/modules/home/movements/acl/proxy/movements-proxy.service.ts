@@ -14,7 +14,7 @@ export class MovementsProxyService {
     private readonly _httpClient: HttpClient,
   ) { }
 
-  getMovements(
+  public getMovements(
     movementsRequestContract: MovementsRequestContract
   ): Observable<MovementsResponseContract> {
     return this._httpClient.get<MovementsResponseContract>(
