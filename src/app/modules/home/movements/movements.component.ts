@@ -12,7 +12,8 @@ import { HttpErrorResponse } from '@angular/common/http';
 })
 export class MovementsComponent {
 
-  public movementsDto: MovementDto[] = []
+  public movementsDto: MovementDto[] = [];
+  public displayedColumns: string[] = ['registerDate', 'bankAccount', 'category', 'description', 'formattedBalance'];
 
   constructor(
     private readonly _authService: AuthService,

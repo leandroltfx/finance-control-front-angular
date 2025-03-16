@@ -1,6 +1,8 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
+import { MatTableModule } from '@angular/material/table';
+
 import { of, throwError } from 'rxjs';
 
 import { MovementsComponent } from './movements.component';
@@ -30,6 +32,9 @@ describe('MovementsComponent', () => {
 
     TestBed.configureTestingModule({
       declarations: [MovementsComponent],
+      imports: [
+        MatTableModule
+      ],
       providers: [
         { provide: AuthService, useValue: authServiceSpy },
         { provide: MovementsService, useValue: movementsServiceSpy },

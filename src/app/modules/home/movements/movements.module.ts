@@ -1,6 +1,8 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
+import { MatTableModule } from '@angular/material/table';
+
 import { MovementsComponent } from './movements.component';
 import { MovementsService } from './acl/service/movements.service';
 import { MovementsRoutingModule } from './movements-routing.module';
@@ -13,6 +15,8 @@ import { MovementsAdapterService } from './acl/adapter/movements-adapter.service
   ],
   imports: [
     CommonModule,
+
+    MatTableModule,
 
     MovementsRoutingModule,
   ],
