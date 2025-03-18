@@ -1,0 +1,16 @@
+.overlay-spinner {
+    position: fixed;
+    /* Fixa o spinner no topo da tela */
+    top: 40%;
+    /* Alinha verticalmente ao centro */
+    left: 50%;
+    /* Alinha horizontalmente ao centro */
+    transform: translate(-50%, -50%);
+    /* Ajusta o centro do spinner */
+    z-index: 1000;
+    /* Garante que o spinner fique acima do conteúdo */
+
+    --mdc-circular-progress-active-indicator-color: #000;
+    width: 200px !important;
+    height: 200px !important;
+}
