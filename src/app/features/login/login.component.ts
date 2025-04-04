@@ -1,9 +1,11 @@
+import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { HttpErrorResponse } from '@angular/common/http';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import { LoginDto } from './models/dto/login-dto';
 import { LoginService } from './acl/service/login.service';
+import { RoutesEnum } from 'src/app/shared/enum/routes.enum';
 
 @Component({
   selector: 'fc-login',
@@ -16,8 +18,9 @@ export class LoginComponent implements OnInit {
   public hidePassword: boolean = true;
 
   constructor(
+    private readonly _router: Router,
     private readonly _formBuilder: FormBuilder,
-    private readonly _loginService: LoginService,
+    private readonly _loginService: LoginService
   ) { }
 
   public ngOnInit(): void {
@@ -42,6 +45,10 @@ export class LoginComponent implements OnInit {
         }
       );
     }
+  }
+
+  public goToUserRegistration(): void {
+    this._router.navigate([RoutesEnum.USER_REGISTRATION]);
   }
 
   private _buildLoginForm(): FormGroup {
