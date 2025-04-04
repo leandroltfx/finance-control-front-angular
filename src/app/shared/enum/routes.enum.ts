@@ -2,6 +2,6 @@ export enum RoutesEnum {
 
     LOGIN = 'login',
     USER_REGISTRATION = 'user-registration',
-    OTHER = '**'
+    RESET_PASSWORD = 'reset-password'
 
 };
