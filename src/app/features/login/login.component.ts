@@ -4,8 +4,8 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import { LoginDto } from './models/dto/login-dto';
+import { RoutesEnum } from '../../shared/enum/routes.enum';
 import { LoginService } from './acl/service/login.service';
-import { RoutesEnum } from 'src/app/shared/enum/routes.enum';
 
 @Component({
   selector: 'fc-login',
@@ -49,6 +49,10 @@ export class LoginComponent implements OnInit {
 
   public goToUserRegistration(): void {
     this._router.navigate([RoutesEnum.USER_REGISTRATION]);
+  }
+
+  public goToResetPassword(): void {
+    this._router.navigate([RoutesEnum.RESET_PASSWORD]);
   }
 
   private _buildLoginForm(): FormGroup {
