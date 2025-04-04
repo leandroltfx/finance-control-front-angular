@@ -1,0 +1,5 @@
+:host {
+    .mat-mdc-card-header > div {
+        width: 100%;
+    }
+}
