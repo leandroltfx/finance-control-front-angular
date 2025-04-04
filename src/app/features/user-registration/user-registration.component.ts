@@ -1,8 +1,11 @@
 import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
+import { HttpErrorResponse } from '@angular/common/http';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
+import { LoginDto } from '../login/models/dto/login-dto';
 import { RoutesEnum } from '../../shared/enum/routes.enum';
+import { UserRegistrationService } from './acl/service/user-registration.service';
 
 @Component({
   selector: 'fc-user-registration',
@@ -15,20 +18,40 @@ export class UserRegistrationComponent implements OnInit {
   public hidePassword: boolean = true;
 
   private _patternEmail: RegExp = /^[a-z0-9.]+@[a-z0-9]+\.[a-z]+(\.[a-z]+)?$/i;
-  private _patternUsername: RegExp = /^\S+$/;
+  private _patternUsername: RegExp = /^[A-Za-z0-9_]+$/;
   private _minLengthPassword: number = 8;
   private _minLengthUsername: number = 3;
 
   constructor(
     private readonly _router: Router,
-    private readonly _formBuilder: FormBuilder
+    private readonly _formBuilder: FormBuilder,
+    private readonly _userRegistrationService: UserRegistrationService,
   ) { }
 
   public ngOnInit(): void {
     this.userRegistrationForm = this._buildUserRegistrationForm();
   }
 
-  public registerUser(): void { }
+  public registerUser(): void {
+    if (this.userRegistrationForm.valid) {
+      this._userRegistrationService.registerUser(
+        this.userRegistrationForm.controls['username'].value,
+        this.userRegistrationForm.controls['email'].value,
+        this.userRegistrationForm.controls['password'].value,
+      ).subscribe(
+        {
+          next: ((loginDto: LoginDto) => {
+            // TODO
+            // Disparar mensagem de sucesso e rotear para a home
+          }),
+          error: ((httpResponseError: HttpErrorResponse) => {
+            // TODO
+            // Disparar mensagem de erro
+          }),
+        }
+      );
+    }
+  }
 
   public cancelRegisterUser(): void {
     this._router.navigate([RoutesEnum.LOGIN]);

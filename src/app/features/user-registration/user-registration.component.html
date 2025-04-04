@@ -21,7 +21,7 @@
                     <input matInput formControlName="username">
                     <mat-error *ngIf="userRegistrationForm.controls['username'].hasError('required')">Informe o nome de usuário</mat-error>
                     <mat-error *ngIf="userRegistrationForm.controls['username'].hasError('minlength')">O nome de usuário deve ter no mínimo 3 caracteres</mat-error>
-                    <mat-error *ngIf="userRegistrationForm.controls['username'].hasError('pattern')">O nome de usuário não deve ter espaços em branco</mat-error>
+                    <mat-error *ngIf="userRegistrationForm.controls['username'].hasError('pattern')">O nome de usuário não pode conter caracteres especiais ou espaços</mat-error>
                 </mat-form-field>
                 <mat-form-field class="fc-w-100 fc-mtop-1">
                     <mat-label>Senha</mat-label>
