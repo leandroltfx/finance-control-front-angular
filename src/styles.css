@@ -3,6 +3,10 @@
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
+.success-message { text-align: center; --mdc-snackbar-supporting-text-color: #000000; --mdc-snackbar-container-color: #bfe3b4; }
+.warning-message { text-align: center; --mdc-snackbar-supporting-text-color: #000000; --mdc-snackbar-container-color: #f4f186; }
+.error-message { text-align: center; --mdc-snackbar-supporting-text-color: #000000; --mdc-snackbar-container-color: #f47174; }
+
 .fc-flex { display: flex; }
 .fc-align-items-center { align-items: center; }
 
