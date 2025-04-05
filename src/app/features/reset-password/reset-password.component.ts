@@ -1,11 +1,13 @@
 import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { HttpErrorResponse } from '@angular/common/http';
-import { Form, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
+import { Message } from '../../shared/enum/message.enum';
 import { RoutesEnum } from '../../shared/enum/routes.enum';
 import { ResetPasswordDto } from './models/dto/reset-password-dto';
 import { ResetPasswordService } from './acl/service/reset-password.service';
+import { MessageService } from '../../core/services/message/message.service';
 
 @Component({
   selector: 'fc-reset-password',
@@ -19,6 +21,7 @@ export class ResetPasswordComponent implements OnInit {
   constructor(
     private readonly _router: Router,
     private readonly _formBuilder: FormBuilder,
+    private readonly _messageService: MessageService,
     private readonly _resetPasswordService: ResetPasswordService,
   ) { }
 
@@ -34,11 +37,11 @@ export class ResetPasswordComponent implements OnInit {
         {
           next: ((resetPasswordDto: ResetPasswordDto) => {
             // TODO
-            // Disparar mensagem de sucesso e redirecionar para a etapa seguinte
+            // Redirecionar para a etapa seguinte
+            this._messageService.showMessage(resetPasswordDto.message, 'success');
           }),
           error: ((httpResponseError: HttpErrorResponse) => {
-            // TODO
-            // Disparar mensagem de erro
+            this._messageService.showMessage(httpResponseError.error['message'] ?? Message.DEFAULT_HTTP_ERROR_MESSAGE, 'error');
           }),
         }
       );

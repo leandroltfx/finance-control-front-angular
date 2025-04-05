@@ -14,15 +14,18 @@ import { LoginDto } from './models/dto/login-dto';
 import { LoginComponent } from './login.component';
 import { LoginService } from './acl/service/login.service';
 import { LoggedUserDto } from './models/logged-user/logged-user-dto';
+import { MessageService } from '../../core/services/message/message.service';
 
 describe('LoginComponent', () => {
   let component: LoginComponent;
   let fixture: ComponentFixture<LoginComponent>;
   let loginServiceSpy: jasmine.SpyObj<LoginService>;
+  let messageServiceSpy: jasmine.SpyObj<MessageService>;
 
   beforeEach(() => {
 
     loginServiceSpy = jasmine.createSpyObj<LoginService>('LoginService', ['login']);
+    messageServiceSpy = jasmine.createSpyObj<MessageService>('MessageService', ['showMessage']);
 
     TestBed.configureTestingModule({
       declarations: [
@@ -38,7 +41,8 @@ describe('LoginComponent', () => {
         BrowserAnimationsModule
       ],
       providers: [
-        { provide: LoginService, useValue: loginServiceSpy }
+        { provide: LoginService, useValue: loginServiceSpy },
+        { provide: MessageService, useValue: messageServiceSpy }
       ]
     });
     fixture = TestBed.createComponent(LoginComponent);
@@ -64,6 +68,7 @@ describe('LoginComponent', () => {
       component.login();
 
       expect(loginServiceSpy.login).toHaveBeenCalledWith('email@email.com', 'asd123');
+      expect(messageServiceSpy.showMessage).toHaveBeenCalledWith('Login efetuado com sucesso!', 'success');
     });
 
     it('deve receber o erro HTTP em caso de falha no login', () => {
@@ -79,6 +84,7 @@ describe('LoginComponent', () => {
       component.login();
 
       expect(loginServiceSpy.login).toHaveBeenCalledWith('email@email.com', 'asd123');
+      expect(messageServiceSpy.showMessage).toHaveBeenCalledWith('Ocorreu um erro no login.', 'error');
     });
 
     it('deve receber o erro HTTP em caso de falha no login e emitir a mensagem padrão caso o servidor esteja offline', () => {
@@ -94,6 +100,7 @@ describe('LoginComponent', () => {
       component.login();
 
       expect(loginServiceSpy.login).toHaveBeenCalledWith('email@email.com', 'asd123');
+      expect(messageServiceSpy.showMessage).toHaveBeenCalledWith('Servidor indisponível. Tente novamente mais tarde.', 'error');
     });
 
     it('não deve realizar o login caso o email não tenha sido preenchido', () => {
