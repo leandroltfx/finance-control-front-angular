@@ -7,6 +7,8 @@ import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 
+import { TranslateModule } from '@ngx-translate/core';
+
 import { ResetPasswordComponent } from './reset-password.component';
 import { ResetPasswordService } from './acl/service/reset-password.service';
 import { ResetPasswordRoutingModule } from './reset-password-routing.module';
@@ -25,6 +27,8 @@ import { ResetPasswordAdapterService } from './acl/adapter/reset-password-adapte
     HttpClientModule,
     MatFormFieldModule,
     ReactiveFormsModule,
+
+    TranslateModule,
 
     ResetPasswordRoutingModule
   ],
