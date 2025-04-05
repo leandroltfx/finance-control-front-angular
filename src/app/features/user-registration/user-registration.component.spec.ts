@@ -11,8 +11,10 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { of, throwError } from 'rxjs';
 
+import { Message } from '../../shared/enum/message.enum';
 import { RoutesEnum } from '../../shared/enum/routes.enum';
 import { UserRegistrationComponent } from './user-registration.component';
+import { MessageService } from '../../core/services/message/message.service';
 import { UserRegistrationService } from './acl/service/user-registration.service';
 import { LoggedUserResponseContract, LoginResponseContract } from '../login/models/contracts/response/login-response-contract';
 
@@ -21,10 +23,12 @@ describe('UserRegistrationComponent', () => {
   let fixture: ComponentFixture<UserRegistrationComponent>;
   let router: Router;
   let userRegistrationServiceSpy: jasmine.SpyObj<UserRegistrationService>;
+  let messageServiceSpy: jasmine.SpyObj<MessageService>;
 
   beforeEach(() => {
 
     userRegistrationServiceSpy = jasmine.createSpyObj<UserRegistrationService>('UserRegistrationService', ['registerUser']);
+    messageServiceSpy = jasmine.createSpyObj<MessageService>('MessageService', ['showMessage']);
 
     TestBed.configureTestingModule({
       declarations: [
@@ -40,7 +44,8 @@ describe('UserRegistrationComponent', () => {
         BrowserAnimationsModule
       ],
       providers: [
-        { provide: UserRegistrationService, useValue: userRegistrationServiceSpy }
+        { provide: UserRegistrationService, useValue: userRegistrationServiceSpy },
+        { provide: MessageService, useValue: messageServiceSpy },
       ]
     });
     fixture = TestBed.createComponent(UserRegistrationComponent);
@@ -70,6 +75,7 @@ describe('UserRegistrationComponent', () => {
       component.registerUser();
 
       expect(userRegistrationServiceSpy.registerUser).toHaveBeenCalledWith('username', 'email@email.com', 'asdasdasd');
+      expect(messageServiceSpy.showMessage).toHaveBeenCalledWith('Cadastro realizado com sucesso!', 'success');
     });
 
     it('deve receber o erro HTTP em caso de falha no login', () => {
@@ -86,6 +92,7 @@ describe('UserRegistrationComponent', () => {
       component.registerUser();
 
       expect(userRegistrationServiceSpy.registerUser).toHaveBeenCalledWith('username', 'email@email.com', 'asdasdasd');
+      expect(messageServiceSpy.showMessage).toHaveBeenCalledWith('Ocorreu um erro no cadastro.', 'error');
     });
 
     it('deve receber o erro HTTP em caso de falha no login e emitir a mensagem padrão caso o servidor esteja offline', () => {
@@ -102,6 +109,7 @@ describe('UserRegistrationComponent', () => {
       component.registerUser();
 
       expect(userRegistrationServiceSpy.registerUser).toHaveBeenCalledWith('username', 'email@email.com', 'asdasdasd');
+      expect(messageServiceSpy.showMessage).toHaveBeenCalledWith(Message.DEFAULT_HTTP_ERROR_MESSAGE, 'error');
     });
 
     it('não deve realizar o cadastro de usuário se o nome de usuário estiver com caracter especial', () => {

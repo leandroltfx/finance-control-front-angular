@@ -3,8 +3,10 @@ import { Component, OnInit } from '@angular/core';
 import { HttpErrorResponse } from '@angular/common/http';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
+import { Message } from '../../shared/enum/message.enum';
 import { LoginDto } from '../login/models/dto/login-dto';
 import { RoutesEnum } from '../../shared/enum/routes.enum';
+import { MessageService } from '../../core/services/message/message.service';
 import { UserRegistrationService } from './acl/service/user-registration.service';
 
 @Component({
@@ -25,6 +27,7 @@ export class UserRegistrationComponent implements OnInit {
   constructor(
     private readonly _router: Router,
     private readonly _formBuilder: FormBuilder,
+    private readonly _messageService: MessageService,
     private readonly _userRegistrationService: UserRegistrationService,
   ) { }
 
@@ -42,11 +45,11 @@ export class UserRegistrationComponent implements OnInit {
         {
           next: ((loginDto: LoginDto) => {
             // TODO
-            // Disparar mensagem de sucesso e rotear para a home
+            // Rotear para a home
+            this._messageService.showMessage(loginDto.message, 'success');
           }),
           error: ((httpResponseError: HttpErrorResponse) => {
-            // TODO
-            // Disparar mensagem de erro
+            this._messageService.showMessage(httpResponseError.error['message'] ?? Message.DEFAULT_HTTP_ERROR_MESSAGE, 'error');
           }),
         }
       );
