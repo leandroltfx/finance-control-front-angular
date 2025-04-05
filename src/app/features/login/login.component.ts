@@ -4,8 +4,10 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import { LoginDto } from './models/dto/login-dto';
+import { Message } from '../../shared/enum/message.enum';
 import { RoutesEnum } from '../../shared/enum/routes.enum';
 import { LoginService } from './acl/service/login.service';
+import { MessageService } from '../../core/services/message/message.service';
 
 @Component({
   selector: 'fc-login',
@@ -20,7 +22,8 @@ export class LoginComponent implements OnInit {
   constructor(
     private readonly _router: Router,
     private readonly _formBuilder: FormBuilder,
-    private readonly _loginService: LoginService
+    private readonly _loginService: LoginService,
+    private readonly _messageService: MessageService,
   ) { }
 
   public ngOnInit(): void {
@@ -36,11 +39,11 @@ export class LoginComponent implements OnInit {
         {
           next: ((loginDto: LoginDto) => {
             // TODO
-            // Disparar mensagem de sucesso e rotear para a home
+            // Rotear para a home
+            this._messageService.showMessage(loginDto.message, 'success');
           }),
           error: ((httpResponseError: HttpErrorResponse) => {
-            // TODO
-            // Disparar mensagem de erro
+            this._messageService.showMessage(httpResponseError.error['message'] ?? Message.DEFAULT_HTTP_ERROR_MESSAGE, 'error');
           }),
         }
       );
