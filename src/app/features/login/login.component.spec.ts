@@ -15,6 +15,7 @@ import { LoginComponent } from './login.component';
 import { LoginService } from './acl/service/login.service';
 import { LoggedUserDto } from './models/logged-user/logged-user-dto';
 import { MessageService } from '../../core/services/message/message.service';
+import { TranslateModule } from '@ngx-translate/core';
 
 describe('LoginComponent', () => {
   let component: LoginComponent;
@@ -38,7 +39,9 @@ describe('LoginComponent', () => {
         MatButtonModule,
         MatFormFieldModule,
         ReactiveFormsModule,
-        BrowserAnimationsModule
+        BrowserAnimationsModule,
+
+        TranslateModule.forRoot()
       ],
       providers: [
         { provide: LoginService, useValue: loginServiceSpy },

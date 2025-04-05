@@ -8,6 +8,8 @@ import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 
+import { TranslateModule } from '@ngx-translate/core';
+
 import { UserRegistrationComponent } from './user-registration.component';
 import { UserRegistrationService } from './acl/service/user-registration.service';
 import { UserRegistrationRoutingModule } from './user-registration-routing.module';
@@ -27,6 +29,8 @@ import { UserRegistrationAdapterService } from './acl/adapter/user-registration-
     HttpClientModule,
     MatFormFieldModule,
     ReactiveFormsModule,
+
+    TranslateModule,
 
     UserRegistrationRoutingModule
   ],

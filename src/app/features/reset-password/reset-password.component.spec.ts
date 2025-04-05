@@ -17,6 +17,7 @@ import { ResetPasswordDto } from './models/dto/reset-password-dto';
 import { ResetPasswordComponent } from './reset-password.component';
 import { ResetPasswordService } from './acl/service/reset-password.service';
 import { MessageService } from '../../core/services/message/message.service';
+import { TranslateModule } from '@ngx-translate/core';
 
 describe('ResetPasswordComponent', () => {
   let component: ResetPasswordComponent;
@@ -40,6 +41,8 @@ describe('ResetPasswordComponent', () => {
         RouterTestingModule,
         ReactiveFormsModule,
         BrowserAnimationsModule,
+
+        TranslateModule.forRoot()
       ],
       providers: [
         { provide: ResetPasswordService, useValue: resetPasswordServiceSpy },

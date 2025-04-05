@@ -3,7 +3,7 @@
         <mat-card-header>
             <mat-card-title>
                 <div class="fc-w-100 fc-txt-center">
-                    <h1>Cadastro de Usuário</h1>
+                    <h1>{{ 'USER_REGISTRATION.TITLE' | translate }}</h1>
                 </div>
             </mat-card-title>
         </mat-card-header>
@@ -11,35 +11,49 @@
         <mat-card-content>
             <form [formGroup]="userRegistrationForm" (submit)="registerUser()">
                 <mat-form-field class="fc-w-100 fc-mtop-1">
-                    <mat-label>Email</mat-label>
+                    <mat-label>{{ 'USER_REGISTRATION.EMAIL' | translate }}</mat-label>
                     <input matInput formControlName="email">
-                    <mat-error *ngIf="userRegistrationForm.controls['email'].hasError('required')">Informe o email</mat-error>
-                    <mat-error *ngIf="userRegistrationForm.controls['email'].hasError('pattern')">Email inválido</mat-error>
+                    <mat-error *ngIf="userRegistrationForm.controls['email'].hasError('required')">
+                        {{ 'USER_REGISTRATION.ERROR_REQUIRED_EMAIL' | translate }}
+                    </mat-error>
+                    <mat-error *ngIf="userRegistrationForm.controls['email'].hasError('pattern')">
+                        {{ 'USER_REGISTRATION.ERROR_PATTERN_EMAIL' | translate }}
+                    </mat-error>
                 </mat-form-field>
                 <mat-form-field class="fc-w-100 fc-mtop-1">
-                    <mat-label>Nome de usuário</mat-label>
+                    <mat-label>{{ 'USER_REGISTRATION.USERNAME' | translate }}</mat-label>
                     <input matInput formControlName="username">
-                    <mat-error *ngIf="userRegistrationForm.controls['username'].hasError('required')">Informe o nome de usuário</mat-error>
-                    <mat-error *ngIf="userRegistrationForm.controls['username'].hasError('minlength')">O nome de usuário deve ter no mínimo 3 caracteres</mat-error>
-                    <mat-error *ngIf="userRegistrationForm.controls['username'].hasError('pattern')">O nome de usuário não pode conter caracteres especiais ou espaços</mat-error>
+                    <mat-error *ngIf="userRegistrationForm.controls['username'].hasError('required')">
+                        {{ 'USER_REGISTRATION.ERROR_REQUIRED_USERNAME' | translate }}
+                    </mat-error>
+                    <mat-error *ngIf="userRegistrationForm.controls['username'].hasError('minlength')">
+                        {{ 'USER_REGISTRATION.ERROR_MINLENGTH_USERNAME' | translate }}
+                    </mat-error>
+                    <mat-error *ngIf="userRegistrationForm.controls['username'].hasError('pattern')">
+                        {{ 'USER_REGISTRATION.ERROR_PATTERN_USERNAME' | translate }}
+                    </mat-error>
                 </mat-form-field>
                 <mat-form-field class="fc-w-100 fc-mtop-1">
-                    <mat-label>Senha</mat-label>
+                    <mat-label>{{ 'USER_REGISTRATION.PASSWORD' | translate }}</mat-label>
                     <input matInput [type]="hidePassword ? 'password' : 'text'" formControlName="password">
                     <button mat-icon-button matSuffix (click)="hidePassword = !hidePassword" type="button">
                         <mat-icon>{{ hidePassword ? 'visibility' : 'visibility_off' }}</mat-icon>
                     </button>
-                    <mat-error *ngIf="userRegistrationForm.controls['password'].hasError('required')">Informe a senha</mat-error>
-                    <mat-error *ngIf="userRegistrationForm.controls['password'].hasError('minlength')">A senha deve ter no mínimo 8 caracteres</mat-error>
+                    <mat-error *ngIf="userRegistrationForm.controls['password'].hasError('required')">
+                        {{ 'USER_REGISTRATION.ERROR_REQUIRED_PASSWORD' | translate }}
+                    </mat-error>
+                    <mat-error *ngIf="userRegistrationForm.controls['password'].hasError('minlength')">
+                        {{ 'USER_REGISTRATION.ERROR_MINLENGTH_PASSWORD' | translate }}
+                    </mat-error>
                 </mat-form-field>
                 <div class="fc-mtop-1">
                     <button mat-raised-button color="primary" class="fc-w-100" type="submit">
-                        Cadastrar
+                        {{ 'USER_REGISTRATION.REGISTER' | translate }}
                     </button>
                 </div>
                 <div class="fc-mtop-1 fc-txt-center">
                     <button mat-button type="button" (click)="cancelRegisterUser()">
-                        Cancelar
+                        {{ 'USER_REGISTRATION.CANCEL' | translate }}
                     </button>
                 </div>
             </form>
