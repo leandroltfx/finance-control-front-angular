@@ -4,6 +4,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { of, throwError } from 'rxjs';
 
 import { UserRegistrationService } from './user-registration.service';
+import { AuthService } from '../../../../core/services/auth/auth.service';
 import { LoginDto } from '../../../../features/login/models/dto/login-dto';
 import { UserRegistrationProxyService } from '../proxy/user-registration-proxy.service';
 import { LoggedUserDto } from '../../../../features/login/models/logged-user/logged-user-dto';
@@ -12,17 +13,26 @@ import { LoggedUserResponseContract, LoginResponseContract } from '../../../../f
 
 describe('UserRegistrationService', () => {
   let service: UserRegistrationService;
+  let authServiceSpy: jasmine.SpyObj<AuthService>;
   let userRegistrationProxyServiceSpy: jasmine.SpyObj<UserRegistrationProxyService>;
   let userRegistrationAdapterServiceSpy: jasmine.SpyObj<UserRegistrationAdapterService>;
 
   beforeEach(() => {
 
+    authServiceSpy = jasmine.createSpyObj<AuthService>('AuthService', ['loggedUser']);
     userRegistrationProxyServiceSpy = jasmine.createSpyObj<UserRegistrationProxyService>('UserRegistrationProxyService', ['registerUser']);
     userRegistrationAdapterServiceSpy = jasmine.createSpyObj<UserRegistrationAdapterService>('UserRegistrationAdapterService', ['toDto', 'toRequestContract']);
+
+    Object.defineProperty(authServiceSpy, 'loggedUser', {
+      get: () => authServiceSpy['_loggedUser'],
+      set: (loggedUser: LoggedUserDto | null) => authServiceSpy['_loggedUser'] = loggedUser,
+    });
+    authServiceSpy['_loggedUser'] = null;
 
     TestBed.configureTestingModule({
       providers: [
         UserRegistrationService,
+        { provide: AuthService, useValue: authServiceSpy },
         { provide: UserRegistrationProxyService, useValue: userRegistrationProxyServiceSpy },
         { provide: UserRegistrationAdapterService, useValue: userRegistrationAdapterServiceSpy },
       ]
@@ -56,6 +66,8 @@ describe('UserRegistrationService', () => {
             expect(userRegistrationAdapterServiceSpy.toRequestContract).toHaveBeenCalledWith('username', 'email', 'password');
             expect(userRegistrationAdapterServiceSpy.toDto).toHaveBeenCalledWith(loginResponseContract);
             expect(userRegistrationProxyServiceSpy.registerUser).toHaveBeenCalled();
+            expect(authServiceSpy.loggedUser?.email).toBe('email');
+            expect(authServiceSpy.loggedUser?.userName).toBe('userName');
           }
         }
       );
