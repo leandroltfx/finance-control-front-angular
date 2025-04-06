@@ -20,11 +20,11 @@ import { MessageService } from '../../core/services/message/message.service';
 import { TranslateModule } from '@ngx-translate/core';
 
 describe('ResetPasswordComponent', () => {
+  let router: Router;
   let component: ResetPasswordComponent;
   let fixture: ComponentFixture<ResetPasswordComponent>;
-  let router: Router;
-  let resetPasswordServiceSpy: jasmine.SpyObj<ResetPasswordService>;
   let messageServiceSpy: jasmine.SpyObj<MessageService>;
+  let resetPasswordServiceSpy: jasmine.SpyObj<ResetPasswordService>;
 
   beforeEach(() => {
 

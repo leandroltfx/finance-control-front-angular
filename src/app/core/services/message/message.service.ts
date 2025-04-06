@@ -7,15 +7,15 @@ import { MessageType } from '../../../shared/types/message.type';
 export class MessageService {
 
   private readonly _durationMessage: number = 4000;
-  private readonly _horizontalPositionMessage: MatSnackBarHorizontalPosition = 'center';
   private readonly _verticalPositionMessage: MatSnackBarVerticalPosition = 'top';
+  private readonly _horizontalPositionMessage: MatSnackBarHorizontalPosition = 'center';
   private readonly _mapPanelClassByMessageType = new Map<string, string>(
     [
       ["success", "success-message"],
       ["warning", "warning-message"],
       ["error", "error-message"]
     ]
-  )
+  );
 
   constructor(
     private readonly _matSnackBar: MatSnackBar
@@ -30,8 +30,8 @@ export class MessageService {
       '',
       {
         duration: this._durationMessage,
-        horizontalPosition: this._horizontalPositionMessage,
         verticalPosition: this._verticalPositionMessage,
+        horizontalPosition: this._horizontalPositionMessage,
         panelClass: this._mapPanelClassByMessageType.get(type),
       }
     );

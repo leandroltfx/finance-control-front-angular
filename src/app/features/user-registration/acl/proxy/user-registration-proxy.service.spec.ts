@@ -17,7 +17,7 @@ describe('UserRegistrationProxyService', () => {
         HttpClientTestingModule
       ],
       providers: [
-        UserRegistrationProxyService,
+        UserRegistrationProxyService
       ]
     });
     service = TestBed.inject(UserRegistrationProxyService);

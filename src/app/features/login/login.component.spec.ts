@@ -22,8 +22,8 @@ import { LoggedUserDto } from './models/logged-user/logged-user-dto';
 import { MessageService } from '../../core/services/message/message.service';
 
 describe('LoginComponent', () => {
-  let component: LoginComponent;
   let router: Router;
+  let component: LoginComponent;
   let fixture: ComponentFixture<LoginComponent>;
   let loginServiceSpy: jasmine.SpyObj<LoginService>;
   let messageServiceSpy: jasmine.SpyObj<MessageService>;

@@ -11,7 +11,7 @@ describe('ResetPasswordAdapterService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       providers: [
-        ResetPasswordAdapterService,
+        ResetPasswordAdapterService
       ]
     });
     service = TestBed.inject(ResetPasswordAdapterService);

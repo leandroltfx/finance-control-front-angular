@@ -23,7 +23,7 @@ export class LoginComponent implements OnInit {
     private readonly _router: Router,
     private readonly _formBuilder: FormBuilder,
     private readonly _loginService: LoginService,
-    private readonly _messageService: MessageService,
+    private readonly _messageService: MessageService
   ) { }
 
   public ngOnInit(): void {
