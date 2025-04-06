@@ -1,10 +1,18 @@
 import { Component } from '@angular/core';
 
+import { TranslateService } from '@ngx-translate/core';
+
 @Component({
   selector: 'fc-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  styleUrls: []
 })
 export class AppComponent {
-  title = 'finance-control-front-angular';
+
+  constructor(
+    private readonly _translateService: TranslateService
+  ) {
+    this._translateService.setDefaultLang('pt');
+  }
+
 }
