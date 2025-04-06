@@ -1,24 +1,29 @@
+import { Router } from '@angular/router';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { HttpErrorResponse } from '@angular/common/http';
 import { MatButtonModule } from '@angular/material/button';
+import { RouterTestingModule } from '@angular/router/testing';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
+import { TranslateModule } from '@ngx-translate/core';
 
 import { of, throwError } from 'rxjs';
 
 import { LoginDto } from './models/dto/login-dto';
 import { LoginComponent } from './login.component';
+import { RoutesEnum } from '../../shared/enum/routes.enum';
 import { LoginService } from './acl/service/login.service';
 import { LoggedUserDto } from './models/logged-user/logged-user-dto';
 import { MessageService } from '../../core/services/message/message.service';
-import { TranslateModule } from '@ngx-translate/core';
 
 describe('LoginComponent', () => {
   let component: LoginComponent;
+  let router: Router;
   let fixture: ComponentFixture<LoginComponent>;
   let loginServiceSpy: jasmine.SpyObj<LoginService>;
   let messageServiceSpy: jasmine.SpyObj<MessageService>;
@@ -39,6 +44,7 @@ describe('LoginComponent', () => {
         MatButtonModule,
         MatFormFieldModule,
         ReactiveFormsModule,
+        RouterTestingModule,
         BrowserAnimationsModule,
 
         TranslateModule.forRoot()
@@ -49,6 +55,7 @@ describe('LoginComponent', () => {
       ]
     });
     fixture = TestBed.createComponent(LoginComponent);
+    router = TestBed.inject(Router);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
@@ -135,6 +142,30 @@ describe('LoginComponent', () => {
       component.login();
 
       expect(loginServiceSpy.login).not.toHaveBeenCalled();
+    });
+  });
+
+  describe('goToUserRegistration', () => {
+
+    it('deve rotear para o módulo de cadastro de usuário', () => {
+
+      const navigateSpy = spyOn(router, 'navigate');
+
+      component.goToUserRegistration();
+
+      expect(navigateSpy).toHaveBeenCalledWith([RoutesEnum.USER_REGISTRATION]);
+    });
+  });
+
+  describe('goToResetPassword', () => {
+
+    it('deve rotear para o módulo de recuperação de senha', () => {
+
+      const navigateSpy = spyOn(router, 'navigate');
+
+      component.goToResetPassword();
+
+      expect(navigateSpy).toHaveBeenCalledWith([RoutesEnum.RESET_PASSWORD]);
     });
   });
 
