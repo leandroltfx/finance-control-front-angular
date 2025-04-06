@@ -35,7 +35,7 @@ import { ResetPasswordAdapterService } from './acl/adapter/reset-password-adapte
   providers: [
     ResetPasswordService,
     ResetPasswordProxyService,
-    ResetPasswordAdapterService,
+    ResetPasswordAdapterService
   ]
 })
 export class ResetPasswordModule { }

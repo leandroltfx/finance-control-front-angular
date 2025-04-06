@@ -21,16 +21,16 @@ import { UserRegistrationService } from './acl/service/user-registration.service
 import { LoggedUserResponseContract, LoginResponseContract } from '../login/models/contracts/response/login-response-contract';
 
 describe('UserRegistrationComponent', () => {
-  let component: UserRegistrationComponent;
-  let fixture: ComponentFixture<UserRegistrationComponent>;
   let router: Router;
-  let userRegistrationServiceSpy: jasmine.SpyObj<UserRegistrationService>;
+  let component: UserRegistrationComponent;
   let messageServiceSpy: jasmine.SpyObj<MessageService>;
+  let fixture: ComponentFixture<UserRegistrationComponent>;
+  let userRegistrationServiceSpy: jasmine.SpyObj<UserRegistrationService>;
 
   beforeEach(() => {
 
-    userRegistrationServiceSpy = jasmine.createSpyObj<UserRegistrationService>('UserRegistrationService', ['registerUser']);
     messageServiceSpy = jasmine.createSpyObj<MessageService>('MessageService', ['showMessage']);
+    userRegistrationServiceSpy = jasmine.createSpyObj<UserRegistrationService>('UserRegistrationService', ['registerUser']);
 
     TestBed.configureTestingModule({
       declarations: [
@@ -49,7 +49,7 @@ describe('UserRegistrationComponent', () => {
       ],
       providers: [
         { provide: UserRegistrationService, useValue: userRegistrationServiceSpy },
-        { provide: MessageService, useValue: messageServiceSpy },
+        { provide: MessageService, useValue: messageServiceSpy }
       ]
     });
     fixture = TestBed.createComponent(UserRegistrationComponent);

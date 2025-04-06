@@ -18,7 +18,7 @@ export class UserRegistrationAdapterService {
       new LoggedUserDto(
         loginResponseContract.loggedUser.id,
         loginResponseContract.loggedUser.userName,
-        loginResponseContract.loggedUser.email,
+        loginResponseContract.loggedUser.email
       ),
     );
   }
@@ -31,7 +31,7 @@ export class UserRegistrationAdapterService {
     return new UserRegistrationRequestContract(
       username,
       email,
-      password,
+      password
     );
   }
 }

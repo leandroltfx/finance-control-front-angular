@@ -15,7 +15,7 @@ describe('MessageService', () => {
 
     TestBed.configureTestingModule({
       imports: [
-        CoreModule,
+        CoreModule
       ],
       providers: [
         MessageService,

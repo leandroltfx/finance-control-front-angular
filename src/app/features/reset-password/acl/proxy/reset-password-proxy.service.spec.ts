@@ -14,10 +14,10 @@ describe('ResetPasswordProxyService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [
-        HttpClientTestingModule,
+        HttpClientTestingModule
       ],
       providers: [
-        ResetPasswordProxyService,
+        ResetPasswordProxyService
       ]
     });
     service = TestBed.inject(ResetPasswordProxyService);

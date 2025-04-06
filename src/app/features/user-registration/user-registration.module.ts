@@ -37,7 +37,7 @@ import { UserRegistrationAdapterService } from './acl/adapter/user-registration-
   providers: [
     UserRegistrationService,
     UserRegistrationProxyService,
-    UserRegistrationAdapterService,
+    UserRegistrationAdapterService
   ]
 })
 export class UserRegistrationModule { }

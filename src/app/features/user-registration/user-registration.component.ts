@@ -16,8 +16,8 @@ import { UserRegistrationService } from './acl/service/user-registration.service
 })
 export class UserRegistrationComponent implements OnInit {
 
-  public userRegistrationForm!: FormGroup;
   public hidePassword: boolean = true;
+  public userRegistrationForm!: FormGroup;
 
   private _patternEmail: RegExp = /^[a-z0-9.]+@[a-z0-9]+\.[a-z]+(\.[a-z]+)?$/i;
   private _patternUsername: RegExp = /^[A-Za-z0-9_]+$/;
@@ -28,7 +28,7 @@ export class UserRegistrationComponent implements OnInit {
     private readonly _router: Router,
     private readonly _formBuilder: FormBuilder,
     private readonly _messageService: MessageService,
-    private readonly _userRegistrationService: UserRegistrationService,
+    private readonly _userRegistrationService: UserRegistrationService
   ) { }
 
   public ngOnInit(): void {
