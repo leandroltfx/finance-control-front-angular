@@ -7,7 +7,7 @@ export class LoggedUserDto {
     constructor(
         id: string,
         userName: string,
-        email: string,
+        email: string
     ) {
         this.id = id;
         this.userName = userName;

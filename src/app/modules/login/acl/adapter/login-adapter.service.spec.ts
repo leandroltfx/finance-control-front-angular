@@ -11,7 +11,7 @@ describe('LoginAdapterService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       providers: [
-        LoginAdapterService,
+        LoginAdapterService
       ]
     });
     service = TestBed.inject(LoginAdapterService);

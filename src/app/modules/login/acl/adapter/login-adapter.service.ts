@@ -11,25 +11,25 @@ export class LoginAdapterService {
   constructor() { }
 
   public toDto(
-    loginResponseContract: LoginResponseContract,
+    loginResponseContract: LoginResponseContract
   ): LoginDto {
     return new LoginDto(
       loginResponseContract.message,
       new LoggedUserDto(
         loginResponseContract.loggedUser.id,
         loginResponseContract.loggedUser.userName,
-        loginResponseContract.loggedUser.email,
+        loginResponseContract.loggedUser.email
       ),
     );
   }
 
   public toRequestContract(
     email: string,
-    password: string,
+    password: string
   ): LoginRequestContract {
     return new LoginRequestContract(
       email,
-      password,
+      password
     );
   }
 }

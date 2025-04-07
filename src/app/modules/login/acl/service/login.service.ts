@@ -15,12 +15,12 @@ export class LoginService {
   constructor(
     private readonly _authService: AuthService,
     private readonly _loginProxyService: LoginProxyService,
-    private readonly _loginAdapterService: LoginAdapterService,
+    private readonly _loginAdapterService: LoginAdapterService
   ) { }
 
   public login(
     email: string,
-    password: string,
+    password: string
   ): Observable<LoginDto> {
     return this._loginProxyService.login(
       this._loginAdapterService.toRequestContract(email, password)

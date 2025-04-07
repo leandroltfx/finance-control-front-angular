@@ -15,13 +15,13 @@ export class UserRegistrationService {
   constructor(
     private readonly _authService: AuthService,
     private readonly _userRegistrationProxyService: UserRegistrationProxyService,
-    private readonly _userRegistrationAdapterService: UserRegistrationAdapterService,
+    private readonly _userRegistrationAdapterService: UserRegistrationAdapterService
   ) { }
 
   public registerUser(
     username: string,
     email: string,
-    password: string,
+    password: string
   ): Observable<LoginDto> {
     return this._userRegistrationProxyService.registerUser(
       this._userRegistrationAdapterService.toRequestContract(username, email, password)

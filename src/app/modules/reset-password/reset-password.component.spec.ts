@@ -9,6 +9,8 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
+import { TranslateModule } from '@ngx-translate/core';
+
 import { of, throwError } from 'rxjs';
 
 import { Message } from '../../shared/enum/message.enum';
@@ -17,7 +19,6 @@ import { ResetPasswordDto } from './models/dto/reset-password-dto';
 import { ResetPasswordComponent } from './reset-password.component';
 import { ResetPasswordService } from './acl/service/reset-password.service';
 import { MessageService } from '../../core/services/message/message.service';
-import { TranslateModule } from '@ngx-translate/core';
 
 describe('ResetPasswordComponent', () => {
   let router: Router;

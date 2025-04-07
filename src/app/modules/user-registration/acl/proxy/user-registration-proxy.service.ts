@@ -11,7 +11,7 @@ import { UserRegistrationRequestContract } from '../../models/contracts/request/
 export class UserRegistrationProxyService {
 
   constructor(
-    private _httpClient: HttpClient,
+    private _httpClient: HttpClient
   ) { }
 
   public registerUser(

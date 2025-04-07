@@ -22,7 +22,7 @@ export class ResetPasswordComponent implements OnInit {
     private readonly _router: Router,
     private readonly _formBuilder: FormBuilder,
     private readonly _messageService: MessageService,
-    private readonly _resetPasswordService: ResetPasswordService,
+    private readonly _resetPasswordService: ResetPasswordService
   ) { }
 
   public ngOnInit(): void {

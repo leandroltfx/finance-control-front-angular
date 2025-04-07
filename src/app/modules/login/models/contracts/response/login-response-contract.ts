@@ -7,7 +7,7 @@ export class LoggedUserResponseContract {
     constructor(
         id: string,
         userName: string,
-        email: string,
+        email: string
     ) {
         this.id = id;
         this.userName = userName;
@@ -22,7 +22,7 @@ export class LoginResponseContract {
 
     constructor(
         message: string,
-        loggedUser: LoggedUserResponseContract,
+        loggedUser: LoggedUserResponseContract
     ) {
         this.message = message;
         this.loggedUser = loggedUser;

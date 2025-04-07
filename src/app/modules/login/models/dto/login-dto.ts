@@ -7,7 +7,7 @@ export class LoginDto {
 
     constructor(
         message: string,
-        loggedUser: LoggedUserDto,
+        loggedUser: LoggedUserDto
     ) {
         this.message = message;
         this.loggedUser = loggedUser;

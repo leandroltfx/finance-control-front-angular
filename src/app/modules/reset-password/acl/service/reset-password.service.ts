@@ -13,7 +13,7 @@ export class ResetPasswordService {
 
   constructor(
     private readonly _resetPasswordProxyService: ResetPasswordProxyService,
-    private readonly _resetPasswordAdapterService: ResetPasswordAdapterService,
+    private readonly _resetPasswordAdapterService: ResetPasswordAdapterService
   ) { }
 
   public sendCode(

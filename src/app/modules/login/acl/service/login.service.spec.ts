@@ -34,7 +34,7 @@ describe('LoginService', () => {
         LoginService,
         { provide: AuthService, useValue: authServiceSpy },
         { provide: LoginProxyService, useValue: loginProxyServiceSpy },
-        { provide: LoginAdapterService, useValue: loginAdapterServiceSpy },
+        { provide: LoginAdapterService, useValue: loginAdapterServiceSpy }
       ]
     });
     service = TestBed.inject(LoginService);
@@ -52,7 +52,7 @@ describe('LoginService', () => {
         new LoggedUserResponseContract(
           '1b9d6bcd-bbfd-4b2d-9b5d-ab8dfbbd4bed',
           'userName',
-          'email',
+          'email'
         )
       );
       loginProxyServiceSpy.login.and.returnValue(of(loginResponseContract));

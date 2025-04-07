@@ -11,7 +11,7 @@ import { LoginResponseContract } from '../../models/contracts/response/login-res
 export class LoginProxyService {
 
   constructor(
-    private readonly _httpClient: HttpClient,
+    private readonly _httpClient: HttpClient
   ) { }
 
   public login(
@@ -19,7 +19,7 @@ export class LoginProxyService {
   ): Observable<LoginResponseContract> {
     return this._httpClient.post<LoginResponseContract>(
       `${environment.api_path}/login`,
-      loginRequestContract,
+      loginRequestContract
     ).pipe(
       map((loginResponseContract: LoginResponseContract) => loginResponseContract),
       catchError((httpErroResponse: HttpErrorResponse) => throwError(() => httpErroResponse)),
