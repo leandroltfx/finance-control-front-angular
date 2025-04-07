@@ -1,4 +1,4 @@
-import { LoginRequestContract } from "../../../../../features/login/models/contracts/request/login-request-contract";
+import { LoginRequestContract } from "../../../../../modules/login/models/contracts/request/login-request-contract";
 
 export class UserRegistrationRequestContract extends LoginRequestContract {
 

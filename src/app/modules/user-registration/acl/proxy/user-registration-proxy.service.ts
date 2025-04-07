@@ -4,8 +4,8 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { catchError, map, Observable, throwError } from 'rxjs';
 
 import { environment } from '../../../../../environments/environment';
+import { LoginResponseContract } from '../../../../modules/login/models/contracts/response/login-response-contract';
 import { UserRegistrationRequestContract } from '../../models/contracts/request/user-registration-request-contract';
-import { LoginResponseContract } from '../../../../features/login/models/contracts/response/login-response-contract';
 
 @Injectable()
 export class UserRegistrationProxyService {

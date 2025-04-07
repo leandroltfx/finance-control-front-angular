@@ -5,7 +5,7 @@ import { HttpClientTestingModule, HttpTestingController } from '@angular/common/
 import { environment } from '../../../../../environments/environment';
 import { UserRegistrationProxyService } from './user-registration-proxy.service';
 import { UserRegistrationRequestContract } from '../../models/contracts/request/user-registration-request-contract';
-import { LoggedUserResponseContract, LoginResponseContract } from '../../../../features/login/models/contracts/response/login-response-contract';
+import { LoggedUserResponseContract, LoginResponseContract } from '../../../../modules/login/models/contracts/response/login-response-contract';
 
 describe('UserRegistrationProxyService', () => {
   let service: UserRegistrationProxyService;

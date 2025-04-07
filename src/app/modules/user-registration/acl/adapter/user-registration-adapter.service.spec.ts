@@ -1,9 +1,9 @@
 import { TestBed } from '@angular/core/testing';
 
-import { LoginDto } from '../../../../features/login/models/dto/login-dto';
+import { LoginDto } from '../../../../modules/login/models/dto/login-dto';
 import { UserRegistrationAdapterService } from './user-registration-adapter.service';
 import { UserRegistrationRequestContract } from '../../models/contracts/request/user-registration-request-contract';
-import { LoggedUserResponseContract, LoginResponseContract } from '../../../../features/login/models/contracts/response/login-response-contract';
+import { LoggedUserResponseContract, LoginResponseContract } from '../../../../modules/login/models/contracts/response/login-response-contract';
 
 describe('UserRegistrationAdapterService', () => {
   let service: UserRegistrationAdapterService;

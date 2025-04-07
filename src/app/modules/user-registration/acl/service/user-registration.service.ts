@@ -3,11 +3,11 @@ import { HttpErrorResponse } from '@angular/common/http';
 
 import { catchError, map, Observable, throwError } from 'rxjs';
 
+import { LoginDto } from '../../../../modules/login/models/dto/login-dto';
 import { AuthService } from '../../../../core/services/auth/auth.service';
-import { LoginDto } from '../../../../features/login/models/dto/login-dto';
 import { UserRegistrationProxyService } from '../proxy/user-registration-proxy.service';
 import { UserRegistrationAdapterService } from '../adapter/user-registration-adapter.service';
-import { LoginResponseContract } from '../../../../features/login/models/contracts/response/login-response-contract';
+import { LoginResponseContract } from '../../../../modules/login/models/contracts/response/login-response-contract';
 
 @Injectable()
 export class UserRegistrationService {

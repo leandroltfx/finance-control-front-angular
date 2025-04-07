@@ -4,12 +4,12 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { of, throwError } from 'rxjs';
 
 import { UserRegistrationService } from './user-registration.service';
+import { LoginDto } from '../../../../modules/login/models/dto/login-dto';
 import { AuthService } from '../../../../core/services/auth/auth.service';
-import { LoginDto } from '../../../../features/login/models/dto/login-dto';
 import { UserRegistrationProxyService } from '../proxy/user-registration-proxy.service';
-import { LoggedUserDto } from '../../../../features/login/models/logged-user/logged-user-dto';
+import { LoggedUserDto } from '../../../../modules/login/models/logged-user/logged-user-dto';
 import { UserRegistrationAdapterService } from '../adapter/user-registration-adapter.service';
-import { LoggedUserResponseContract, LoginResponseContract } from '../../../../features/login/models/contracts/response/login-response-contract';
+import { LoggedUserResponseContract, LoginResponseContract } from '../../../../modules/login/models/contracts/response/login-response-contract';
 
 describe('UserRegistrationService', () => {
   let service: UserRegistrationService;
