@@ -2,7 +2,7 @@ import { TestBed } from '@angular/core/testing';
 
 import { AuthService } from './auth.service';
 import { CoreModule } from '../../core.module';
-import { LoggedUserDto } from '../../../features/login/models/logged-user/logged-user-dto';
+import { LoggedUserDto } from '../../../modules/login/models/logged-user/logged-user-dto';
 
 describe('AuthService', () => {
   let service: AuthService;
