@@ -80,6 +80,7 @@ describe('UserRegistrationComponent', () => {
 
       expect(userRegistrationServiceSpy.registerUser).toHaveBeenCalledWith('username', 'email@email.com', 'asdasdasd');
       expect(messageServiceSpy.showMessage).toHaveBeenCalledWith('Cadastro realizado com sucesso!', 'success');
+      expect(navigateSpy).toHaveBeenCalledWith([RoutesEnum.HOME]);
     });
 
     it('deve receber o erro HTTP em caso de falha no login', () => {
