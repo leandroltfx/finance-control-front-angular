@@ -22,3 +22,4 @@
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 </table>
+<fc-error *ngIf="!movementsDto.length && errorMessage" [message]="errorMessage" (emitEventRetry)="getMovements()"></fc-error>

@@ -16,3 +16,4 @@
         </mat-card-content>
     </mat-card>
 </main>
+<fc-error *ngIf="!bankAccountsDto.length && errorMessage" [message]="errorMessage" (emitEventRetry)="getBankAccounts()"></fc-error>

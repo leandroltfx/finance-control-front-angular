@@ -35,5 +35,8 @@
     "HOME": {
         "ITEM_MENU_1": "Contas bancárias",
         "ITEM_MENU_2": "Movimentações"
+    },
+    "ERROR": {
+        "LINK": "Tente novamente"
     }
 }
