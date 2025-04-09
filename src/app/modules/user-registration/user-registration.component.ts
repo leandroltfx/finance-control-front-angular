@@ -44,9 +44,8 @@ export class UserRegistrationComponent implements OnInit {
       ).subscribe(
         {
           next: ((loginDto: LoginDto) => {
-            // TODO
-            // Rotear para a home
             this._messageService.showMessage(loginDto.message, 'success');
+            this._router.navigate([RoutesEnum.HOME]);
           }),
           error: ((httpResponseError: HttpErrorResponse) => {
             this._messageService.showMessage(httpResponseError.error['message'] ?? Message.DEFAULT_HTTP_ERROR_MESSAGE, 'error');
