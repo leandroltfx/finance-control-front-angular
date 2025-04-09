@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { formatCurrency } from '@angular/common';
 
 import { BankAccountDto } from '../../models/dto/bank-account-dto';
 import { BankAccountsRequestContract } from '../../models/contracts/request/bank-accounts-request-contract';
@@ -21,7 +22,7 @@ export class BankAccountsAdapterService {
         bankAccountResponse.institution,
         bankAccountResponse.nickname,
         bankAccountResponse.balance,
-        this._formatCurrencyBrl(bankAccountResponse.balance),
+        formatCurrency(bankAccountResponse.balance, 'pt-BR', 'R$')
       );
       bankAccountsDto.push(bankAccountDto);
     }
@@ -33,9 +34,5 @@ export class BankAccountsAdapterService {
     userId: string
   ): BankAccountsRequestContract {
     return new BankAccountsRequestContract(userId);
-  }
-
-  private _formatCurrencyBrl(value: number): string {
-    return '';
   }
 }
