@@ -56,4 +56,14 @@ describe('HomeComponent', () => {
       expect(navigateSpy).toHaveBeenCalledWith([`${RoutesEnum.HOME}/${RoutesEnum.BANK_ACCOUNTS}`]);
     });
   });
+
+  describe('goToMovements', () => {
+    it('deve rotear para o módulo de movimentações dentro da rota ativa da home', () => {
+      const navigateSpy = spyOn(router, 'navigate');
+
+      component.goToMovements();
+
+      expect(navigateSpy).toHaveBeenCalledWith([`${RoutesEnum.HOME}/${RoutesEnum.MOVEMENTS}`]);
+    });
+  });
 });

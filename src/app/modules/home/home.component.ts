@@ -17,4 +17,9 @@ export class HomeComponent {
   public goToBankAccounts(): void {
     this._router.navigate([`${RoutesEnum.HOME}/${RoutesEnum.BANK_ACCOUNTS}`]);
   }
+
+  public goToMovements(): void {
+    this._router.navigate([`${RoutesEnum.HOME}/${RoutesEnum.MOVEMENTS}`]);
+  }
+
 }

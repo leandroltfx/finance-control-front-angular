@@ -14,7 +14,7 @@
     <mat-drawer mode="side" opened class="fc-w-15">
         <mat-nav-list role="navigation">
             <a mat-list-item (click)="goToBankAccounts()">{{ 'HOME.ITEM_MENU_1' | translate }}</a>
-            <a mat-list-item>{{ 'HOME.ITEM_MENU_2' | translate }}</a>
+            <a mat-list-item (click)="goToMovements()">{{ 'HOME.ITEM_MENU_2' | translate }}</a>
         </mat-nav-list>
     </mat-drawer>
     <mat-drawer-content class="fc-w-85 fc-p-1">

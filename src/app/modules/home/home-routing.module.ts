@@ -10,6 +10,7 @@ const routes: Routes = [
     component: HomeComponent,
     children: [
       { path: RoutesEnum.BANK_ACCOUNTS, loadChildren: () => import('./bank-accounts/bank-accounts.module').then(m => m.BankAccountsModule) },
+      { path: RoutesEnum.MOVEMENTS, loadChildren: () => import('./movements/movements.module').then(m => m.MovementsModule) }
     ]
   }
 ];
