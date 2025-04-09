@@ -6,6 +6,19 @@ O formato segue as convenções do [Keep a Changelog](https://keepachangelog.com
 
 ---
 
+## [0.2.0-alpha.1] - 09/04/2025
+
+### 🚀 Adicionado
+- Home
+- Item de menu da home: Contas bancárias com serviço mockado
+- Item de menu da home: Movimentações com serviço mockado
+
+### 🧱 Estrutura
+- Versão com a home e menu lateral com duas opções adicionadas
+- Base para novas funcionalidades na home
+
+---
+
 ## [0.2.0-alpha.1] - 06/04/2025
 
 ### 🚀 Adicionado

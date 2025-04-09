@@ -1,0 +1,23 @@
+<mat-toolbar>
+    <span>
+        {{ 'APP_NAME' | translate }}
+    </span>
+    <span class="spacer"></span>
+    <button mat-icon-button>
+        <mat-icon>settings</mat-icon>
+    </button>
+    <button mat-icon-button>
+        <mat-icon>logout</mat-icon>
+    </button>
+</mat-toolbar>
+<mat-drawer-container class="container">
+    <mat-drawer mode="side" opened class="fc-w-15">
+        <mat-nav-list role="navigation">
+            <a mat-list-item (click)="goToBankAccounts()">{{ 'HOME.ITEM_MENU_1' | translate }}</a>
+            <a mat-list-item (click)="goToMovements()">{{ 'HOME.ITEM_MENU_2' | translate }}</a>
+        </mat-nav-list>
+    </mat-drawer>
+    <mat-drawer-content class="fc-w-85 fc-p-1">
+        <router-outlet></router-outlet>
+    </mat-drawer-content>
+</mat-drawer-container>

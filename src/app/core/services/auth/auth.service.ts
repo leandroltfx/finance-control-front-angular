@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 
-import { LoggedUserDto } from '../../../features/login/models/logged-user/logged-user-dto';
+import { LoggedUserDto } from '../../../modules/login/models/logged-user/logged-user-dto';
 
 @Injectable()
 export class AuthService {

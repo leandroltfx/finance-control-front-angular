@@ -1,0 +1,19 @@
+<main class="fc-flex fc-align-items-center fc-flex-wrap" *ngIf="bankAccountsDto.length && !errorMessage">
+    <mat-card class="fc-w-30 fc-mbottom-1 fc-mright-1" *ngFor="let bankAccount of bankAccountsDto">
+        <mat-card-header>
+            <mat-card-title-group>
+                <mat-card-title>{{ bankAccount.institution }}</mat-card-title>
+                <mat-card-subtitle>
+                    <ng-container *ngIf="bankAccount.nickname; else noNickname">
+                        {{ bankAccount.nickname }}
+                    </ng-container>
+                    <ng-template #noNickname><br></ng-template>
+                </mat-card-subtitle>
+            </mat-card-title-group>
+        </mat-card-header>
+        <mat-card-content>
+            {{ bankAccount.formattedBalance }}
+        </mat-card-content>
+    </mat-card>
+</main>
+<fc-error *ngIf="!bankAccountsDto.length && errorMessage" [message]="errorMessage" (emitEventRetry)="getBankAccounts()"></fc-error>

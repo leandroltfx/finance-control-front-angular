@@ -31,5 +31,12 @@
         "ERROR_REQUIRED_EMAIL": "Informe o email",
         "SUBMIT": "Enviar código para redefinição de senha",
         "CANCEL": "Cancelar"
+    },
+    "HOME": {
+        "ITEM_MENU_1": "Contas bancárias",
+        "ITEM_MENU_2": "Movimentações"
+    },
+    "ERROR": {
+        "LINK": "Tente novamente"
     }
 }
