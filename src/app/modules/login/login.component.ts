@@ -1,6 +1,11 @@
+import { HttpErrorResponse } from '@angular/common/http';
+
 import { Component, OnInit } from '@angular/core';
 
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+
+import { LoginService } from './acl/service/login.service';
+import { LoginDto } from '../../shared/model/dto/login/login-dto';
 
 @Component({
   selector: 'fc-login',
@@ -15,7 +20,8 @@ export class LoginComponent implements OnInit {
   private _patternEmail: RegExp = /^[a-z0-9.]+@[a-z0-9]+\.[a-z]+(\.[a-z]+)?$/i;
 
   constructor(
-    private readonly _formBuilder: FormBuilder
+    private readonly _formBuilder: FormBuilder,
+    private readonly _loginService: LoginService
   ) { }
 
   ngOnInit(): void {
@@ -24,7 +30,15 @@ export class LoginComponent implements OnInit {
 
   public login(): void {
     if (this.loginForm.valid) {
-      console.log('login');
+      this._loginService.login(
+        this.loginForm.controls['email'].value,
+        this.loginForm.controls['password'].value
+      ).subscribe(
+        {
+          next: (loginDto: LoginDto) => console.log('ok', loginDto),
+          error: (httpErrorResponse: HttpErrorResponse) => console.log('erro', httpErrorResponse)
+        }
+      )
     }
   }
 
