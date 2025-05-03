@@ -1,0 +1,6 @@
+:host ::ng-deep {
+    .mat-mdc-card-header-text {
+        width: 100%;
+        text-align: center;
+    }
+}
