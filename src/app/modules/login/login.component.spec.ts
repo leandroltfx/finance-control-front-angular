@@ -1,3 +1,5 @@
+import { HttpErrorResponse } from '@angular/common/http';
+
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ReactiveFormsModule } from '@angular/forms';
@@ -10,12 +12,12 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
+import { of, throwError } from 'rxjs';
+
 import { LoginComponent } from './login.component';
 import { LoginService } from './acl/service/login.service';
-import { of, throwError } from 'rxjs';
 import { LoginDto } from 'src/app/shared/model/dto/login/login-dto';
 import { LoggedUserDto } from 'src/app/shared/model/dto/logged-user/logged-user-dto';
-import { HttpErrorResponse } from '@angular/common/http';
 
 describe('LoginComponent', () => {
   let component: LoginComponent;
@@ -39,7 +41,7 @@ describe('LoginComponent', () => {
         MatIconModule,
         MatInputModule,
         MatButtonModule,
-        MatFormFieldModule,
+        MatFormFieldModule
       ],
       providers: [
         { provide: LoginService, useValue: loginServiceSpy }

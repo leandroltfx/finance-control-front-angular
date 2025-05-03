@@ -9,7 +9,7 @@ import { LoginProxyService } from '../proxy/login-proxy.service';
 import { LoginAdapterService } from '../adapter/login-adapter.service';
 import { LoginDto } from '../../../../shared/model/dto/login/login-dto';
 import { LoggedUserDto } from '../../../../shared/model/dto/logged-user/logged-user-dto';
-import { LoginRequestContract } from 'src/app/shared/model/contracts/request/login/login-request-contract';
+import { LoginRequestContract } from '../../../../shared/model/contracts/request/login/login-request-contract';
 
 describe('LoginService', () => {
   let service: LoginService;

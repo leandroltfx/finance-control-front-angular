@@ -38,7 +38,7 @@ import { LoginAdapterService } from './acl/adapter/login-adapter.service';
   providers: [
     LoginService,
     LoginProxyService,
-    LoginAdapterService,
+    LoginAdapterService
   ]
 })
 export class LoginModule { }
