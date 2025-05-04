@@ -12,6 +12,9 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
+import { Router } from '@angular/router';
+import { RouterTestingModule } from '@angular/router/testing';
+
 import { of, throwError } from 'rxjs';
 
 import { LoginDto } from '../../shared/model/dto/login/login-dto';
@@ -20,6 +23,7 @@ import { UserRegistrationService } from './acl/service/user-registration.service
 import { LoggedUserDto } from '../../shared/model/dto/logged-user/logged-user-dto';
 
 describe('UserRegistrationComponent', () => {
+  let router: Router;
   let component: UserRegistrationComponent;
   let fixture: ComponentFixture<UserRegistrationComponent>;
   let userRegistrationServiceSpy: jasmine.SpyObj<UserRegistrationService>;
@@ -37,6 +41,8 @@ describe('UserRegistrationComponent', () => {
 
         BrowserAnimationsModule,
 
+        RouterTestingModule,
+
         MatCardModule,
         MatIconModule,
         MatInputModule,
@@ -49,6 +55,7 @@ describe('UserRegistrationComponent', () => {
     });
     fixture = TestBed.createComponent(UserRegistrationComponent);
     userRegistrationServiceSpy = TestBed.inject(UserRegistrationService) as jasmine.SpyObj<UserRegistrationService>;
+    router = TestBed.inject(Router);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
@@ -156,6 +163,16 @@ describe('UserRegistrationComponent', () => {
       component.registerUser();
 
       expect(userRegistrationServiceSpy.registerUser).not.toHaveBeenCalled();
+    });
+  });
+
+  describe('cancelUserRegistration', () => {
+    it('deve rotear para a tela de login', () => {
+      const navigateSpy = spyOn(router, 'navigate');
+
+      component.cancelUserRegistration();
+
+      expect(navigateSpy).toHaveBeenCalledWith(['/login']);
     });
   });
 });
