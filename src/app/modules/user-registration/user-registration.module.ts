@@ -1,4 +1,5 @@
 import { CommonModule } from '@angular/common';
+import { HttpClientModule } from '@angular/common/http';
 
 import { NgModule } from '@angular/core';
 
@@ -11,7 +12,10 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 
 import { UserRegistrationComponent } from './user-registration.component';
+import { UserRegistrationService } from './acl/service/user-registration.service';
 import { UserRegistrationRoutingModule } from './user-registration-routing.module';
+import { UserRegistrationProxyService } from './acl/proxy/user-registration-proxy.service';
+import { UserRegistrationAdapterService } from './acl/adapter/user-registration-adapter.service';
 
 @NgModule({
   declarations: [
@@ -19,6 +23,7 @@ import { UserRegistrationRoutingModule } from './user-registration-routing.modul
   ],
   imports: [
     CommonModule,
+    HttpClientModule,
 
     ReactiveFormsModule,
 
@@ -29,6 +34,11 @@ import { UserRegistrationRoutingModule } from './user-registration-routing.modul
     MatFormFieldModule,
 
     UserRegistrationRoutingModule
+  ],
+  providers: [
+    UserRegistrationService,
+    UserRegistrationProxyService,
+    UserRegistrationAdapterService
   ]
 })
 export class UserRegistrationModule { }

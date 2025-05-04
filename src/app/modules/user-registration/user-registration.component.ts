@@ -1,6 +1,11 @@
+import { HttpErrorResponse } from '@angular/common/http';
+
 import { Component, OnInit } from '@angular/core';
 
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+
+import { LoginDto } from '../../shared/model/dto/login/login-dto';
+import { UserRegistrationService } from './acl/service/user-registration.service';
 
 @Component({
   selector: 'fc-user-registration',
@@ -17,7 +22,8 @@ export class UserRegistrationComponent implements OnInit {
   private _patternEmail: RegExp = /^[a-z0-9.]+@[a-z0-9]+\.[a-z]+(\.[a-z]+)?$/i;
 
   constructor(
-    private readonly _formBuilder: FormBuilder
+    private readonly _formBuilder: FormBuilder,
+    private readonly _userRegistrationService: UserRegistrationService
   ) { }
 
   ngOnInit(): void {
@@ -26,7 +32,16 @@ export class UserRegistrationComponent implements OnInit {
 
   public registerUser(): void {
     if (this.userRegistrationForm.valid) {
-      console.log('user registration form is valid');
+      this._userRegistrationService.registerUser(
+        this.userRegistrationForm.controls['username'].value,
+        this.userRegistrationForm.controls['email'].value,
+        this.userRegistrationForm.controls['password'].value
+      ).subscribe(
+        {
+          next: (loginDto: LoginDto) => console.log('ok', loginDto),
+          error: (httpErrorResponse: HttpErrorResponse) => console.log('erro', httpErrorResponse)
+        }
+      );
     }
   }
 
