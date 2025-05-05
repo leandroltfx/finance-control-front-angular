@@ -17,20 +17,18 @@ describe('UserRegistrationService', () => {
   let userRegistrationAdapterServiceSpy: jasmine.SpyObj<UserRegistrationAdapterService>;
 
   beforeEach(() => {
-    const proxySpy = jasmine.createSpyObj('UserRegistrationProxyService', ['registerUser']);
-    const adapterSpy = jasmine.createSpyObj('UserRegistrationAdapterService', ['toRequestContract']);
+    userRegistrationProxyServiceSpy = jasmine.createSpyObj<UserRegistrationProxyService>('UserRegistrationProxyService', ['registerUser']);
+    userRegistrationAdapterServiceSpy = jasmine.createSpyObj<UserRegistrationAdapterService>('UserRegistrationAdapterService', ['toRequestContract']);
 
     TestBed.configureTestingModule({
       providers: [
         UserRegistrationService,
-        { provide: UserRegistrationProxyService, useValue: proxySpy },
-        { provide: UserRegistrationAdapterService, useValue: adapterSpy },
+        { provide: UserRegistrationProxyService, useValue: userRegistrationProxyServiceSpy },
+        { provide: UserRegistrationAdapterService, useValue: userRegistrationAdapterServiceSpy },
       ],
     });
 
     service = TestBed.inject(UserRegistrationService);
-    userRegistrationProxyServiceSpy = TestBed.inject(UserRegistrationProxyService) as jasmine.SpyObj<UserRegistrationProxyService>;
-    userRegistrationAdapterServiceSpy = TestBed.inject(UserRegistrationAdapterService) as jasmine.SpyObj<UserRegistrationAdapterService>;
   });
 
   it('should be created', () => {

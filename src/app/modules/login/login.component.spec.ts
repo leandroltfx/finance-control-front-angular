@@ -23,10 +23,10 @@ import { LoginDto } from '../../shared/model/dto/login/login-dto';
 import { LoggedUserDto } from '../../shared/model/dto/logged-user/logged-user-dto';
 
 describe('LoginComponent', () => {
-  let router: Router;
   let component: LoginComponent;
   let fixture: ComponentFixture<LoginComponent>;
   let loginServiceSpy: jasmine.SpyObj<LoginService>;
+  let router: Router;
 
   beforeEach(() => {
 
@@ -54,9 +54,8 @@ describe('LoginComponent', () => {
       ]
     });
     fixture = TestBed.createComponent(LoginComponent);
-    loginServiceSpy = TestBed.inject(LoginService) as jasmine.SpyObj<LoginService>;
-    router = TestBed.inject(Router);
     component = fixture.componentInstance;
+    router = TestBed.inject(Router);
     fixture.detectChanges();
   });
 
@@ -84,7 +83,6 @@ describe('LoginComponent', () => {
       component.loginForm = component['_buildLoginForm']();
       component.loginForm.controls['email'].setValue('email@email.com');
       component.loginForm.controls['password'].setValue('password');
-      const loginDto: LoginDto = new LoginDto('message', new LoggedUserDto('id', 'username', 'email'));
       loginServiceSpy.login.and.returnValue(throwError(() => new HttpErrorResponse({})));
 
       component.login();
