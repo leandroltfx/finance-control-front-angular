@@ -12,21 +12,25 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
+import { Router } from '@angular/router';
+import { RouterTestingModule } from '@angular/router/testing';
+
 import { of, throwError } from 'rxjs';
 
 import { LoginComponent } from './login.component';
 import { LoginService } from './acl/service/login.service';
-import { LoginDto } from 'src/app/shared/model/dto/login/login-dto';
-import { LoggedUserDto } from 'src/app/shared/model/dto/logged-user/logged-user-dto';
+import { LoginDto } from '../../shared/model/dto/login/login-dto';
+import { LoggedUserDto } from '../../shared/model/dto/logged-user/logged-user-dto';
 
 describe('LoginComponent', () => {
+  let router: Router;
   let component: LoginComponent;
   let fixture: ComponentFixture<LoginComponent>;
   let loginServiceSpy: jasmine.SpyObj<LoginService>;
 
   beforeEach(() => {
 
-    loginServiceSpy = jasmine.createSpyObj('LoginComponent', ['login']);
+    loginServiceSpy = jasmine.createSpyObj<LoginService>('LoginService', ['login']);
 
     TestBed.configureTestingModule({
       declarations: [
@@ -36,6 +40,8 @@ describe('LoginComponent', () => {
         ReactiveFormsModule,
 
         BrowserAnimationsModule,
+
+        RouterTestingModule,
 
         MatCardModule,
         MatIconModule,
@@ -49,6 +55,7 @@ describe('LoginComponent', () => {
     });
     fixture = TestBed.createComponent(LoginComponent);
     loginServiceSpy = TestBed.inject(LoginService) as jasmine.SpyObj<LoginService>;
+    router = TestBed.inject(Router);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
@@ -117,6 +124,16 @@ describe('LoginComponent', () => {
       component.login();
 
       expect(loginServiceSpy.login).not.toHaveBeenCalled();
+    });
+  });
+
+  describe('goToUserRegistration', () => {
+    it('deve rotear para o cadastro de usuário', () => {
+      const navigateSpy = spyOn(router, 'navigate');
+
+      component.goToUserRegistration();
+
+      expect(navigateSpy).toHaveBeenCalledWith(['/user-registration']);
     });
   });
 });

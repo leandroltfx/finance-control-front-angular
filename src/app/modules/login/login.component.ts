@@ -4,6 +4,8 @@ import { Component, OnInit } from '@angular/core';
 
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
+import { Router } from '@angular/router';
+
 import { LoginService } from './acl/service/login.service';
 import { LoginDto } from '../../shared/model/dto/login/login-dto';
 
@@ -20,6 +22,7 @@ export class LoginComponent implements OnInit {
   private _patternEmail: RegExp = /^[a-z0-9.]+@[a-z0-9]+\.[a-z]+(\.[a-z]+)?$/i;
 
   constructor(
+    private readonly _router: Router,
     private readonly _formBuilder: FormBuilder,
     private readonly _loginService: LoginService
   ) { }
@@ -40,6 +43,10 @@ export class LoginComponent implements OnInit {
         }
       )
     }
+  }
+
+  public goToUserRegistration(): void {
+    this._router.navigate(['/user-registration']);
   }
 
   private _buildLoginForm(): FormGroup {
