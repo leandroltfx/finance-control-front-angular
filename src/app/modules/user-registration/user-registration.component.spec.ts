@@ -54,9 +54,8 @@ describe('UserRegistrationComponent', () => {
       ]
     });
     fixture = TestBed.createComponent(UserRegistrationComponent);
-    userRegistrationServiceSpy = TestBed.inject(UserRegistrationService) as jasmine.SpyObj<UserRegistrationService>;
-    router = TestBed.inject(Router);
     component = fixture.componentInstance;
+    router = TestBed.inject(Router);
     fixture.detectChanges();
   });
 

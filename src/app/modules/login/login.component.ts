@@ -27,7 +27,7 @@ export class LoginComponent implements OnInit {
     private readonly _loginService: LoginService
   ) { }
 
-  ngOnInit(): void {
+  public ngOnInit(): void {
     this.loginForm = this._buildLoginForm();
   }
 

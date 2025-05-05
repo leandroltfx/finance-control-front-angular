@@ -17,20 +17,18 @@ describe('LoginService', () => {
   let loginAdapterServiceSpy: jasmine.SpyObj<LoginAdapterService>;
 
   beforeEach(() => {
-    const proxySpy = jasmine.createSpyObj('LoginProxyService', ['login']);
-    const adapterSpy = jasmine.createSpyObj('LoginAdapterService', ['toRequestContract']);
+    loginProxyServiceSpy = jasmine.createSpyObj<LoginProxyService>('LoginProxyService', ['login']);
+    loginAdapterServiceSpy = jasmine.createSpyObj<LoginAdapterService>('LoginAdapterService', ['toRequestContract']);
 
     TestBed.configureTestingModule({
       providers: [
         LoginService,
-        { provide: LoginProxyService, useValue: proxySpy },
-        { provide: LoginAdapterService, useValue: adapterSpy },
+        { provide: LoginProxyService, useValue: loginProxyServiceSpy },
+        { provide: LoginAdapterService, useValue: loginAdapterServiceSpy },
       ],
     });
 
     service = TestBed.inject(LoginService);
-    loginProxyServiceSpy = TestBed.inject(LoginProxyService) as jasmine.SpyObj<LoginProxyService>;
-    loginAdapterServiceSpy = TestBed.inject(LoginAdapterService) as jasmine.SpyObj<LoginAdapterService>;
   });
 
   it('should be created', () => {

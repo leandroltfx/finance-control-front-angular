@@ -29,7 +29,7 @@ export class UserRegistrationComponent implements OnInit {
     private readonly _userRegistrationService: UserRegistrationService
   ) { }
 
-  ngOnInit(): void {
+  public ngOnInit(): void {
     this.userRegistrationForm = this._buildUserRegistrationForm();
   }
 
