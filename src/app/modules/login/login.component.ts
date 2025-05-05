@@ -49,6 +49,10 @@ export class LoginComponent implements OnInit {
     this._router.navigate(['/user-registration']);
   }
 
+  public goToResetPassword(): void {
+    this._router.navigate(['/reset-password']);
+  }
+
   private _buildLoginForm(): FormGroup {
     return this._formBuilder.group(
       {
