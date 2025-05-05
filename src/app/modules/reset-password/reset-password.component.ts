@@ -1,8 +1,13 @@
+import { HttpErrorResponse } from '@angular/common/http';
+
 import { Component } from '@angular/core';
 
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import { Router } from '@angular/router';
+
+import { ResetPasswordService } from './acl/service/reset-password.service';
+import { ResetPasswordDto } from '../../shared/model/dto/reset-password/reset-password-dto';
 
 @Component({
   selector: 'fc-reset-password',
@@ -17,7 +22,8 @@ export class ResetPasswordComponent {
 
   constructor(
     private readonly _formBuilder: FormBuilder,
-    private readonly _router: Router
+    private readonly _router: Router,
+    private readonly _resetPasswordService: ResetPasswordService
   ) { }
 
   public ngOnInit(): void {
@@ -26,7 +32,14 @@ export class ResetPasswordComponent {
 
   public sendCodeToEmail(): void {
     if (this.resetPasswordForm.valid) {
-      console.log('ok');
+      this._resetPasswordService.sendCodeToEmail(
+        this.resetPasswordForm.controls['email'].value
+      ).subscribe(
+        {
+          next: (resetPasswordDto: ResetPasswordDto) => console.log('ok', resetPasswordDto),
+          error: (httpErrorResponse: HttpErrorResponse) => console.log('error', httpErrorResponse)
+        }
+      );
     }
   }
 
