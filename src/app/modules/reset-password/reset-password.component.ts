@@ -1,13 +1,6 @@
-import { HttpErrorResponse } from '@angular/common/http';
-
 import { Component } from '@angular/core';
 
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-
 import { Router } from '@angular/router';
-
-import { ResetPasswordService } from './acl/service/reset-password.service';
-import { ResetPasswordDto } from '../../shared/model/dto/reset-password/reset-password-dto';
 
 @Component({
   selector: 'fc-reset-password',
@@ -16,43 +9,12 @@ import { ResetPasswordDto } from '../../shared/model/dto/reset-password/reset-pa
 })
 export class ResetPasswordComponent {
 
-  public resetPasswordForm!: FormGroup;
-
-  private _patternEmail: RegExp = /^[a-z0-9.]+@[a-z0-9]+\.[a-z]+(\.[a-z]+)?$/i;
-
   constructor(
-    private readonly _formBuilder: FormBuilder,
-    private readonly _router: Router,
-    private readonly _resetPasswordService: ResetPasswordService
+    private readonly _router: Router
   ) { }
 
-  public ngOnInit(): void {
-    this.resetPasswordForm = this._buildResetPasswordForm();
-  }
-
-  public sendCodeToEmail(): void {
-    if (this.resetPasswordForm.valid) {
-      this._resetPasswordService.sendCodeToEmail(
-        this.resetPasswordForm.controls['email'].value
-      ).subscribe(
-        {
-          next: (resetPasswordDto: ResetPasswordDto) => console.log('ok', resetPasswordDto),
-          error: (httpErrorResponse: HttpErrorResponse) => console.log('error', httpErrorResponse)
-        }
-      );
-    }
-  }
-
-  public cancelResetPassword(): void {
+  public backToLogin(): void {
     this._router.navigate(['/login']);
-  }
-
-  private _buildResetPasswordForm(): FormGroup {
-    return this._formBuilder.group(
-      {
-        email: ['', [Validators.required, Validators.pattern(this._patternEmail)]]
-      }
-    )
   }
 
 }

@@ -1,4 +1,3 @@
-import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ReactiveFormsModule } from '@angular/forms';
@@ -7,48 +6,43 @@ import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
-import { MatStepperModule } from '@angular/material/stepper';
 import { MatFormFieldModule } from '@angular/material/form-field';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-import { Router } from '@angular/router';
-import { RouterTestingModule } from '@angular/router/testing';
+import { UpdatePasswordComponent } from './update-password.component';
+import { ResetPasswordService } from '../../acl/service/reset-password.service';
 
-import { ResetPasswordComponent } from './reset-password.component';
-
-describe('ResetPasswordComponent', () => {
-  let component: ResetPasswordComponent;
-  let fixture: ComponentFixture<ResetPasswordComponent>;
-  let router: Router;
+describe('UpdatePasswordComponent', () => {
+  let component: UpdatePasswordComponent;
+  let fixture: ComponentFixture<UpdatePasswordComponent>;
+  let resetPasswordServiceSpy: jasmine.SpyObj<ResetPasswordService>;
 
   beforeEach(() => {
 
+    resetPasswordServiceSpy = jasmine.createSpyObj<ResetPasswordService>('ResetPasswordService', ['sendCodeToEmail']);
+
     TestBed.configureTestingModule({
       declarations: [
-        ResetPasswordComponent
+        UpdatePasswordComponent
       ],
       imports: [
         ReactiveFormsModule,
 
         BrowserAnimationsModule,
 
-        RouterTestingModule,
-
         MatCardModule,
         MatIconModule,
         MatInputModule,
         MatButtonModule,
-        MatStepperModule,
         MatFormFieldModule
       ],
-      schemas: [
-        NO_ERRORS_SCHEMA
+      providers: [
+        { provide: ResetPasswordService, useValue: resetPasswordServiceSpy }
       ]
     });
-    fixture = TestBed.createComponent(ResetPasswordComponent);
+    fixture = TestBed.createComponent(UpdatePasswordComponent);
     component = fixture.componentInstance;
-    router = TestBed.inject(Router);
     fixture.detectChanges();
   });
 
