@@ -16,7 +16,7 @@ import { of, throwError } from 'rxjs';
 
 import { SendCodeComponent } from './send-code.component';
 import { ResetPasswordService } from '../../acl/service/reset-password.service';
-import { ResetPasswordDto } from '../../../../shared/model/dto/reset-password/reset-password-dto';
+import { SendCodeDto } from '../../../../shared/model/dto/send-code/send-code-dto';
 
 describe('SendCodeComponent', () => {
   let component: SendCodeComponent;
@@ -60,8 +60,8 @@ describe('SendCodeComponent', () => {
 
       component.sendCodeForm = component['_buildSendCodeForm']();
       component.sendCodeForm.controls['email'].setValue('email@email.com');
-      const resetPasswordDto: ResetPasswordDto = new ResetPasswordDto('message');
-      resetPasswordServiceSpy.sendCodeToEmail.and.returnValue(of(resetPasswordDto));
+      const sendCodeDto: SendCodeDto = new SendCodeDto('message');
+      resetPasswordServiceSpy.sendCodeToEmail.and.returnValue(of(sendCodeDto));
 
       component.sendCodeToEmail();
 

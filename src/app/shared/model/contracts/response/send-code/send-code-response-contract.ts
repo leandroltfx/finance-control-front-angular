@@ -1,4 +1,4 @@
-export class ResetPasswordResponseContract {
+export class SendCodeResponseContract {
 
     message!: string;
 

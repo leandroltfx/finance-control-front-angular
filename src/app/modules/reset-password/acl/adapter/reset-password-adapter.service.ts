@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 
-import { ResetPasswordDto } from '../../../../shared/model/dto/reset-password/reset-password-dto';
-import { ResetPasswordRequestContract } from '../../../../shared/model/contracts/request/reset-password/reset-password-request-contract';
-import { ResetPasswordResponseContract } from '../../../../shared/model/contracts/response/reset-password/reset-password-response-contract';
+import { SendCodeDto } from '../../../../shared/model/dto/send-code/send-code-dto';
+import { SendCodeRequestContract } from '../../../../shared/model/contracts/request/send-code/send-code-request-contract';
+import { SendCodeResponseContract } from '../../../../shared/model/contracts/response/send-code/send-code-response-contract';
 
 @Injectable()
 export class ResetPasswordAdapterService {
@@ -11,15 +11,15 @@ export class ResetPasswordAdapterService {
 
   public toRequestContract(
     email: string,
-  ): ResetPasswordRequestContract {
-    return new ResetPasswordRequestContract(email);
+  ): SendCodeRequestContract {
+    return new SendCodeRequestContract(email);
   }
 
   public toDto(
-    resetPasswordResponseContract: ResetPasswordResponseContract
-  ): ResetPasswordDto {
-    return new ResetPasswordDto(
-      resetPasswordResponseContract.message
+    sendCodeResponseContract: SendCodeResponseContract
+  ): SendCodeDto {
+    return new SendCodeDto(
+      sendCodeResponseContract.message
     );
   }
 }

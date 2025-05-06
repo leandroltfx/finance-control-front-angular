@@ -1,4 +1,4 @@
-export class ResetPasswordDto {
+export class SendCodeDto {
 
     message!: string;
 

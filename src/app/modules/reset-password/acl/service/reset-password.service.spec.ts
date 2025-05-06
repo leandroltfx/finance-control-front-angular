@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
+import { HttpErrorResponse } from '@angular/common/http';
 
 import { of, throwError } from 'rxjs';
 
 import { ResetPasswordService } from './reset-password.service';
-import { ResetPasswordDto } from 'src/app/shared/model/dto/reset-password/reset-password-dto';
-import { ResetPasswordRequestContract } from 'src/app/shared/model/contracts/request/reset-password/reset-password-request-contract';
 import { ResetPasswordProxyService } from '../proxy/reset-password-proxy.service';
 import { ResetPasswordAdapterService } from '../adapter/reset-password-adapter.service';
-import { HttpErrorResponse } from '@angular/common/http';
+import { SendCodeDto } from '../../../../shared/model/dto/send-code/send-code-dto';
+import { SendCodeRequestContract } from '../../../../shared/model/contracts/request/send-code/send-code-request-contract';
 
 describe('ResetPasswordService', () => {
   let service: ResetPasswordService;
@@ -35,39 +35,39 @@ describe('ResetPasswordService', () => {
 
   describe('sendCodeToEmail', () => {
 
-    it('deve chamar o serviço de redefinição de senha no proxy montando antes a requisição através do adapter', (done) => {
+    it('deve chamar o serviço de envio de código no proxy montando antes a requisição através do adapter', (done) => {
 
       const email = 'email';
-      const resetPasswordDto: ResetPasswordDto = { message: 'Código enviado com sucesso!' };
-      const resetPasswordRequestContract = new ResetPasswordRequestContract(email);
-      resetPasswordAdapterServiceSpy.toRequestContract.and.returnValue(resetPasswordRequestContract);
-      resetPasswordProxyServiceSpy.sendCodeToEmail.and.returnValue(of(resetPasswordDto));
+      const sendCodeDto: SendCodeDto = { message: 'Código enviado com sucesso!' };
+      const sendCodeRequestContract = new SendCodeRequestContract('email');
+      resetPasswordAdapterServiceSpy.toRequestContract.and.returnValue(sendCodeRequestContract);
+      resetPasswordProxyServiceSpy.sendCodeToEmail.and.returnValue(of(sendCodeDto));
 
       service.sendCodeToEmail(email).subscribe({
         next: (result) => {
-          expect(result).toEqual(resetPasswordDto);
+          expect(result).toEqual(sendCodeDto);
           expect(resetPasswordAdapterServiceSpy.toRequestContract).toHaveBeenCalledWith(email);
-          expect(resetPasswordProxyServiceSpy.sendCodeToEmail).toHaveBeenCalledWith(resetPasswordRequestContract);
+          expect(resetPasswordProxyServiceSpy.sendCodeToEmail).toHaveBeenCalledWith(sendCodeRequestContract);
           done();
         },
         error: () => done(),
       });
     });
 
-    it('deve capturar e lançar o erro do serviço de redefinição de senha no proxy', (done) => {
+    it('deve capturar e lançar o erro do serviço de envio de código no proxy', (done) => {
 
       const email = 'email';
-      const requestContract = new ResetPasswordRequestContract(email);
-      const errorResponse = new HttpErrorResponse({ status: 401, statusText: 'Unauthorized' });
-      resetPasswordAdapterServiceSpy.toRequestContract.and.returnValue(requestContract);
-      resetPasswordProxyServiceSpy.sendCodeToEmail.and.returnValue(throwError(() => errorResponse));
+      const sendCodeRequestContract = new SendCodeRequestContract(email);
+      const httpErrorResponse = new HttpErrorResponse({ status: 401, statusText: 'Unauthorized' });
+      resetPasswordAdapterServiceSpy.toRequestContract.and.returnValue(sendCodeRequestContract);
+      resetPasswordProxyServiceSpy.sendCodeToEmail.and.returnValue(throwError(() => httpErrorResponse));
 
       service.sendCodeToEmail(email).subscribe({
         next: () => done(),
         error: (error) => {
-          expect(error).toEqual(errorResponse);
+          expect(error).toEqual(httpErrorResponse);
           expect(resetPasswordAdapterServiceSpy.toRequestContract).toHaveBeenCalledWith(email);
-          expect(resetPasswordProxyServiceSpy.sendCodeToEmail).toHaveBeenCalledWith(requestContract);
+          expect(resetPasswordProxyServiceSpy.sendCodeToEmail).toHaveBeenCalledWith(sendCodeRequestContract);
           done();
         },
       });

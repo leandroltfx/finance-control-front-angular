@@ -1,9 +1,9 @@
 import { TestBed } from '@angular/core/testing';
 
 import { ResetPasswordAdapterService } from './reset-password-adapter.service';
-import { ResetPasswordDto } from '../../../../shared/model/dto/reset-password/reset-password-dto';
-import { ResetPasswordRequestContract } from '../../../../shared/model/contracts/request/reset-password/reset-password-request-contract';
-import { ResetPasswordResponseContract } from '../../../../shared/model/contracts/response/reset-password/reset-password-response-contract';
+import { SendCodeDto } from '../../../../shared/model/dto/send-code/send-code-dto';
+import { SendCodeRequestContract } from '../../../../shared/model/contracts/request/send-code/send-code-request-contract';
+import { SendCodeResponseContract } from '../../../../shared/model/contracts/response/send-code/send-code-response-contract';
 
 describe('ResetPasswordAdapterService', () => {
   let service: ResetPasswordAdapterService;
@@ -25,10 +25,10 @@ describe('ResetPasswordAdapterService', () => {
 
     it('deve montar a requisição da redefinição de senha a partir dos dados do formulário da redefinição de senha', () => {
 
-      const resetPasswordRequestContract = service.toRequestContract('email');
+      const sendCodeRequestContract = service.toRequestContract('email');
 
-      expect(resetPasswordRequestContract instanceof ResetPasswordRequestContract).toBeTrue();
-      expect(resetPasswordRequestContract.email).toBe('email');
+      expect(sendCodeRequestContract instanceof SendCodeRequestContract).toBeTrue();
+      expect(sendCodeRequestContract.email).toBe('email');
     });
   });
 
@@ -36,12 +36,12 @@ describe('ResetPasswordAdapterService', () => {
 
     it('deve transformar a resposta da redefinição de senha do backend em dto', () => {
 
-      const resetPasswordResponseContract = new ResetPasswordResponseContract('message');
+      const sendCodeResponseContract = new SendCodeResponseContract('message');
 
-      const resetPasswordDto = service.toDto(resetPasswordResponseContract);
+      const sendCodeDto = service.toDto(sendCodeResponseContract);
 
-      expect(resetPasswordDto instanceof ResetPasswordDto).toBeTrue();
-      expect(resetPasswordDto.message).toBe('message');
+      expect(sendCodeDto instanceof SendCodeDto).toBeTrue();
+      expect(sendCodeDto.message).toBe('message');
     });
   });
 });
