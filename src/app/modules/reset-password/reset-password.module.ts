@@ -15,7 +15,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { ResetPasswordComponent } from './reset-password.component';
 import { SendCodeComponent } from './steps/send-code/send-code.component';
 import { ResetPasswordService } from './acl/service/reset-password.service';
-import { WriteCodeComponent } from './steps/write-code/write-code.component';
+import { ValidateCodeComponent } from './steps/validate-code/validate-code.component';
 import { ResetPasswordRoutingModule } from './reset-password-routing.module';
 import { ResetPasswordProxyService } from './acl/proxy/reset-password-proxy.service';
 import { ResetPasswordAdapterService } from './acl/adapter/reset-password-adapter.service';
@@ -24,7 +24,7 @@ import { UpdatePasswordComponent } from './steps/update-password/update-password
 @NgModule({
   declarations: [
     SendCodeComponent,
-    WriteCodeComponent,
+    ValidateCodeComponent,
     ResetPasswordComponent,
     UpdatePasswordComponent
   ],

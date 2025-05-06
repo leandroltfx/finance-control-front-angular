@@ -28,7 +28,6 @@ export class UpdatePasswordComponent {
 
   public updatePassword(): void {
     if (this.updatePasswordForm.valid) {
-      this._resetPasswordService
       this.eventFinish.emit();
     }
   }

@@ -55,4 +55,14 @@ describe('ResetPasswordComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  describe('backToLogin', () => {
+    it('deve rotear para a tela de login', () => {
+      const navigateSpy = spyOn(router, 'navigate');
+
+      component.backToLogin();
+
+      expect(navigateSpy).toHaveBeenCalled();
+    });
+  });
 });

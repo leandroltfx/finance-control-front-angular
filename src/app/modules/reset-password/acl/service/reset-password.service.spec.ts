@@ -5,9 +5,11 @@ import { of, throwError } from 'rxjs';
 
 import { ResetPasswordService } from './reset-password.service';
 import { ResetPasswordProxyService } from '../proxy/reset-password-proxy.service';
-import { ResetPasswordAdapterService } from '../adapter/reset-password-adapter.service';
 import { SendCodeDto } from '../../../../shared/model/dto/send-code/send-code-dto';
+import { ResetPasswordAdapterService } from '../adapter/reset-password-adapter.service';
+import { ValidateCodeDto } from '../../../../shared/model/dto/validate-code/validate-code-dto';
 import { SendCodeRequestContract } from '../../../../shared/model/contracts/request/send-code/send-code-request-contract';
+import { ValidateCodeRequestContract } from '../../../../shared/model/contracts/request/validate-code/validate-code-request-contract';
 
 describe('ResetPasswordService', () => {
   let service: ResetPasswordService;
@@ -15,8 +17,8 @@ describe('ResetPasswordService', () => {
   let resetPasswordAdapterServiceSpy: jasmine.SpyObj<ResetPasswordAdapterService>;
 
   beforeEach(() => {
-    resetPasswordProxyServiceSpy = jasmine.createSpyObj<ResetPasswordProxyService>('ResetPasswordProxyService', ['sendCodeToEmail']);
-    resetPasswordAdapterServiceSpy = jasmine.createSpyObj<ResetPasswordAdapterService>('ResetPasswordAdapterService', ['toRequestContract']);
+    resetPasswordProxyServiceSpy = jasmine.createSpyObj<ResetPasswordProxyService>('ResetPasswordProxyService', ['sendCodeToEmail', 'validateCode']);
+    resetPasswordAdapterServiceSpy = jasmine.createSpyObj<ResetPasswordAdapterService>('ResetPasswordAdapterService', ['toSendCodeRequestContract', 'toValidateCodeRequestContract']);
 
     TestBed.configureTestingModule({
       providers: [
@@ -40,13 +42,13 @@ describe('ResetPasswordService', () => {
       const email = 'email';
       const sendCodeDto: SendCodeDto = { message: 'Código enviado com sucesso!' };
       const sendCodeRequestContract = new SendCodeRequestContract('email');
-      resetPasswordAdapterServiceSpy.toRequestContract.and.returnValue(sendCodeRequestContract);
+      resetPasswordAdapterServiceSpy.toSendCodeRequestContract.and.returnValue(sendCodeRequestContract);
       resetPasswordProxyServiceSpy.sendCodeToEmail.and.returnValue(of(sendCodeDto));
 
       service.sendCodeToEmail(email).subscribe({
         next: (result) => {
           expect(result).toEqual(sendCodeDto);
-          expect(resetPasswordAdapterServiceSpy.toRequestContract).toHaveBeenCalledWith(email);
+          expect(resetPasswordAdapterServiceSpy.toSendCodeRequestContract).toHaveBeenCalledWith(email);
           expect(resetPasswordProxyServiceSpy.sendCodeToEmail).toHaveBeenCalledWith(sendCodeRequestContract);
           done();
         },
@@ -59,15 +61,54 @@ describe('ResetPasswordService', () => {
       const email = 'email';
       const sendCodeRequestContract = new SendCodeRequestContract(email);
       const httpErrorResponse = new HttpErrorResponse({ status: 401, statusText: 'Unauthorized' });
-      resetPasswordAdapterServiceSpy.toRequestContract.and.returnValue(sendCodeRequestContract);
+      resetPasswordAdapterServiceSpy.toSendCodeRequestContract.and.returnValue(sendCodeRequestContract);
       resetPasswordProxyServiceSpy.sendCodeToEmail.and.returnValue(throwError(() => httpErrorResponse));
 
       service.sendCodeToEmail(email).subscribe({
         next: () => done(),
         error: (error) => {
           expect(error).toEqual(httpErrorResponse);
-          expect(resetPasswordAdapterServiceSpy.toRequestContract).toHaveBeenCalledWith(email);
+          expect(resetPasswordAdapterServiceSpy.toSendCodeRequestContract).toHaveBeenCalledWith(email);
           expect(resetPasswordProxyServiceSpy.sendCodeToEmail).toHaveBeenCalledWith(sendCodeRequestContract);
+          done();
+        },
+      });
+    });
+  });
+
+  describe('validateCode', () => {
+
+    it('deve chamar o serviço de validação de código no proxy montando antes a requisição através do adapter', (done) => {
+
+      const validateCodeDto: ValidateCodeDto = { userId: 'userid' };
+      const validateCodeRequestContract = new ValidateCodeRequestContract('email', 'code');
+      resetPasswordAdapterServiceSpy.toValidateCodeRequestContract.and.returnValue(validateCodeRequestContract);
+      resetPasswordProxyServiceSpy.validateCode.and.returnValue(of(validateCodeDto));
+
+      service.validateCode('email', 'code').subscribe({
+        next: (result) => {
+          expect(result).toEqual(validateCodeDto);
+          expect(resetPasswordAdapterServiceSpy.toValidateCodeRequestContract).toHaveBeenCalledWith('email', 'code');
+          expect(resetPasswordProxyServiceSpy.validateCode).toHaveBeenCalledWith(validateCodeRequestContract);
+          done();
+        },
+        error: () => done(),
+      });
+    });
+
+    it('deve capturar e lançar o erro do serviço de validação de código no proxy', (done) => {
+
+      const validateCodeRequestContract = new ValidateCodeRequestContract('email', 'code');
+      const httpErrorResponse = new HttpErrorResponse({ status: 401, statusText: 'Unauthorized' });
+      resetPasswordAdapterServiceSpy.toValidateCodeRequestContract.and.returnValue(validateCodeRequestContract);
+      resetPasswordProxyServiceSpy.validateCode.and.returnValue(throwError(() => httpErrorResponse));
+
+      service.validateCode('email', 'code').subscribe({
+        next: () => done(),
+        error: (error) => {
+          expect(error).toEqual(httpErrorResponse);
+          expect(resetPasswordAdapterServiceSpy.toValidateCodeRequestContract).toHaveBeenCalledWith('email', 'code');
+          expect(resetPasswordProxyServiceSpy.validateCode).toHaveBeenCalledWith(validateCodeRequestContract);
           done();
         },
       });

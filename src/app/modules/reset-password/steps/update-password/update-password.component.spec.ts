@@ -49,4 +49,14 @@ describe('UpdatePasswordComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  describe('cancel', () => {
+    it('deve emitir evento para cancelar o fluxo de redefinição de senha', () => {
+      const emitSpy = spyOn(component.eventCancel, 'emit');
+
+      component.cancel();
+
+      expect(emitSpy).toHaveBeenCalled();
+    });
+  });
 });
