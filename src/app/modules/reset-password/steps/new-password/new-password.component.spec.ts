@@ -93,8 +93,8 @@ describe('NewPasswordComponent', () => {
   });
 
   describe('cancel', () => {
-    it('deve emitir evento para cancelar o fluxo de redefinição de senha', () => {
-      const emitSpy = spyOn(component.eventCancel, 'emit');
+    it('deve emitir evento para cancelar o fluxo de redefinição de senha e voltar ao login', () => {
+      const emitSpy = spyOn(component.eventBackToLogin, 'emit');
 
       component.cancel();
 

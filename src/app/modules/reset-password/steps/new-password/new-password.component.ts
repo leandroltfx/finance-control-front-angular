@@ -14,8 +14,7 @@ import { NewPasswordDto } from '../../../../shared/model/dto/new-password/new-pa
 })
 export class NewPasswordComponent {
 
-  @Output() eventFinish = new EventEmitter();
-  @Output() eventCancel = new EventEmitter();
+  @Output() eventBackToLogin = new EventEmitter();
 
   public updatePasswordForm!: FormGroup;
   public hidePassword: boolean = true;
@@ -37,7 +36,7 @@ export class NewPasswordComponent {
         {
           next: (newPasswordDto: NewPasswordDto) => {
             console.log('ok', newPasswordDto);
-            this.eventFinish.emit();
+            this.eventBackToLogin.emit();
           },
           error: (httpErrorResponse: HttpErrorResponse) => console.log('erro', httpErrorResponse)
         }
@@ -46,7 +45,7 @@ export class NewPasswordComponent {
   }
 
   public cancel(): void {
-    this.eventCancel.emit();
+    this.eventBackToLogin.emit();
   }
 
   private _buildUpdatePasswordForm(): FormGroup {

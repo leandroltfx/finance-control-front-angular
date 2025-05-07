@@ -15,7 +15,7 @@ import { ValidateCodeDto } from '../../../../shared/model/dto/validate-code/vali
 export class ValidateCodeComponent implements OnInit {
 
   @Output() eventNextStep = new EventEmitter();
-  @Output() eventCancel = new EventEmitter();
+  @Output() eventBackToLogin = new EventEmitter();
 
   public validateCodeForm!: FormGroup;
 
@@ -49,7 +49,7 @@ export class ValidateCodeComponent implements OnInit {
   }
 
   public cancel(): void {
-    this.eventCancel.emit();
+    this.eventBackToLogin.emit();
   }
 
   private _buildValidateCodeForm(): FormGroup {

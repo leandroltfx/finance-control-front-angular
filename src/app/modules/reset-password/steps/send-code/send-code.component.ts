@@ -14,7 +14,7 @@ import { ResetPasswordService } from '../../acl/service/reset-password.service';
 export class SendCodeComponent implements OnInit {
 
   @Output() eventNextStep = new EventEmitter();
-  @Output() eventCancel = new EventEmitter();
+  @Output() eventBackToLogin = new EventEmitter();
 
   public sendCodeForm!: FormGroup;
 
@@ -43,7 +43,7 @@ export class SendCodeComponent implements OnInit {
   }
 
   public cancel(): void {
-    this.eventCancel.emit();
+    this.eventBackToLogin.emit();
   }
 
   private _buildSendCodeForm(): FormGroup {
