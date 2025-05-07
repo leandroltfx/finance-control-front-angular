@@ -56,10 +56,19 @@ describe('ResetPasswordComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  describe('nextStep', () => {
-    it('deve seguir para o passo seguinte da redefinição de senha', () => {
+  describe('goToValidateCode', () => {
+    it('deve seguir para o passo de validação de código', () => {
 
-      component.nextStep('email');
+      component.goToValidateCode('email');
+
+      expect(component.stepper.selectedIndex).toBe(1);
+    });
+  });
+
+  describe('goToNewPassword', () => {
+    it('deve seguir para o passo de criação de nova senha', () => {
+
+      component.goToNewPassword('email');
 
       expect(component.stepper.selectedIndex).toBe(1);
     });

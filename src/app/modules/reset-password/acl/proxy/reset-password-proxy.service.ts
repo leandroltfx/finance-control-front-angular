@@ -9,7 +9,6 @@ import { SendCodeRequestContract } from '../../../../shared/model/contracts/requ
 import { NewPasswordRequestContract } from '../../../../shared/model/contracts/request/new-password/new-password-request-contract';
 import { ValidateCodeRequestContract } from '../../../../shared/model/contracts/request/validate-code/validate-code-request-contract';
 import { NewPasswordResponseContract } from '../../../../shared/model/contracts/response/new-password/new-password-response-contract';
-import { ValidateCodeResponseContract } from '../../../../shared/model/contracts/response/validate-code/validate-code-response-contract';
 
 @Injectable()
 export class ResetPasswordProxyService {
@@ -32,12 +31,12 @@ export class ResetPasswordProxyService {
 
   public validateCode(
     validateCodeRequestContract: ValidateCodeRequestContract
-  ): Observable<ValidateCodeResponseContract> {
-    return this._httpClient.post<ValidateCodeResponseContract>(
+  ): Observable<void> {
+    return this._httpClient.post<void>(
       `${environment.api_path}/validate-code`,
       validateCodeRequestContract
     ).pipe(
-      map((validateCodeResponseContract: ValidateCodeResponseContract) => validateCodeResponseContract),
+      map(() => {}),
       catchError((httpErrorResponse: HttpErrorResponse) => throwError(() => httpErrorResponse))
     );
   }

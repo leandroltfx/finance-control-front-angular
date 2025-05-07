@@ -57,13 +57,15 @@ describe('SendCodeComponent', () => {
   describe('sendCodeToEmail', () => {
     it('deve chamar o serviço de redefinição de senha', () => {
 
+      const emitSpy = spyOn(component.eventGoToValidateCode, 'emit');
       component.sendCodeForm = component['_buildSendCodeForm']();
       component.sendCodeForm.controls['email'].setValue('email@email.com');
       resetPasswordServiceSpy.sendCodeToEmail.and.returnValue(of(undefined));
-
+      
       component.sendCodeToEmail();
-
+      
       expect(component.sendCodeForm.valid).toBeTrue();
+      expect(emitSpy).toHaveBeenCalledWith('email@email.com');
       expect(resetPasswordServiceSpy.sendCodeToEmail).toHaveBeenCalledWith('email@email.com');
     });
 

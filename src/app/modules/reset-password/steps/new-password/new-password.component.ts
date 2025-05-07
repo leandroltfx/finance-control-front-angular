@@ -17,6 +17,7 @@ export class NewPasswordComponent {
   @Output() eventBackToLogin = new EventEmitter();
 
   @Input() email!: string;
+  @Input() code!: string;
 
   public updatePasswordForm!: FormGroup;
   public hidePassword: boolean = true;
@@ -34,7 +35,8 @@ export class NewPasswordComponent {
     if (this.updatePasswordForm.valid) {
       this._resetPasswordService.createNewPassword(
         this.updatePasswordForm.controls['newPassword'].value,
-        this.email
+        this.email,
+        this.code
       ).subscribe(
         {
           next: (newPasswordDto: NewPasswordDto) => {

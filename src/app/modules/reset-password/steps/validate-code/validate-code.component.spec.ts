@@ -16,7 +16,6 @@ import { of, throwError } from 'rxjs';
 
 import { ValidateCodeComponent } from './validate-code.component';
 import { ResetPasswordService } from '../../acl/service/reset-password.service';
-import { ValidateCodeDto } from '../../../../shared/model/dto/validate-code/validate-code-dto';
 
 describe('ValidateCodeComponent', () => {
   let component: ValidateCodeComponent;
@@ -58,15 +57,16 @@ describe('ValidateCodeComponent', () => {
   describe('validateCode', () => {
     it('deve chamar o serviço de validação de código', () => {
 
+      const emitSpy = spyOn(component.eventGoToNewPassword, 'emit');
       component.validateCodeForm = component['_buildValidateCodeForm']();
       component.validateCodeForm.controls['code'].setValue('123456');
       component.email = 'email@email.com';
-      const validateCodeDto: ValidateCodeDto = new ValidateCodeDto('userid');
-      resetPasswordServiceSpy.validateCode.and.returnValue(of(validateCodeDto));
+      resetPasswordServiceSpy.validateCode.and.returnValue(of(undefined));
 
       component.validateCode();
 
       expect(component.validateCodeForm.valid).toBeTrue();
+      expect(emitSpy).toHaveBeenCalledWith('123456');
       expect(resetPasswordServiceSpy.validateCode).toHaveBeenCalledWith('email@email.com', '123456');
     });
 

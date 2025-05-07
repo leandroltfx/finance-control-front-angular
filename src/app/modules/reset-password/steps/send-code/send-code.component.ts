@@ -13,7 +13,7 @@ import { ResetPasswordService } from '../../acl/service/reset-password.service';
 })
 export class SendCodeComponent implements OnInit {
 
-  @Output() eventNextStep = new EventEmitter<string>();
+  @Output() eventGoToValidateCode = new EventEmitter<string>();
   @Output() eventBackToLogin = new EventEmitter();
 
   public sendCodeForm!: FormGroup;
@@ -36,7 +36,7 @@ export class SendCodeComponent implements OnInit {
         email
       ).subscribe(
         {
-          next: () => this.eventNextStep.emit(email),
+          next: () => this.eventGoToValidateCode.emit(email),
           error: (httpErrorResponse: HttpErrorResponse) => console.log('error', httpErrorResponse)
         }
       );

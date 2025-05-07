@@ -8,7 +8,6 @@ import { SendCodeRequestContract } from '../../../../shared/model/contracts/requ
 import { NewPasswordRequestContract } from '../../../../shared/model/contracts/request/new-password/new-password-request-contract';
 import { NewPasswordResponseContract } from '../../../../shared/model/contracts/response/new-password/new-password-response-contract';
 import { ValidateCodeRequestContract } from '../../../../shared/model/contracts/request/validate-code/validate-code-request-contract';
-import { ValidateCodeResponseContract } from '../../../../shared/model/contracts/response/validate-code/validate-code-response-contract';
 
 describe('ResetPasswordProxyService', () => {
   let service: ResetPasswordProxyService;
@@ -71,16 +70,15 @@ describe('ResetPasswordProxyService', () => {
 
     it('deve realizar uma chamada para o endpoint de validação de código através do método POST', () => {
       const mockRequest: ValidateCodeRequestContract = { email: 'email@email.com', code: '123456' };
-      const mockResponse: ValidateCodeResponseContract = { userId: 'userid' };
 
       service.validateCode(mockRequest).subscribe((response) => {
-        expect(response).toEqual(mockResponse);
+        expect(response).toEqual();
       });
 
       const req = httpMock.expectOne(`${environment.api_path}/validate-code`);
       expect(req.request.method).toBe('POST');
       expect(req.request.body).toEqual(mockRequest);
-      req.flush(mockResponse);
+      req.flush({});
     });
 
     it('deve tratar erro na chamada do endpoint de validação de código', () => {
@@ -103,7 +101,7 @@ describe('ResetPasswordProxyService', () => {
   describe('createNewPassword', () => {
 
     it('deve realizar uma chamada para o endpoint de cadastro de nova senha através do método POST', () => {
-      const mockRequest: NewPasswordRequestContract = { newPassword: 'newPassword', email: 'email@email.com' };
+      const mockRequest: NewPasswordRequestContract = { newPassword: 'newPassword', email: 'email@email.com', code: '123456' };
       const mockResponse: NewPasswordResponseContract = { message: 'message' };
 
       service.createNewPassword(mockRequest).subscribe((response) => {
@@ -117,7 +115,7 @@ describe('ResetPasswordProxyService', () => {
     });
 
     it('deve tratar erro na chamada do endpoint de cadastro de nova senha', () => {
-      const mockRequest: NewPasswordRequestContract = { newPassword: 'newPassword', email: 'email@email.com' };
+      const mockRequest: NewPasswordRequestContract = { newPassword: 'newPassword', email: 'email@email.com', code: '123456' };
       const mockError = { status: 401, statusText: 'Unauthorized' };
 
       service.createNewPassword(mockRequest).subscribe({

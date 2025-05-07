@@ -58,16 +58,19 @@ describe('NewPasswordComponent', () => {
   describe('createNewPassword', () => {
     it('deve chamar o serviço de criação da nova senha', () => {
 
+      const emitSpy = spyOn(component.eventBackToLogin, 'emit');
       component.updatePasswordForm = component['_buildUpdatePasswordForm']();
       component.updatePasswordForm.controls['newPassword'].setValue('newPassword');
       component.email = 'email@email.com';
+      component.code = '123456';
       const newPasswordDto: NewPasswordDto = new NewPasswordDto('userid');
       resetPasswordServiceSpy.createNewPassword.and.returnValue(of(newPasswordDto));
 
       component.createNewPassword();
 
       expect(component.updatePasswordForm.valid).toBeTrue();
-      expect(resetPasswordServiceSpy.createNewPassword).toHaveBeenCalledWith('newPassword', 'email@email.com');
+      expect(emitSpy).toHaveBeenCalled();
+      expect(resetPasswordServiceSpy.createNewPassword).toHaveBeenCalledWith('newPassword', 'email@email.com', '123456');
     });
 
     it('deve chamar o serviço de criação da nova senha e tratar o erro se houver', () => {
@@ -75,12 +78,13 @@ describe('NewPasswordComponent', () => {
       component.updatePasswordForm = component['_buildUpdatePasswordForm']();
       component.updatePasswordForm.controls['newPassword'].setValue('newPassword');
       component.email = 'email@email.com';
+      component.code = '123456';
       resetPasswordServiceSpy.createNewPassword.and.returnValue(throwError(() => new HttpErrorResponse({})));
 
       component.createNewPassword();
 
       expect(component.updatePasswordForm.valid).toBeTrue();
-      expect(resetPasswordServiceSpy.createNewPassword).toHaveBeenCalledWith('newPassword', 'email@email.com');
+      expect(resetPasswordServiceSpy.createNewPassword).toHaveBeenCalledWith('newPassword', 'email@email.com', '123456');
     });
 
     it('não deve chamar o serviço de criação da nova senha se o formulário estiver inválido por não preenchimento da senha', () => {

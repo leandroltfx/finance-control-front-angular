@@ -7,7 +7,6 @@ import { catchError, map, Observable, throwError } from 'rxjs';
 import { ResetPasswordProxyService } from '../proxy/reset-password-proxy.service';
 import { ResetPasswordAdapterService } from '../adapter/reset-password-adapter.service';
 import { NewPasswordDto } from '../../../../shared/model/dto/new-password/new-password-dto';
-import { ValidateCodeDto } from '../../../../shared/model/dto/validate-code/validate-code-dto';
 
 @Injectable()
 export class ResetPasswordService {
@@ -33,26 +32,28 @@ export class ResetPasswordService {
   public validateCode(
     email: string,
     code: string
-  ): Observable<ValidateCodeDto> {
+  ): Observable<void> {
     return this._resetPasswordProxyService.validateCode(
       this._resetPasswordAdapterService.toValidateCodeRequestContract(
         email,
         code
       )
     ).pipe(
-      map((validateCodeDto: ValidateCodeDto) => validateCodeDto),
+      map(() => {}),
       catchError((httpErrorResponse: HttpErrorResponse) => throwError(() => httpErrorResponse))
     );
   }
 
   public createNewPassword(
     newPassword: string,
-    email: string
+    email: string,
+    code: string
   ): Observable<NewPasswordDto> {
     return this._resetPasswordProxyService.createNewPassword(
       this._resetPasswordAdapterService.toNewPasswordRequestContract(
         newPassword,
-        email
+        email,
+        code
       )
     ).pipe(
       map((newPasswordDto: NewPasswordDto) => newPasswordDto),

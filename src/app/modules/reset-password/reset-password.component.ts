@@ -14,13 +14,19 @@ export class ResetPasswordComponent {
   @ViewChild('stepper') stepper!: MatStepper;
 
   public email!: string;
+  public code!: string;
 
   constructor(
     private readonly _router: Router
   ) { }
 
-  public nextStep(email: string): void {
+  public goToValidateCode(email: string): void {
     this.email = email;
+    this.stepper.next();
+  }
+
+  public goToNewPassword(code: string): void {
+    this.code = code;
     this.stepper.next();
   }
 

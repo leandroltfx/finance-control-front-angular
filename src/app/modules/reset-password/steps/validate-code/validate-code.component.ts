@@ -5,7 +5,6 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import { ResetPasswordService } from '../../acl/service/reset-password.service';
-import { ValidateCodeDto } from '../../../../shared/model/dto/validate-code/validate-code-dto';
 
 @Component({
   selector: 'fc-validate-code',
@@ -14,7 +13,7 @@ import { ValidateCodeDto } from '../../../../shared/model/dto/validate-code/vali
 })
 export class ValidateCodeComponent implements OnInit {
 
-  @Output() eventNextStep = new EventEmitter();
+  @Output() eventGoToNewPassword = new EventEmitter();
   @Output() eventBackToLogin = new EventEmitter();
 
   @Input() email!: string;
@@ -34,15 +33,13 @@ export class ValidateCodeComponent implements OnInit {
 
   public validateCode(): void {
     if (this.validateCodeForm.valid) {
+      const code = this.validateCodeForm.controls['code'].value;
       this._resetPasswordService.validateCode(
         this.email,
-        this.validateCodeForm.controls['code'].value
+        code
       ).subscribe(
         {
-          next: (validateCodeDto: ValidateCodeDto) => {
-            console.log('ok', validateCodeDto);
-            this.eventNextStep.emit();
-          },
+          next: () => this.eventGoToNewPassword.emit(code),
           error: (httpErrorResponse: HttpErrorResponse) => console.log('erro', httpErrorResponse)
         }
       );
