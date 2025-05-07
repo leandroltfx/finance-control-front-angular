@@ -5,7 +5,6 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import { ResetPasswordService } from '../../acl/service/reset-password.service';
-import { SendCodeDto } from '../../../../shared/model/dto/send-code/send-code-dto';
 
 @Component({
   selector: 'fc-send-code',
@@ -36,10 +35,7 @@ export class SendCodeComponent implements OnInit {
         this.sendCodeForm.controls['email'].value
       ).subscribe(
         {
-          next: (sendCodeDto: SendCodeDto) => {
-            console.log('ok', sendCodeDto);
-            this.eventNextStep.emit();
-          },
+          next: () => this.eventNextStep.emit(),
           error: (httpErrorResponse: HttpErrorResponse) => console.log('error', httpErrorResponse)
         }
       );

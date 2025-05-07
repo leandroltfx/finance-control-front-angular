@@ -5,7 +5,6 @@ import { of, throwError } from 'rxjs';
 
 import { ResetPasswordService } from './reset-password.service';
 import { ResetPasswordProxyService } from '../proxy/reset-password-proxy.service';
-import { SendCodeDto } from '../../../../shared/model/dto/send-code/send-code-dto';
 import { ResetPasswordAdapterService } from '../adapter/reset-password-adapter.service';
 import { NewPasswordDto } from '../../../../shared/model/dto/new-password/new-password-dto';
 import { ValidateCodeDto } from '../../../../shared/model/dto/validate-code/validate-code-dto';
@@ -42,14 +41,12 @@ describe('ResetPasswordService', () => {
     it('deve chamar o serviço de envio de código no proxy montando antes a requisição através do adapter', (done) => {
 
       const email = 'email';
-      const sendCodeDto: SendCodeDto = { message: 'Código enviado com sucesso!' };
       const sendCodeRequestContract = new SendCodeRequestContract('email');
       resetPasswordAdapterServiceSpy.toSendCodeRequestContract.and.returnValue(sendCodeRequestContract);
-      resetPasswordProxyServiceSpy.sendCodeToEmail.and.returnValue(of(sendCodeDto));
+      resetPasswordProxyServiceSpy.sendCodeToEmail.and.returnValue(of(undefined));
 
       service.sendCodeToEmail(email).subscribe({
-        next: (result) => {
-          expect(result).toEqual(sendCodeDto);
+        next: () => {
           expect(resetPasswordAdapterServiceSpy.toSendCodeRequestContract).toHaveBeenCalledWith(email);
           expect(resetPasswordProxyServiceSpy.sendCodeToEmail).toHaveBeenCalledWith(sendCodeRequestContract);
           done();

@@ -1,11 +1,9 @@
 import { TestBed } from '@angular/core/testing';
 
 import { ResetPasswordAdapterService } from './reset-password-adapter.service';
-import { SendCodeDto } from '../../../../shared/model/dto/send-code/send-code-dto';
 import { NewPasswordDto } from '../../../../shared/model/dto/new-password/new-password-dto';
 import { ValidateCodeDto } from '../../../../shared/model/dto/validate-code/validate-code-dto';
 import { SendCodeRequestContract } from '../../../../shared/model/contracts/request/send-code/send-code-request-contract';
-import { SendCodeResponseContract } from '../../../../shared/model/contracts/response/send-code/send-code-response-contract';
 import { NewPasswordRequestContract } from '../../../../shared/model/contracts/request/new-password/new-password-request-contract';
 import { ValidateCodeRequestContract } from '../../../../shared/model/contracts/request/validate-code/validate-code-request-contract';
 import { NewPasswordResponseContract } from '../../../../shared/model/contracts/response/new-password/new-password-response-contract';
@@ -35,19 +33,6 @@ describe('ResetPasswordAdapterService', () => {
 
       expect(sendCodeRequestContract instanceof SendCodeRequestContract).toBeTrue();
       expect(sendCodeRequestContract.email).toBe('email');
-    });
-  });
-
-  describe('toSendCodeDto', () => {
-
-    it('deve transformar a resposta da redefinição de senha do backend em dto', () => {
-
-      const sendCodeResponseContract = new SendCodeResponseContract('message');
-
-      const sendCodeDto = service.toSendCodeDto(sendCodeResponseContract);
-
-      expect(sendCodeDto instanceof SendCodeDto).toBeTrue();
-      expect(sendCodeDto.message).toBe('message');
     });
   });
 

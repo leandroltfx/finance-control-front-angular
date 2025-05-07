@@ -5,7 +5,6 @@ import { HttpClientTestingModule, HttpTestingController } from '@angular/common/
 import { ResetPasswordProxyService } from './reset-password-proxy.service';
 import { environment } from '../../../../../environments/environment.development';
 import { SendCodeRequestContract } from '../../../../shared/model/contracts/request/send-code/send-code-request-contract';
-import { SendCodeResponseContract } from '../../../../shared/model/contracts/response/send-code/send-code-response-contract';
 import { NewPasswordRequestContract } from '../../../../shared/model/contracts/request/new-password/new-password-request-contract';
 import { NewPasswordResponseContract } from '../../../../shared/model/contracts/response/new-password/new-password-response-contract';
 import { ValidateCodeRequestContract } from '../../../../shared/model/contracts/request/validate-code/validate-code-request-contract';
@@ -40,16 +39,15 @@ describe('ResetPasswordProxyService', () => {
 
     it('deve realizar uma chamada para o endpoint de redefinição de senha através do método POST', () => {
       const mockRequest: SendCodeRequestContract = { email: 'email' };
-      const mockResponse: SendCodeResponseContract = { message: 'Código enviado com sucesso!' };
 
       service.sendCodeToEmail(mockRequest).subscribe((response) => {
-        expect(response).toEqual(mockResponse);
+        expect(response).toEqual();
       });
 
       const req = httpMock.expectOne(`${environment.api_path}/send-code`);
       expect(req.request.method).toBe('POST');
       expect(req.request.body).toEqual(mockRequest);
-      req.flush(mockResponse);
+      req.flush({});
     });
 
     it('deve tratar erro na chamada do endpoint de redefinição de senha', () => {

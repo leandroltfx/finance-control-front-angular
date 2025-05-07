@@ -5,7 +5,6 @@ import { Injectable } from '@angular/core';
 import { catchError, map, Observable, throwError } from 'rxjs';
 
 import { ResetPasswordProxyService } from '../proxy/reset-password-proxy.service';
-import { SendCodeDto } from '../../../../shared/model/dto/send-code/send-code-dto';
 import { ResetPasswordAdapterService } from '../adapter/reset-password-adapter.service';
 import { NewPasswordDto } from '../../../../shared/model/dto/new-password/new-password-dto';
 import { ValidateCodeDto } from '../../../../shared/model/dto/validate-code/validate-code-dto';
@@ -20,13 +19,13 @@ export class ResetPasswordService {
 
   public sendCodeToEmail(
     email: string
-  ): Observable<SendCodeDto> {
+  ): Observable<any> {
     return this._resetPasswordProxyService.sendCodeToEmail(
       this._resetPasswordAdapterService.toSendCodeRequestContract(
         email
       )
     ).pipe(
-      map((sendCodeDto: SendCodeDto) => sendCodeDto),
+      map(() => {}),
       catchError((httpErrorResponse: HttpErrorResponse) => throwError(() => httpErrorResponse))
     );
   }
