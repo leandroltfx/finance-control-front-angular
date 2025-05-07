@@ -14,13 +14,13 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { of, throwError } from 'rxjs';
 
-import { UpdatePasswordComponent } from './update-password.component';
+import { NewPasswordComponent } from './new-password.component';
 import { ResetPasswordService } from '../../acl/service/reset-password.service';
 import { NewPasswordDto } from '../../../../shared/model/dto/new-password/new-password-dto';
 
-describe('UpdatePasswordComponent', () => {
-  let component: UpdatePasswordComponent;
-  let fixture: ComponentFixture<UpdatePasswordComponent>;
+describe('NewPasswordComponent', () => {
+  let component: NewPasswordComponent;
+  let fixture: ComponentFixture<NewPasswordComponent>;
   let resetPasswordServiceSpy: jasmine.SpyObj<ResetPasswordService>;
 
   beforeEach(() => {
@@ -29,7 +29,7 @@ describe('UpdatePasswordComponent', () => {
 
     TestBed.configureTestingModule({
       declarations: [
-        UpdatePasswordComponent
+        NewPasswordComponent
       ],
       imports: [
         ReactiveFormsModule,
@@ -46,7 +46,7 @@ describe('UpdatePasswordComponent', () => {
         { provide: ResetPasswordService, useValue: resetPasswordServiceSpy }
       ]
     });
-    fixture = TestBed.createComponent(UpdatePasswordComponent);
+    fixture = TestBed.createComponent(NewPasswordComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

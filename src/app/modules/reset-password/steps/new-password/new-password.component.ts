@@ -8,11 +8,11 @@ import { ResetPasswordService } from '../../acl/service/reset-password.service';
 import { NewPasswordDto } from '../../../../shared/model/dto/new-password/new-password-dto';
 
 @Component({
-  selector: 'fc-update-password',
-  templateUrl: './update-password.component.html',
-  styleUrls: ['./update-password.component.css']
+  selector: 'fc-new-password',
+  templateUrl: './new-password.component.html',
+  styleUrls: ['./new-password.component.css']
 })
-export class UpdatePasswordComponent {
+export class NewPasswordComponent {
 
   @Output() eventFinish = new EventEmitter();
   @Output() eventCancel = new EventEmitter();
