@@ -7,8 +7,10 @@ import { ResetPasswordService } from './reset-password.service';
 import { ResetPasswordProxyService } from '../proxy/reset-password-proxy.service';
 import { SendCodeDto } from '../../../../shared/model/dto/send-code/send-code-dto';
 import { ResetPasswordAdapterService } from '../adapter/reset-password-adapter.service';
+import { NewPasswordDto } from '../../../../shared/model/dto/new-password/new-password-dto';
 import { ValidateCodeDto } from '../../../../shared/model/dto/validate-code/validate-code-dto';
 import { SendCodeRequestContract } from '../../../../shared/model/contracts/request/send-code/send-code-request-contract';
+import { NewPasswordRequestContract } from '../../../../shared/model/contracts/request/new-password/new-password-request-contract';
 import { ValidateCodeRequestContract } from '../../../../shared/model/contracts/request/validate-code/validate-code-request-contract';
 
 describe('ResetPasswordService', () => {
@@ -17,8 +19,8 @@ describe('ResetPasswordService', () => {
   let resetPasswordAdapterServiceSpy: jasmine.SpyObj<ResetPasswordAdapterService>;
 
   beforeEach(() => {
-    resetPasswordProxyServiceSpy = jasmine.createSpyObj<ResetPasswordProxyService>('ResetPasswordProxyService', ['sendCodeToEmail', 'validateCode']);
-    resetPasswordAdapterServiceSpy = jasmine.createSpyObj<ResetPasswordAdapterService>('ResetPasswordAdapterService', ['toSendCodeRequestContract', 'toValidateCodeRequestContract']);
+    resetPasswordProxyServiceSpy = jasmine.createSpyObj<ResetPasswordProxyService>('ResetPasswordProxyService', ['sendCodeToEmail', 'validateCode', 'createNewPassword']);
+    resetPasswordAdapterServiceSpy = jasmine.createSpyObj<ResetPasswordAdapterService>('ResetPasswordAdapterService', ['toSendCodeRequestContract', 'toValidateCodeRequestContract', 'toNewPasswordRequestContract']);
 
     TestBed.configureTestingModule({
       providers: [
@@ -109,6 +111,45 @@ describe('ResetPasswordService', () => {
           expect(error).toEqual(httpErrorResponse);
           expect(resetPasswordAdapterServiceSpy.toValidateCodeRequestContract).toHaveBeenCalledWith('email', 'code');
           expect(resetPasswordProxyServiceSpy.validateCode).toHaveBeenCalledWith(validateCodeRequestContract);
+          done();
+        },
+      });
+    });
+  });
+
+  describe('createNewPassword', () => {
+
+    it('deve chamar o serviço de cadastro de nova senha no proxy montando antes a requisição através do adapter', (done) => {
+
+      const newPasswordDto: NewPasswordDto = { message: 'message' };
+      const newPasswordRequestContract = new NewPasswordRequestContract('newPassword');
+      resetPasswordAdapterServiceSpy.toNewPasswordRequestContract.and.returnValue(newPasswordRequestContract);
+      resetPasswordProxyServiceSpy.createNewPassword.and.returnValue(of(newPasswordDto));
+
+      service.createNewPassword('newPassword').subscribe({
+        next: (result) => {
+          expect(result).toEqual(newPasswordDto);
+          expect(resetPasswordAdapterServiceSpy.toNewPasswordRequestContract).toHaveBeenCalledWith('newPassword');
+          expect(resetPasswordProxyServiceSpy.createNewPassword).toHaveBeenCalledWith(newPasswordRequestContract);
+          done();
+        },
+        error: () => done(),
+      });
+    });
+
+    it('deve capturar e lançar o erro do serviço de cadastro de nova senha no proxy', (done) => {
+
+      const newPasswordRequestContract = new NewPasswordRequestContract('newPassword');
+      const httpErrorResponse = new HttpErrorResponse({ status: 401, statusText: 'Unauthorized' });
+      resetPasswordAdapterServiceSpy.toNewPasswordRequestContract.and.returnValue(newPasswordRequestContract);
+      resetPasswordProxyServiceSpy.createNewPassword.and.returnValue(throwError(() => httpErrorResponse));
+
+      service.createNewPassword('newPassword').subscribe({
+        next: () => done(),
+        error: (error) => {
+          expect(error).toEqual(httpErrorResponse);
+          expect(resetPasswordAdapterServiceSpy.toNewPasswordRequestContract).toHaveBeenCalledWith('newPassword');
+          expect(resetPasswordProxyServiceSpy.createNewPassword).toHaveBeenCalledWith(newPasswordRequestContract);
           done();
         },
       });

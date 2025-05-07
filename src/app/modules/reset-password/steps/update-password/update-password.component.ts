@@ -1,8 +1,11 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 
+import { HttpErrorResponse } from '@angular/common/http';
+
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import { ResetPasswordService } from '../../acl/service/reset-password.service';
+import { NewPasswordDto } from '../../../../shared/model/dto/new-password/new-password-dto';
 
 @Component({
   selector: 'fc-update-password',
@@ -26,9 +29,19 @@ export class UpdatePasswordComponent {
     this.updatePasswordForm = this._buildUpdatePasswordForm();
   }
 
-  public updatePassword(): void {
+  public createNewPassword(): void {
     if (this.updatePasswordForm.valid) {
-      this.eventFinish.emit();
+      this._resetPasswordService.createNewPassword(
+        this.updatePasswordForm.controls['newPassword'].value
+      ).subscribe(
+        {
+          next: (newPasswordDto: NewPasswordDto) => {
+            console.log('ok', newPasswordDto);
+            this.eventFinish.emit();
+          },
+          error: (httpErrorResponse: HttpErrorResponse) => console.log('erro', httpErrorResponse)
+        }
+      );
     }
   }
 
@@ -39,7 +52,7 @@ export class UpdatePasswordComponent {
   private _buildUpdatePasswordForm(): FormGroup {
     return this._formBuilder.group(
       {
-        password: ['', Validators.required]
+        newPassword: ['', Validators.required]
       }
     )
   }
