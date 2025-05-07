@@ -38,10 +38,12 @@ export class ResetPasswordAdapterService {
   }
 
   public toNewPasswordRequestContract(
-    newPassword: string
+    newPassword: string,
+    email: string
   ): NewPasswordRequestContract {
     return new NewPasswordRequestContract(
-      newPassword
+      newPassword,
+      email
     );
   }
 

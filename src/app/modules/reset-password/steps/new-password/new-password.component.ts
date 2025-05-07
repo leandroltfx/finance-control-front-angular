@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 import { HttpErrorResponse } from '@angular/common/http';
 
@@ -16,6 +16,8 @@ export class NewPasswordComponent {
 
   @Output() eventBackToLogin = new EventEmitter();
 
+  @Input() email!: string;
+
   public updatePasswordForm!: FormGroup;
   public hidePassword: boolean = true;
 
@@ -31,7 +33,8 @@ export class NewPasswordComponent {
   public createNewPassword(): void {
     if (this.updatePasswordForm.valid) {
       this._resetPasswordService.createNewPassword(
-        this.updatePasswordForm.controls['newPassword'].value
+        this.updatePasswordForm.controls['newPassword'].value,
+        this.email
       ).subscribe(
         {
           next: (newPasswordDto: NewPasswordDto) => {

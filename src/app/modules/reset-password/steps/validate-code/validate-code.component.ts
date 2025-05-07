@@ -1,6 +1,6 @@
 import { HttpErrorResponse } from '@angular/common/http';
 
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
@@ -17,6 +17,8 @@ export class ValidateCodeComponent implements OnInit {
   @Output() eventNextStep = new EventEmitter();
   @Output() eventBackToLogin = new EventEmitter();
 
+  @Input() email!: string;
+
   public validateCodeForm!: FormGroup;
 
   private _codeMinLength: number = 6;
@@ -32,9 +34,8 @@ export class ValidateCodeComponent implements OnInit {
 
   public validateCode(): void {
     if (this.validateCodeForm.valid) {
-      //TODO passar o email informado no primeiro passo
       this._resetPasswordService.validateCode(
-        'email@email.com',
+        this.email,
         this.validateCodeForm.controls['code'].value
       ).subscribe(
         {

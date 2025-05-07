@@ -60,6 +60,7 @@ describe('ValidateCodeComponent', () => {
 
       component.validateCodeForm = component['_buildValidateCodeForm']();
       component.validateCodeForm.controls['code'].setValue('123456');
+      component.email = 'email@email.com';
       const validateCodeDto: ValidateCodeDto = new ValidateCodeDto('userid');
       resetPasswordServiceSpy.validateCode.and.returnValue(of(validateCodeDto));
 
@@ -73,6 +74,7 @@ describe('ValidateCodeComponent', () => {
 
       component.validateCodeForm = component['_buildValidateCodeForm']();
       component.validateCodeForm.controls['code'].setValue('123456');
+      component.email = 'email@email.com';
       resetPasswordServiceSpy.validateCode.and.returnValue(throwError(() => new HttpErrorResponse({})));
 
       component.validateCode();

@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
+
+import { MatStepper } from '@angular/material/stepper';
 
 import { Router } from '@angular/router';
 
@@ -9,9 +11,18 @@ import { Router } from '@angular/router';
 })
 export class ResetPasswordComponent {
 
+  @ViewChild('stepper') stepper!: MatStepper;
+
+  public email!: string;
+
   constructor(
     private readonly _router: Router
   ) { }
+
+  public nextStep(email: string): void {
+    this.email = email;
+    this.stepper.next();
+  }
 
   public backToLogin(): void {
     this._router.navigate(['/login']);

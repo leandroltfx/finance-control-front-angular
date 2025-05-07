@@ -56,6 +56,15 @@ describe('ResetPasswordComponent', () => {
     expect(component).toBeTruthy();
   });
 
+  describe('nextStep', () => {
+    it('deve seguir para o passo seguinte da redefinição de senha', () => {
+
+      component.nextStep('email');
+
+      expect(component.stepper.selectedIndex).toBe(1);
+    });
+  });
+
   describe('backToLogin', () => {
     it('deve rotear para a tela de login', () => {
       const navigateSpy = spyOn(router, 'navigate');

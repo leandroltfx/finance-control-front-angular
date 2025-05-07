@@ -119,14 +119,14 @@ describe('ResetPasswordService', () => {
     it('deve chamar o serviço de cadastro de nova senha no proxy montando antes a requisição através do adapter', (done) => {
 
       const newPasswordDto: NewPasswordDto = { message: 'message' };
-      const newPasswordRequestContract = new NewPasswordRequestContract('newPassword');
+      const newPasswordRequestContract = new NewPasswordRequestContract('newPassword', 'email@email.com');
       resetPasswordAdapterServiceSpy.toNewPasswordRequestContract.and.returnValue(newPasswordRequestContract);
       resetPasswordProxyServiceSpy.createNewPassword.and.returnValue(of(newPasswordDto));
 
-      service.createNewPassword('newPassword').subscribe({
+      service.createNewPassword('newPassword', 'email@email.com').subscribe({
         next: (result) => {
           expect(result).toEqual(newPasswordDto);
-          expect(resetPasswordAdapterServiceSpy.toNewPasswordRequestContract).toHaveBeenCalledWith('newPassword');
+          expect(resetPasswordAdapterServiceSpy.toNewPasswordRequestContract).toHaveBeenCalledWith('newPassword', 'email@email.com');
           expect(resetPasswordProxyServiceSpy.createNewPassword).toHaveBeenCalledWith(newPasswordRequestContract);
           done();
         },
@@ -136,16 +136,16 @@ describe('ResetPasswordService', () => {
 
     it('deve capturar e lançar o erro do serviço de cadastro de nova senha no proxy', (done) => {
 
-      const newPasswordRequestContract = new NewPasswordRequestContract('newPassword');
+      const newPasswordRequestContract = new NewPasswordRequestContract('newPassword', 'email@email.com');
       const httpErrorResponse = new HttpErrorResponse({ status: 401, statusText: 'Unauthorized' });
       resetPasswordAdapterServiceSpy.toNewPasswordRequestContract.and.returnValue(newPasswordRequestContract);
       resetPasswordProxyServiceSpy.createNewPassword.and.returnValue(throwError(() => httpErrorResponse));
 
-      service.createNewPassword('newPassword').subscribe({
+      service.createNewPassword('newPassword', 'email@email.com').subscribe({
         next: () => done(),
         error: (error) => {
           expect(error).toEqual(httpErrorResponse);
-          expect(resetPasswordAdapterServiceSpy.toNewPasswordRequestContract).toHaveBeenCalledWith('newPassword');
+          expect(resetPasswordAdapterServiceSpy.toNewPasswordRequestContract).toHaveBeenCalledWith('newPassword', 'email@email.com');
           expect(resetPasswordProxyServiceSpy.createNewPassword).toHaveBeenCalledWith(newPasswordRequestContract);
           done();
         },

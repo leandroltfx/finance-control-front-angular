@@ -103,7 +103,7 @@ describe('ResetPasswordProxyService', () => {
   describe('createNewPassword', () => {
 
     it('deve realizar uma chamada para o endpoint de cadastro de nova senha através do método POST', () => {
-      const mockRequest: NewPasswordRequestContract = { newPassword: 'newPassword' };
+      const mockRequest: NewPasswordRequestContract = { newPassword: 'newPassword', email: 'email@email.com' };
       const mockResponse: NewPasswordResponseContract = { message: 'message' };
 
       service.createNewPassword(mockRequest).subscribe((response) => {
@@ -117,7 +117,7 @@ describe('ResetPasswordProxyService', () => {
     });
 
     it('deve tratar erro na chamada do endpoint de cadastro de nova senha', () => {
-      const mockRequest: NewPasswordRequestContract = { newPassword: 'newPassword' };
+      const mockRequest: NewPasswordRequestContract = { newPassword: 'newPassword', email: 'email@email.com' };
       const mockError = { status: 401, statusText: 'Unauthorized' };
 
       service.createNewPassword(mockRequest).subscribe({

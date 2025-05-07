@@ -65,7 +65,7 @@ describe('ResetPasswordAdapterService', () => {
 
     it('deve montar a requisição do cadastro de nova senha', () => {
 
-      const newPasswordRequestContract = service.toNewPasswordRequestContract('newPassword');
+      const newPasswordRequestContract = service.toNewPasswordRequestContract('newPassword', 'email@email.com');
 
       expect(newPasswordRequestContract instanceof NewPasswordRequestContract).toBeTrue();
       expect(newPasswordRequestContract.newPassword).toBe('newPassword');

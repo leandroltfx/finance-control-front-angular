@@ -46,11 +46,13 @@ export class ResetPasswordService {
   }
 
   public createNewPassword(
-    newPassword: string
+    newPassword: string,
+    email: string
   ): Observable<NewPasswordDto> {
     return this._resetPasswordProxyService.createNewPassword(
       this._resetPasswordAdapterService.toNewPasswordRequestContract(
-        newPassword
+        newPassword,
+        email
       )
     ).pipe(
       map((newPasswordDto: NewPasswordDto) => newPasswordDto),
