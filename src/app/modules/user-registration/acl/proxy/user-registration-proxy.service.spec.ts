@@ -43,7 +43,7 @@ describe('UserRegistrationProxyService', () => {
         expect(response).toEqual(mockResponse);
       });
 
-      const req = httpMock.expectOne(`${environment.api_path}/user-registration`);
+      const req = httpMock.expectOne(`${environment.api_path}/user`);
       expect(req.request.method).toBe('POST');
       expect(req.request.body).toEqual(mockRequest);
       req.flush(mockResponse);
@@ -61,7 +61,7 @@ describe('UserRegistrationProxyService', () => {
         }
       });
 
-      const req = httpMock.expectOne(`${environment.api_path}/user-registration`);
+      const req = httpMock.expectOne(`${environment.api_path}/user`);
       req.flush(null, mockError);
     });
   });

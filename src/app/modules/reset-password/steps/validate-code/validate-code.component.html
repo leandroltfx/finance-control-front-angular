@@ -1,0 +1,21 @@
+<form [formGroup]="validateCodeForm" (submit)="validateCode()">
+    <mat-form-field class="fc-w-100 fc-ptop-1">
+        <mat-label>Código</mat-label>
+        <input matInput formControlName="code" maxlength="6">
+        <mat-error *ngIf="validateCodeForm.controls['code'].hasError('required')">
+            Informe o código recebido
+        </mat-error>
+        <mat-error *ngIf="validateCodeForm.controls['code'].hasError('minlength')">
+            O código deve ter 6 dígitos
+        </mat-error>
+        <mat-icon matSuffix>123</mat-icon>
+    </mat-form-field>
+    <section class="fc-ptop-1 fc-flex fc-align-items-center fc-justify-content-end">
+        <button mat-raised-button type="button" (click)="cancel()">
+            Cancelar
+        </button>
+        <button mat-raised-button color="primary" type="submit" class="fc-mleft-1">
+            Validar código
+        </button>
+    </section>
+</form>

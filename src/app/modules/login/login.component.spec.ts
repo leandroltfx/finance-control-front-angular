@@ -134,4 +134,14 @@ describe('LoginComponent', () => {
       expect(navigateSpy).toHaveBeenCalledWith(['/user-registration']);
     });
   });
+
+  describe('goToResetPassword', () => {
+    it('deve rotear para a redefinição de senha', () => {
+      const navigateSpy = spyOn(router, 'navigate');
+
+      component.goToResetPassword();
+
+      expect(navigateSpy).toHaveBeenCalledWith(['/reset-password']);
+    });
+  });
 });

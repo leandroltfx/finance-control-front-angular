@@ -3,6 +3,8 @@
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
+.mat-stepper-horizontal-line { width: 100%; }
+
 .fc-center { margin: 0 auto; }
 
 .fc-txt-left { text-align: left; }
