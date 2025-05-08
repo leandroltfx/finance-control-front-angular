@@ -19,7 +19,7 @@ export class UserRegistrationProxyService {
     userRegistrationRequestContract: UserRegistrationRequestContract
   ): Observable<LoginResponseContract> {
     return this._httpClient.post<LoginResponseContract>(
-      `${environment.api_path}/user-registration`,
+      `${environment.api_path}/user`,
       userRegistrationRequestContract
     ).pipe(
       map((loginResponseContract: LoginResponseContract) => loginResponseContract),
