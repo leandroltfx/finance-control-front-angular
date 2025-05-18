@@ -1,1 +1,7 @@
-<router-outlet></router-outlet>
+<input [(ngModel)]="searchTerm" placeholder="Buscar..." />
+<ul>
+  <li *ngFor="let user of users | filterBy: searchTerm : ['name', 'email']">
+    {{ user.name }} - {{ user.email }}
+  </li>
+</ul>
+<fc-testando></fc-testando>

@@ -1,0 +1,17 @@
+<h1 appHighlight="lightgreen">Exemplo de Diretivas e Pipes Angular 16</h1>
+
+<!-- Diretiva Estrutural -->
+<div *appIfAdmin="user.isAdmin">
+  <p>Você é um administrador. Aqui está um conteúdo exclusivo.</p>
+</div>
+
+<!-- Diretiva de Atributo -->
+<p appHighlight="lightyellow">
+  Passe o mouse sobre este texto para ver o destaque.
+</p>
+
+<!-- Pipe de Data -->
+<p>Data formatada: {{ hoje | appSimpleDate }}</p>
+
+<!-- Pipe de Currency -->
+<p>Preço formatado: {{ preco | appRealCurrency }}</p>

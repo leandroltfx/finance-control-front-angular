@@ -1,4 +1,8 @@
 import { Component } from '@angular/core';
+import { IfAdminDirective } from '../shared/directives/if-admin.directive';
+import { HighlightDirective } from '../shared/directives/highlight.directive';
+import { SimpleDatePipe } from '../shared/pipes/simple-date.pipe';
+import { RealCurrencyPipe } from '../shared/pipes/real-currency.pipe';
 
 interface User {
   id: number;
@@ -7,11 +11,18 @@ interface User {
 }
 
 @Component({
-  selector: 'fc-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  selector: 'fc-testando',
+  templateUrl: './testando.component.html',
+  styleUrls: ['./testando.component.css'],
+  imports: [
+    IfAdminDirective,
+    HighlightDirective,
+    SimpleDatePipe,
+    RealCurrencyPipe,
+  ],
+  standalone: true
 })
-export class AppComponent {
+export class TestandoComponent {
 
   searchTerm: string = '';
   user = { isAdmin: true };
