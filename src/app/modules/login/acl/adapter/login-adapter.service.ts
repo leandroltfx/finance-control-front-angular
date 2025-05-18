@@ -20,7 +20,7 @@ export class LoginAdapterService {
     loginResponseContract: LoginResponseContract
   ): LoginDto {
     return new LoginDto(
-      loginResponseContract.message,
+      loginResponseContract.messages,
       loginResponseContract.loggedUser
     );
   }

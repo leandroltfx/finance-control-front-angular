@@ -37,7 +37,7 @@ describe('LoginProxyService', () => {
 
     it('deve realizar uma chamada para o endpoint login através do método POST', () => {
       const mockRequest: LoginRequestContract = { email: 'email', password: 'password' };
-      const mockResponse: LoginResponseContract = { message: 'Login efetuado com sucesso!', loggedUser: new LoggedUserDto('id', 'username', 'email') };
+      const mockResponse: LoginResponseContract = { messages: ['Login efetuado com sucesso!'], loggedUser: new LoggedUserDto('id', 'username', 'email') };
 
       service.login(mockRequest).subscribe((response) => {
         expect(response).toEqual(mockResponse);

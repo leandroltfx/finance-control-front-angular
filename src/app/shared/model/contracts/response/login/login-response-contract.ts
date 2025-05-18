@@ -2,14 +2,14 @@ import { LoggedUserDto } from "../../../dto/logged-user/logged-user-dto";
 
 export class LoginResponseContract {
 
-    message!: string;
+    messages!: string[];
     loggedUser!: LoggedUserDto;
 
     constructor(
-        message: string,
+        messages: [],
         loggedUser: LoggedUserDto
     ) {
-        this.message = message;
+        this.messages = messages;
         this.loggedUser = loggedUser;
     }
 

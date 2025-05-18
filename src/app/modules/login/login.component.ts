@@ -8,6 +8,7 @@ import { Router } from '@angular/router';
 
 import { LoginService } from './acl/service/login.service';
 import { LoginDto } from '../../shared/model/dto/login/login-dto';
+import { MessageService } from '../../core/services/message/message.service';
 
 @Component({
   selector: 'fc-login',
@@ -24,7 +25,8 @@ export class LoginComponent implements OnInit {
   constructor(
     private readonly _router: Router,
     private readonly _formBuilder: FormBuilder,
-    private readonly _loginService: LoginService
+    private readonly _loginService: LoginService,
+    private readonly _messageService: MessageService,
   ) { }
 
   public ngOnInit(): void {
@@ -38,7 +40,7 @@ export class LoginComponent implements OnInit {
         this.loginForm.controls['password'].value
       ).subscribe(
         {
-          next: (loginDto: LoginDto) => console.log('ok', loginDto),
+          next: (loginDto: LoginDto) => this._messageService.showMessage(loginDto.messages, 'success'),
           error: (httpErrorResponse: HttpErrorResponse) => console.log('erro', httpErrorResponse)
         }
       )

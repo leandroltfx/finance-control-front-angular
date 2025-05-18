@@ -2,14 +2,14 @@ import { LoggedUserDto } from "../logged-user/logged-user-dto";
 
 export class LoginDto {
 
-    message!: string;
+    messages!: string[];
     loggedUser!: LoggedUserDto;
 
     constructor(
-        message: string,
+        messages: string[],
         loggedUser: LoggedUserDto
     ) {
-        this.message = message;
+        this.messages = messages;
         this.loggedUser = loggedUser;
     }
 

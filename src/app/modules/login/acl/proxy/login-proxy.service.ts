@@ -22,8 +22,14 @@ export class LoginProxyService {
       `${environment.api_path}/login`,
       loginRequestContract
     ).pipe(
-      map((loginResponseContract: LoginResponseContract) => loginResponseContract),
-      catchError((httpErrorResponse: HttpErrorResponse) => throwError(() => httpErrorResponse))
+      map((loginResponseContract: LoginResponseContract) => {
+        console.log(loginResponseContract);
+        return loginResponseContract;
+      }),
+      catchError((httpErrorResponse: HttpErrorResponse) => {
+        console.log(httpErrorResponse);
+        return throwError(() => httpErrorResponse);
+      })
     );
   }
 }

@@ -21,7 +21,7 @@ export class UserRegistrationAdapterService {
     loginResponseContract: LoginResponseContract
   ): LoginDto {
     return new LoginDto(
-      loginResponseContract.message,
+      loginResponseContract.messages,
       loginResponseContract.loggedUser
     );
   }
