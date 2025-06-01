@@ -33,7 +33,7 @@ export class UserRegistrationComponent implements OnInit {
   private _validatorMinLengthUsername: ValidatorFn = Validators.minLength(3);
   private _validatorMinLengthPassword: ValidatorFn = Validators.minLength(8);
   private _validatorPatternUsername: ValidatorFn = Validators.pattern(/^[a-zA-Z][a-zA-Z0-9]*$/);
-  private _validatorPatternEmail: ValidatorFn = Validators.pattern(/^[a-z0-9.]+@[a-z0-9]+\.[a-z]+(\.[a-z]+)?$/i);
+  private _validatorPatternEmail: ValidatorFn = Validators.pattern(/^[a-zA-Z0-9_!#$%&'*+/=?`{|}~^.-]+@[a-zA-Z0-9.-]+$/i);
 
   constructor(
     private readonly _formBuilder: FormBuilder
