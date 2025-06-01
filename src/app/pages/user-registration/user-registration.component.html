@@ -19,6 +19,9 @@
                     <mat-error>O nome de usuário deve começar com letra e conter apenas letras e números, sem espaços ou
                         caracteres especiais.</mat-error>
                     }
+                    @if (!userRegistrationForm.controls['username'].hasError('pattern') && userRegistrationForm.controls['username'].hasError('minlength')) {
+                    <mat-error>O nome de usuário deve conter no mínimo 3 caracteres</mat-error>
+                    }
                 </mat-form-field>
                 <mat-form-field appearance="outline" class="fc-w-100 fc-ptop-1">
                     <mat-label>E-mail</mat-label>
