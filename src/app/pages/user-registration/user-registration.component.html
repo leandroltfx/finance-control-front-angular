@@ -1,1 +1,55 @@
-<p>user-registration works!</p>
+<main class="fc-w-30 fc-center fc-ptop-5">
+    <mat-card>
+        <mat-card-header>
+            <div class="fc-txt-center fc-w-100">
+                <h1>Cadastrar usuário</h1>
+            </div>
+        </mat-card-header>
+        <mat-divider class="fc-pbottom-1"></mat-divider>
+        <mat-card-content>
+            <form [formGroup]="userRegistrationForm" (submit)="registerUser()">
+                <mat-form-field appearance="outline" class="fc-w-100">
+                    <mat-label>Usuário</mat-label>
+                    <input matInput placeholder="Digite o nome de usuário" formControlName="username">
+                    <mat-icon matSuffix>person</mat-icon>
+                    @if (userRegistrationForm.controls['username'].hasError('required')) {
+                    <mat-error>Informe o nome de usuário</mat-error>
+                    }
+                    @if (userRegistrationForm.controls['username'].hasError('pattern')) {
+                    <mat-error>O nome de usuário deve começar com letra e conter apenas letras e números, sem espaços ou
+                        caracteres especiais.</mat-error>
+                    }
+                </mat-form-field>
+                <mat-form-field appearance="outline" class="fc-w-100 fc-ptop-1">
+                    <mat-label>E-mail</mat-label>
+                    <input matInput placeholder="Digite o e-mail" formControlName="email">
+                    <mat-icon matSuffix>mail</mat-icon>
+                    @if (userRegistrationForm.controls['email'].hasError('required')) {
+                    <mat-error>Informe o e-mail</mat-error>
+                    }
+                    @if (userRegistrationForm.controls['email'].hasError('pattern')) {
+                    <mat-error>E-mail inválido</mat-error>
+                    }
+                </mat-form-field>
+                <mat-form-field appearance="outline" class="fc-w-100 fc-ptop-1">
+                    <mat-label>Senha</mat-label>
+                    <input matInput placeholder="Digite a senha" formControlName="password"
+                        [type]="hidePassword ? 'password' : 'text'">
+                    <button mat-icon-button matSuffix (click)="hidePassword = !hidePassword" type="button">
+                        <mat-icon>{{ hidePassword ? 'visibility' : 'visibility_off' }}</mat-icon>
+                    </button>
+                    @if (userRegistrationForm.controls['password'].hasError('required')) {
+                    <mat-error>Informe a senha</mat-error>
+                    }
+                    @if (userRegistrationForm.controls['password'].hasError('minlength')) {
+                    <mat-error>A senha deve conter no mínimo 8 caracteres</mat-error>
+                    }
+                </mat-form-field>
+                <div class="fc-ptop-1 fc-txt-right">
+                    <button mat-stroked-button color="primary" type="button">Cancelar</button>
+                    <button mat-flat-button color="primary" class="fc-mleft-1" type="submit">Cadastrar</button>
+                </div>
+            </form>
+        </mat-card-content>
+    </mat-card>
+</main>
