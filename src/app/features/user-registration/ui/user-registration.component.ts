@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-
+import { HttpClientModule } from '@angular/common/http';
 import { FormBuilder, FormGroup, ReactiveFormsModule, ValidatorFn, Validators } from '@angular/forms';
 
 import { MatCardModule } from '@angular/material/card';
@@ -9,10 +9,16 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatFormFieldModule } from '@angular/material/form-field';
 
+import { UserService } from '../acl/service/user.service';
+import { UserProxyService } from '../acl/proxy/user-proxy.service';
+import { UserFacadeService } from '../application/user-facade.service';
+import { UserAdapterService } from '../acl/adapter/user-adapter.service';
+
 @Component({
   selector: 'fc-user-registration',
   standalone: true,
   imports: [
+    HttpClientModule,
     ReactiveFormsModule,
 
     MatCardModule,
@@ -21,6 +27,12 @@ import { MatFormFieldModule } from '@angular/material/form-field';
     MatButtonModule,
     MatDividerModule,
     MatFormFieldModule
+  ],
+  providers: [
+    UserService,
+    UserProxyService,
+    UserFacadeService,
+    UserAdapterService
   ],
   templateUrl: './user-registration.component.html',
   styleUrls: ['./user-registration.component.css']
@@ -36,7 +48,8 @@ export class UserRegistrationComponent implements OnInit {
   private _validatorPatternEmail: ValidatorFn = Validators.pattern(/^[a-zA-Z0-9_!#$%&'*+/=?`{|}~^.-]+@[a-zA-Z0-9.-]+$/i);
 
   constructor(
-    private readonly _formBuilder: FormBuilder
+    private readonly _formBuilder: FormBuilder,
+    private readonly _userFacadeService: UserFacadeService
   ) { }
 
   public ngOnInit(): void {
@@ -45,7 +58,11 @@ export class UserRegistrationComponent implements OnInit {
 
   public registerUser(): void {
     if (this.userRegistrationForm.valid) {
-      console.log('chamar o serviço de cadastro de usuário');
+      this._userFacadeService.registerUser(
+        this.userRegistrationForm.controls['username'].value,
+        this.userRegistrationForm.controls['email'].value,
+        this.userRegistrationForm.controls['password'].value
+      );
     }
   }
 

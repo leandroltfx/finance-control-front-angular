@@ -1,23 +1,31 @@
 import { Validators } from '@angular/forms';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { UserRegistrationComponent } from './user-registration.component';
+import { UserFacadeService } from '../application/user-facade.service';
 
 describe('UserRegistrationComponent', () => {
   let component: UserRegistrationComponent;
   let fixture: ComponentFixture<UserRegistrationComponent>;
+  let userFacadeServiceSpy: jasmine.SpyObj<UserFacadeService>;
 
   beforeEach(async () => {
+
+    userFacadeServiceSpy = jasmine.createSpyObj<UserFacadeService>(['registerUser']);
+
     await TestBed.configureTestingModule({
       imports: [
-        UserRegistrationComponent
+        UserRegistrationComponent,
+        BrowserAnimationsModule
       ],
-      providers: [
-        provideAnimationsAsync()
-      ]
-    })
-      .compileComponents();
+    }).overrideComponent(UserRegistrationComponent, {
+      set: {
+        providers: [
+          { provide: UserFacadeService, useValue: userFacadeServiceSpy }
+        ]
+      }
+    }).compileComponents();
 
     fixture = TestBed.createComponent(UserRegistrationComponent);
     component = fixture.componentInstance;
@@ -32,8 +40,6 @@ describe('UserRegistrationComponent', () => {
 
     it('deve chamar o serviço de cadastro de usuário se o formulário estiver válido', () => {
 
-      const logSpy = spyOn(console, 'log');
-
       component.userRegistrationForm = component['_buildUserRegistrationForm']();
 
       component.userRegistrationForm.controls['username'].setValue('admin');
@@ -42,12 +48,10 @@ describe('UserRegistrationComponent', () => {
 
       component.registerUser();
 
-      expect(logSpy).toHaveBeenCalledWith('chamar o serviço de cadastro de usuário');
+      expect(userFacadeServiceSpy.registerUser).toHaveBeenCalledWith('admin', 'admin@mail.com', 'admin12345');
     });
 
     it('não deve chamar o serviço de cadastro de usuário se o nome de usuário não for preenchido', () => {
-
-      const logSpy = spyOn(console, 'log');
 
       component.userRegistrationForm = component['_buildUserRegistrationForm']();
 
@@ -57,12 +61,10 @@ describe('UserRegistrationComponent', () => {
 
       component.registerUser();
 
-      expect(logSpy).not.toHaveBeenCalled();
+      expect(userFacadeServiceSpy.registerUser).not.toHaveBeenCalled();
     });
 
     it('não deve chamar o serviço de cadastro de usuário se o nome de usuário estiver com espaços em branco no meio', () => {
-
-      const logSpy = spyOn(console, 'log');
 
       component.userRegistrationForm = component['_buildUserRegistrationForm']();
 
@@ -72,12 +74,10 @@ describe('UserRegistrationComponent', () => {
 
       component.registerUser();
 
-      expect(logSpy).not.toHaveBeenCalled();
+      expect(userFacadeServiceSpy.registerUser).not.toHaveBeenCalled();
     });
 
     it('não deve chamar o serviço de cadastro de usuário se o nome de usuário estiver com espaços em branco no início', () => {
-
-      const logSpy = spyOn(console, 'log');
 
       component.userRegistrationForm = component['_buildUserRegistrationForm']();
 
@@ -87,12 +87,10 @@ describe('UserRegistrationComponent', () => {
 
       component.registerUser();
 
-      expect(logSpy).not.toHaveBeenCalled();
+      expect(userFacadeServiceSpy.registerUser).not.toHaveBeenCalled();
     });
 
     it('não deve chamar o serviço de cadastro de usuário se o nome de usuário estiver com espaços em branco no fim', () => {
-
-      const logSpy = spyOn(console, 'log');
 
       component.userRegistrationForm = component['_buildUserRegistrationForm']();
 
@@ -102,12 +100,10 @@ describe('UserRegistrationComponent', () => {
 
       component.registerUser();
 
-      expect(logSpy).not.toHaveBeenCalled();
+      expect(userFacadeServiceSpy.registerUser).not.toHaveBeenCalled();
     });
 
     it('não deve chamar o serviço de cadastro de usuário se o nome de usuário estiver com caracteres especiais', () => {
-
-      const logSpy = spyOn(console, 'log');
 
       component.userRegistrationForm = component['_buildUserRegistrationForm']();
 
@@ -117,12 +113,10 @@ describe('UserRegistrationComponent', () => {
 
       component.registerUser();
 
-      expect(logSpy).not.toHaveBeenCalled();
+      expect(userFacadeServiceSpy.registerUser).not.toHaveBeenCalled();
     });
 
     it('não deve chamar o serviço de cadastro de usuário se o nome de usuário estiver com apenas números', () => {
-
-      const logSpy = spyOn(console, 'log');
 
       component.userRegistrationForm = component['_buildUserRegistrationForm']();
 
@@ -132,12 +126,10 @@ describe('UserRegistrationComponent', () => {
 
       component.registerUser();
 
-      expect(logSpy).not.toHaveBeenCalled();
+      expect(userFacadeServiceSpy.registerUser).not.toHaveBeenCalled();
     });
 
     it('não deve chamar o serviço de cadastro de usuário se o nome de usuário iniciar com número', () => {
-
-      const logSpy = spyOn(console, 'log');
 
       component.userRegistrationForm = component['_buildUserRegistrationForm']();
 
@@ -147,12 +139,10 @@ describe('UserRegistrationComponent', () => {
 
       component.registerUser();
 
-      expect(logSpy).not.toHaveBeenCalled();
+      expect(userFacadeServiceSpy.registerUser).not.toHaveBeenCalled();
     });
 
     it('não deve chamar o serviço de cadastro de usuário se o email não for preenchido', () => {
-
-      const logSpy = spyOn(console, 'log');
 
       component.userRegistrationForm = component['_buildUserRegistrationForm']();
 
@@ -162,12 +152,10 @@ describe('UserRegistrationComponent', () => {
 
       component.registerUser();
 
-      expect(logSpy).not.toHaveBeenCalled();
+      expect(userFacadeServiceSpy.registerUser).not.toHaveBeenCalled();
     });
 
     it('não deve chamar o serviço de cadastro de usuário se o email for inválido', () => {
-
-      const logSpy = spyOn(console, 'log');
 
       component.userRegistrationForm = component['_buildUserRegistrationForm']();
 
@@ -177,12 +165,10 @@ describe('UserRegistrationComponent', () => {
 
       component.registerUser();
 
-      expect(logSpy).not.toHaveBeenCalled();
+      expect(userFacadeServiceSpy.registerUser).not.toHaveBeenCalled();
     });
 
     it('não deve chamar o serviço de cadastro de usuário se a senha não for preenchida', () => {
-
-      const logSpy = spyOn(console, 'log');
 
       component.userRegistrationForm = component['_buildUserRegistrationForm']();
 
@@ -192,12 +178,10 @@ describe('UserRegistrationComponent', () => {
 
       component.registerUser();
 
-      expect(logSpy).not.toHaveBeenCalled();
+      expect(userFacadeServiceSpy.registerUser).not.toHaveBeenCalled();
     });
 
     it('não deve chamar o serviço de cadastro de usuário se a senha não conter no mínimo 8 caracteres', () => {
-
-      const logSpy = spyOn(console, 'log');
 
       component.userRegistrationForm = component['_buildUserRegistrationForm']();
 
@@ -207,7 +191,7 @@ describe('UserRegistrationComponent', () => {
 
       component.registerUser();
 
-      expect(logSpy).not.toHaveBeenCalled();
+      expect(userFacadeServiceSpy.registerUser).not.toHaveBeenCalled();
     });
   });
 
@@ -225,4 +209,6 @@ describe('UserRegistrationComponent', () => {
     expect(component.userRegistrationForm.controls['password'].hasValidator(Validators.required)).toBeTrue();
     expect(component.userRegistrationForm.controls['password'].hasValidator(component['_validatorMinLengthPassword'])).toBeTrue();
   });
+
+
 });

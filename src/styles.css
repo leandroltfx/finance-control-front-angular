@@ -3,6 +3,16 @@
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
+.success-message {
+    --mdc-snackbar-container-color: #4BB543 !important;
+    --mdc-snackbar-supporting-text-color: #fff !important;
+}
+
+.error-message {
+    --mdc-snackbar-container-color: #ff5555 !important;
+    --mdc-snackbar-supporting-text-color: #fff !important;
+}
+
 .fc-center { margin: 0 auto; }
 
 .fc-txt-center { text-align: center; }
